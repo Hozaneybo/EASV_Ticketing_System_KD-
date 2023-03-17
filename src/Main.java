@@ -12,12 +12,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AdminView.fxml"));
-        Parent root = loader.load();
-
-        primaryStage.setScene(new Scene(root));
+        FXMLLoader loader = new FXMLLoader();
+        Parent root = loader.load(getClass().getResource("/gui/view/EC_Dashboard.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ticketing System");
         primaryStage.show();
-
     }
 }
