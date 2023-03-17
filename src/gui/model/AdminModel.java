@@ -1,4 +1,22 @@
 package gui.model;
 
+import be.Admin;
+import bll.AdminManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.DBConnector;
+
 public class AdminModel {
+
+
+    private AdminManager adminManager;
+    DBConnector dbConnector;
+
+    public AdminModel(){
+        adminManager = new AdminManager();
+        dbConnector = new DBConnector();
+    }
+
+    public Admin logIn(String username, String password) throws SQLServerException {
+         return adminManager.logIn(username, password);
+    }
 }
