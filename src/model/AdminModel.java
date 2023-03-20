@@ -1,15 +1,16 @@
-package gui.model;
+package model;
 
 import be.Admin;
 import bll.AdminManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import dal.DBConnector;
+import dal.database.DBConnector;
+
 
 public class AdminModel {
 
 
     private AdminManager adminManager;
-    DBConnector dbConnector;
+    private DBConnector dbConnector;
 
     public AdminModel(){
         adminManager = new AdminManager();

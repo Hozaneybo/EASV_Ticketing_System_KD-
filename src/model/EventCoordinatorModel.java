@@ -26,6 +26,7 @@ public class EventCoordinatorModel {
     public void createNewBarEvent(String eventName, String eventAddress, String notes, String startTime, String endTime) throws Exception {
         BarEvent barEvent = eventCoordinatorManager.createNewBarEvent(eventName, eventAddress, notes, startTime, endTime);
         allEvents.add(barEvent);
+        refreshEventListView();
 
     }
 
@@ -41,7 +42,7 @@ public class EventCoordinatorModel {
     public void refreshEventListView() throws Exception {
         //Update the listview
         allEvents.clear();
-        allEvents.addAll(eventCoordinatorManager.getAllBarEvents());
+        allEvents.setAll(eventCoordinatorManager.getAllBarEvents());
     }
 
 }

@@ -1,0 +1,46 @@
+.bottom_bar_color
+{
+-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #0B1E3E, #4E154C);
+}
+.body_background
+{
+-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebc934, #050000);
+}
+
+.vBox_background
+{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #851414, #050000);
+}
+.transparent
+{
+-fx-background-color: rgba(0,0,0,0);
+}
+.search-background
+{
+-fx-background-color: #787A8F;
+-fx-background-radius: 50;
+}
+
+
+.my-fill-text
+{
+    -fx-text-fill: #050000;
+    -fx-font-size: 18px;
+    -fx-font-family: "Algerian"
+}
+
+.my-button-style:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebc934, #050000);
+
+}
+
+.text-style {
+    -fx-font-family: "Passion One";
+}
+
+.event_background
+{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ed3232, #4d0707);
+}
+
+

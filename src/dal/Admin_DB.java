@@ -2,6 +2,7 @@ package dal;
 
 import be.Admin;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.database.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class Admin_DB {
     public Admin logIn(String username, String password) throws SQLServerException {
         String sql = "Select * FROM Admin WHERE username = ? AND password = ?";
 
-        try(Connection connection = dbConnector.getConnection()){
+        try(Connection connection = dbConnector.getConnected()){
             PreparedStatement statement = connection.prepareStatement(sql);
 
             statement.setString(1, username);

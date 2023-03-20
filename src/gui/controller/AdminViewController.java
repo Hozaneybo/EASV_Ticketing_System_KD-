@@ -2,7 +2,7 @@ package gui.controller;
 
 import be.Admin;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import gui.model.AdminModel;
+import model.AdminModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,8 +66,10 @@ public class AdminViewController implements Initializable {
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
-        }}
+        }
+        }
         catch (Exception e) {
                 e.printStackTrace();
-        }}
+        }
+    }
 }
