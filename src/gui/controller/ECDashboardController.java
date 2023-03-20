@@ -1,10 +1,13 @@
 package gui.controller;
 
+
 import be.BarEvent;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -13,23 +16,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import gui.model.EventCoordinatorModel;
 
+import javafx.scene.Node;
+import javafx.scene.layout.VBox;
+
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ECDashboardController implements Initializable {
+    @FXML
+    private VBox eventBox;
 
     private EventCoordinatorModel eventCoordinatorModel;
+    private int eventsNumber;
 
-    @FXML
-    private TableView<BarEvent> eventsTableView;
-
-    
-    @FXML
-    private TableColumn<BarEvent, String> eventNameColumn, eventAddressColumn, eventStartTimeColumn, eventNotesColumn, eventEndTimeColumn;
-    @FXML
-    private TableColumn<BarEvent, Integer> eventIdColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,22 +42,48 @@ public class ECDashboardController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        if(eventCoordinatorModel.getObservableEvents().size() != 0)
-        {
-            showAllEvents();
-        }
-
-
     }
-
+    @FXML
     private void showAllEvents() {
-        eventsTableView.setItems(eventCoordinatorModel.getObservableEvents());
-        eventIdColumn.setCellValueFactory(new PropertyValueFactory<BarEvent, Integer>("id"));
-        eventNameColumn.setCellValueFactory(new PropertyValueFactory<BarEvent, String>("eventName"));
-        eventAddressColumn.setCellValueFactory(new PropertyValueFactory<BarEvent, String>("eventAddress"));
-        eventStartTimeColumn.setCellValueFactory(new PropertyValueFactory<BarEvent, String>("startTime"));
-        eventNotesColumn.setCellValueFactory(new PropertyValueFactory<BarEvent, String>("notes"));
-        eventEndTimeColumn.setCellValueFactory(new PropertyValueFactory<BarEvent, String>("endTime"));
+        eventBox.getChildren().clear();
+        try {
+            eventCoordinatorModel.refreshEventListView();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        eventsNumber = eventCoordinatorModel.getObservableEvents().size();
+
+        if ( eventsNumber != 0) {
+            for (int i = 0; i < eventsNumber; i++) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/EventView.fxml"));
+                    Node node = loader.load();
+                    EventViewController controller = loader.getController();
+                    controller.getEventNameLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getEventName());
+                    controller.getEventAddressLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getEventAddress());
+                    controller.getEventNotes().setText(eventCoordinatorModel.getObservableEvents().get(i).getNotes());
+                    controller.getStartTimeLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getStartTime());
+                    controller.getEndTimeLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getEndTime());
+                    eventBox.getChildren().add(node);
+                } catch (IOException ex) {
+
+                }
+            }
+        }
+    }
+    @FXML
+    private void createNewEvent(ActionEvent actionEvent) {
+
+        eventBox.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/CreateEventView.fxml"));
+        Node node = null;
+        try {
+            node = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        eventBox.getChildren().add(node);
+
 
     }
 

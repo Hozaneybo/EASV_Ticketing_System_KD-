@@ -66,8 +66,10 @@ public class AdminViewController implements Initializable {
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
-        }}
+        }
+        }
         catch (Exception e) {
                 e.printStackTrace();
-        }}
+        }
+    }
 }
