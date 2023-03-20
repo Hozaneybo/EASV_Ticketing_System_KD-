@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-
 <AnchorPane prefHeight="661.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ECDashboardController">
    <children>
       <VBox prefHeight="661.0" prefWidth="133.0">
@@ -15,7 +14,7 @@
             <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="169.0" text="Button" />
             <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="169.0" text="Button" />
             <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="169.0" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="169.0" text="Button" />
+            <Button fx:id="newCoordinatorButton" mnemonicParsing="false" onAction="#NewEventCoordinator" prefHeight="54.0" prefWidth="169.0" text="New Coordinator" />
          </children>
       </VBox>
       <Circle fill="DODGERBLUE" layoutX="939.0" layoutY="31.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
