@@ -21,7 +21,7 @@ public class EventCoordinator_DB {
         try (Connection conn = dbConnector.getConnected()) {
             String sql = "SELECT * FROM BarEvent;";
             Statement statement = conn.createStatement();
-            //Run the SQL statement
+            //Run the SQL statementgti
             if(statement.execute(sql))
             {
                 ResultSet resultSet = statement.getResultSet();

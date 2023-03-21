@@ -3,7 +3,8 @@ package gui.model;
 import be.Admin;
 import bll.AdminManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import dal.DBConnector;
+import dal.database.DBConnector;
+
 
 public class AdminModel {
 

@@ -14,11 +14,11 @@ public class DBConnector {
     public DBConnector() {
         dataSource = new SQLServerDataSource();
         dataSource.setServerName("10.176.111.31");
-        dataSource.setDatabaseName("Ticketing_System");
-        dataSource.setUser("*****"); // Type your given username
-        dataSource.setPassword("*****"); // Type your given password
+        dataSource.setDatabaseName("Event_Tickets_EASV_bar");
+        dataSource.setUser("CSe22A_23");
+        dataSource.setPassword("DataMatiker");
         dataSource.setTrustServerCertificate(true);
-        dataSource.setPortNumber(1433); // From school
+        dataSource.setPortNumber(1433);
 
 
     }
