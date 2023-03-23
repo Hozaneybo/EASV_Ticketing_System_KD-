@@ -1,2 +1,4 @@
-package be;public class Ticket {
+package be;
+
+public class Ticket {
 }

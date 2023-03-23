@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ECDashboardController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.coordinatorControllers.ECDashboardController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="150.0" styleClass="vBox_background" stylesheets="@design.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="600.0" prefWidth="150.0" styleClass="vBox_background" stylesheets="@../design.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/EASYDVEST1.png" />
+                  <Image url="@../images/EASYDVEST1.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#createNewEvent" prefHeight="40.0" prefWidth="150.0" stylesheets="@design.css" text="NEW EVENT">
+            <Button mnemonicParsing="false" onAction="#createNewEvent" prefHeight="40.0" prefWidth="150.0" stylesheets="@../design.css" text="NEW EVENT">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -28,7 +28,7 @@
                   <String fx:value="my-button-style" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#showAllEvents" prefHeight="40.0" prefWidth="150.0" stylesheets="@design.css" text="ALL EVENTS">
+            <Button mnemonicParsing="false" onAction="#showAllEvents" prefHeight="40.0" prefWidth="150.0" stylesheets="@../design.css" text="ALL EVENTS">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -37,6 +37,16 @@
                   <String fx:value="my-fill-text" />
                   <String fx:value="my-button-style" />
                </styleClass></Button>
+            <Button mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="150.0" stylesheets="@../design.css" text="LogOut">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="my-fill-text" />
+                  <String fx:value="my-button-style" />
+               </styleClass>
+            </Button>
          </children>
       </VBox>
       <ScrollPane layoutX="150.0" prefHeight="600.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

@@ -1,6 +1,7 @@
 package bll;
 
 import be.Admin;
+import be.BarEvent;
 import be.EventCoordinator;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.Admin_DB;
@@ -19,15 +20,19 @@ public class AdminManager {
         adminDb = new Admin_DB();
     }
 
-    public Admin logIn(String username, String password) throws SQLServerException {
-        return adminDb.logIn(username, password);
-    }
+    /*public Admin logIn(String username, String password) throws SQLServerException {
+        return adminDb.alogIn(username, password);
+    }*/
 
     public EventCoordinator createNewEventCoordinator(String fullName, String username, String password) throws Exception {
         return adminDb.createNewEventCoordinator( fullName, username, password);
     }
 
-    public List<EventCoordinator> getAllEventCoordinator() throws SQLException {
-        return adminDb.getAllEventCoordinator();
+    public List<EventCoordinator> getAllEventCoordinators() throws SQLException {
+        return adminDb.getAllEventCoordinators();
+    }
+
+    public List<BarEvent> getAllBarEvents() throws SQLException {
+        return adminDb.getAllBarEvents();
     }
 }

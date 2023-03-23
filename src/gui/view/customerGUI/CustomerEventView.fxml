@@ -9,9 +9,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="340.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventViewController">
+<AnchorPane prefHeight="340.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.costumerControllers.CustomerEventViewController">
    <children>
-      <Pane layoutX="50.0" layoutY="20.0" prefHeight="300.0" prefWidth="550.0" styleClass="event_background" stylesheets="@design.css">
+      <Pane layoutX="50.0" layoutY="20.0" prefHeight="300.0" prefWidth="550.0" styleClass="event_background" stylesheets="@../design.css">
          <children>
             <ImageView fitHeight="300.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="15.0" layoutY="13.0" text="We would like to invite you to">
@@ -55,7 +55,7 @@
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>
             </Label>
-            <Button layoutX="431.0" layoutY="250.0" mnemonicParsing="false" onAction="#deleteEvent" prefHeight="32.0" prefWidth="105.0" style="-fx-background-radius: 25;" stylesheets="@design.css" text="Delete">
+            <Button layoutX="386.0" layoutY="250.0" mnemonicParsing="false" onAction="#buyTickets" prefHeight="32.0" prefWidth="150.0" style="-fx-background-radius: 25;" stylesheets="@../design.css" text="Buy Tickets">
                <styleClass>
                   <String fx:value="my-button-style" />
                   <String fx:value="my-button-style" />
@@ -73,14 +73,6 @@
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>
             </Label>
-            <Button layoutX="319.0" layoutY="250.0" mnemonicParsing="false" onAction="#updateEvent" prefHeight="32.0" prefWidth="105.0" style="-fx-background-radius: 25;" stylesheets="@design.css" text="Update">
-               <styleClass>
-                  <String fx:value="my-button-style" />
-                  <String fx:value="my-button-style" />
-                  <String fx:value="my-fill-text" />
-                  <String fx:value="body_background" />
-               </styleClass>
-            </Button>
          </children>
       </Pane>
    </children>

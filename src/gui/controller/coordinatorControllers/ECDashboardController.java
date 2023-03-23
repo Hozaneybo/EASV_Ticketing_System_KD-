@@ -1,25 +1,16 @@
-package gui.controller;
+package gui.controller.coordinatorControllers;
 
 
-import be.BarEvent;
-
+import gui.model.EventCoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import gui.model.EventCoordinatorModel;
-
-import javafx.scene.Node;
 import javafx.scene.layout.VBox;
-
-
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +47,7 @@ public class ECDashboardController implements Initializable {
         if ( eventsNumber != 0) {
             for (int i = 0; i < eventsNumber; i++) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/EventView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/EventView.fxml"));
                     Node node = loader.load();
                     EventViewController controller = loader.getController();
                     controller.getEventNameLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getEventName());
@@ -71,11 +62,12 @@ public class ECDashboardController implements Initializable {
             }
         }
     }
+
     @FXML
     private void createNewEvent(ActionEvent actionEvent) {
 
         eventBox.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/CreateEventView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/CreateEventView.fxml"));
         Node node = null;
         try {
             node = loader.load();
@@ -83,14 +75,12 @@ public class ECDashboardController implements Initializable {
             throw new RuntimeException(e);
         }
         eventBox.getChildren().add(node);
-
-
     }
 
     public void NewEventCoordinator(ActionEvent event) throws IOException {
         try {
             // Load the FXML file for the event coordinator form
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/NewEventCoordinator.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/adminGUI/NewEventCoordinator.fxml"));
             Parent root = loader.load();
 
             // Create a new stage (window) for the event coordinator form
@@ -107,5 +97,22 @@ public class ECDashboardController implements Initializable {
             // Handle any errors that occur while loading the FXML file
             e.printStackTrace();
         }
+    }
+
+    public void logOut(ActionEvent actionEvent) {
+        Node source = (Node) actionEvent.getSource();
+        javafx.stage.Stage stage = (javafx.stage.Stage) source.getScene().getWindow();
+        stage.close();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/customerGUI/CustomerView.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

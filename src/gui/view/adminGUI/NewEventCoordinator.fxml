@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.NewEventCoordinatorController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.adminControllers.NewEventCoordinatorController">
    <children>
       <TextField fx:id="FullNameTXT" layoutX="206.0" layoutY="97.0" />
       <TextField fx:id="UserNameTXT" layoutX="203.0" layoutY="188.0" />

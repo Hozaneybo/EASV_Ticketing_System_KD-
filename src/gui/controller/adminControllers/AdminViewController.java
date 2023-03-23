@@ -1,8 +1,9 @@
-package gui.controller;
+package gui.controller.adminControllers;
 
 import be.Admin;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.AdminModel;
+import gui.model.LogInModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,25 +26,13 @@ public class AdminViewController implements Initializable {
     @FXML
     private TextField Username;
 
-    private AdminModel adminModel;
-
-    public AdminViewController(){
-
-        try {
-            adminModel = new AdminModel();
-
-        } catch (Exception e) {
-            System.out.println("Failed to connect to database");
-            e.printStackTrace();
-        }
-    }
-
-
+    private LogInModel logInModel;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        logInModel = new LogInModel();
 
     }
 
@@ -53,9 +42,9 @@ public class AdminViewController implements Initializable {
         String password = Password.getText();
 
         try {
-            Admin admin1 = adminModel.logIn(username, password);
+            Admin admin = logInModel.adminLogIn(username, password);
 
-        if(admin1 != null) {
+        if(admin != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/MainView.fxml"));
             Parent root = loader.load();
 

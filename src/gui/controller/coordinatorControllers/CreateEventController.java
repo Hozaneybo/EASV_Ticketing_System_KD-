@@ -1,4 +1,4 @@
-package gui.controller;
+package gui.controller.coordinatorControllers;
 
 import gui.model.EventCoordinatorModel;
 import javafx.event.ActionEvent;
