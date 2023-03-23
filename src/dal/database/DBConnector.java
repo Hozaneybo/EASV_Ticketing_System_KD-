@@ -13,11 +13,10 @@ public class DBConnector {
     //Defining server and database
     public DBConnector() {
         dataSource = new SQLServerDataSource();
-        dataSource.setServerName("10.176.111.34");
         dataSource.setServerName("*****");
         dataSource.setDatabaseName("******");
         dataSource.setUser("******"); // Type your given username
-        dataSource.setPassword("*******"); // Type your given password
+        dataSource.setPassword("******"); // Type your given password
         dataSource.setTrustServerCertificate(true);
         dataSource.setPortNumber(1433);
 
