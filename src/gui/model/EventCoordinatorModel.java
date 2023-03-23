@@ -1,6 +1,8 @@
-package model;
+package gui.model;
 
+import be.Admin;
 import be.BarEvent;
+import be.EventCoordinator;
 import bll.EventCoordinatorManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,22 +12,22 @@ import java.sql.SQLException;
 public class EventCoordinatorModel {
 
     private ObservableList<BarEvent> allEvents;
+
     private EventCoordinatorManager eventCoordinatorManager;
 
     public EventCoordinatorModel() throws SQLException {
 
         eventCoordinatorManager = new EventCoordinatorManager();
+
         allEvents = FXCollections.observableArrayList();
         allEvents.addAll(eventCoordinatorManager.getAllBarEvents());
     }
-    public ObservableList<BarEvent> getObservableEvents()
-    {
-        return allEvents;
-    }
+    public ObservableList<BarEvent> getObservableEvents() {return allEvents;}
 
     public void createNewBarEvent(String eventName, String eventAddress, String notes, String startTime, String endTime) throws Exception {
         BarEvent barEvent = eventCoordinatorManager.createNewBarEvent(eventName, eventAddress, notes, startTime, endTime);
         allEvents.add(barEvent);
+        refreshEventListView();
 
     }
 
@@ -41,7 +43,9 @@ public class EventCoordinatorModel {
     public void refreshEventListView() throws Exception {
         //Update the listview
         allEvents.clear();
-        allEvents.addAll(eventCoordinatorManager.getAllBarEvents());
+        allEvents.setAll(eventCoordinatorManager.getAllBarEvents());
     }
+
+
 
 }

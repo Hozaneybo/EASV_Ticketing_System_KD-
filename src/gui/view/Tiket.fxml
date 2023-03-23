@@ -5,9 +5,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <AnchorPane prefHeight="400.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.view.TiketController">
    <children>
       <ImageView fx:id="qrCode" fitHeight="150.0" fitWidth="200.0" layoutX="516.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
@@ -16,5 +13,6 @@
       <TextField fx:id="eventName" layoutX="71.0" layoutY="200.0" promptText="event name " />
       <TextField fx:id="location" layoutX="79.0" layoutY="284.0" promptText="location" />
       <Button layoutX="397.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="42.0" prefWidth="131.0" text="Button" />
+      <TextField fx:id="StandardTiket" layoutX="387.0" layoutY="328.0" text="STANDARD" />
    </children>
 </AnchorPane>

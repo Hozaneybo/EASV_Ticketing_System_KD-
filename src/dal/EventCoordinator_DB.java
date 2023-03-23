@@ -1,6 +1,7 @@
 package dal;
 
 import be.BarEvent;
+import be.EventCoordinator;
 import dal.database.DBConnector;
 
 import java.sql.*;
@@ -15,7 +16,7 @@ public class EventCoordinator_DB {
         dbConnector = new DBConnector();
     }
 
-    public List<BarEvent> getAllBarevents() throws SQLException {
+    public List<BarEvent> getAllBarEvents() throws SQLException {
         List<BarEvent> allBarEvents = new ArrayList<>();
 
         try (Connection conn = dbConnector.getConnected()) {
@@ -34,15 +35,15 @@ public class EventCoordinator_DB {
                     String startTime = resultSet.getString("Start_Time");
                     String endTime = resultSet.getString("End_Time");
                     allBarEvents.add(new BarEvent(id, eventName, eventAddress, notes, startTime, endTime));
-
-
-
                 }
             }
         }
 
         return allBarEvents;
     }
+
+
+
 
 
 

@@ -1,24 +1,23 @@
 package gui.view;
 
-import dal.EventCoordinator_DB;
-import dal.StandardTicket_DB;
+
+import be.TicketType;
+import gui.model.FacadeModel;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class TiketController  implements Initializable {
 
-
-    public Label barEventLabel;
-    public Label ticketTypeLabel;
-    public Label customerLabel;
-    public Label qrCodeLabel;
+    public TextField StandardTiket;
     @FXML
     private TextField email;
 
@@ -34,8 +33,16 @@ public class TiketController  implements Initializable {
     @FXML
     private ImageView qrCode;
 
-    StandardTicket_DB standardTicket = new StandardTicket_DB();
-    EventCoordinator_DB eventCoordinatorDb = new EventCoordinator_DB();
+
+    private FacadeModel facadeModel;
+
+
+    public TiketController() throws SQLException {
+        this.facadeModel = new FacadeModel();
+    }
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,5 +52,17 @@ public class TiketController  implements Initializable {
 
 
     public void handleClick(ActionEvent actionEvent) {
+
+        if(StandardTiket.getText().equals("STANDARD")){
+            BufferedImage qrCodeImage = facadeModel.getTicketModel().printQRCodeOnTicket();
+            qrCode.setImage(SwingFXUtils.toFXImage(qrCodeImage, null));
+            eventName.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(0).getEventName());
+            location.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(0).getEventAddress());
+        }else {
+            BufferedImage qrCodeImage = facadeModel.getTicketModel().printQRCodeOnTicket();
+            qrCode.setImage(SwingFXUtils.toFXImage(qrCodeImage, null));
+        }
+
+
     }
 }

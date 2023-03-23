@@ -1,3 +1,4 @@
+/*
 package be;
 
 
@@ -22,12 +23,13 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
             String uniqueID = UUID.randomUUID().toString();
 
             // Create QR code content with the unique ID
-            String qrCodeContent = "Drasing Kabab group welcomes you " + uniqueID;
+            String qrCodeContent = "https://www.easv.dk/da/uddannelser  " + uniqueID;
 
             // Set QR code properties
-            int width = 150;
-            int height = 150;
+            int width = 200;
+            int height = 200;
             String format = "png";
+
             Path path = FileSystems.getDefault().getPath("src/image/QR-code.png");
 
             // Generate QR code image
@@ -52,3 +54,4 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
     }
 
 
+*/

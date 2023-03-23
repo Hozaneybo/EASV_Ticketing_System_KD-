@@ -2,7 +2,7 @@ package be;
 
 public enum TicketType {
 
-    Standard,
-    Customized,
-    Special,
+    STANDARD,
+    CUSTOMIZED,
+    SPECIAL,
 }
