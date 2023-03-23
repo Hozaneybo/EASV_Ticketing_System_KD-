@@ -12,7 +12,7 @@
       <TextField fx:id="email" layoutX="78.0" layoutY="101.0" promptText="email" />
       <TextField fx:id="eventName" layoutX="71.0" layoutY="200.0" promptText="event name " />
       <TextField fx:id="location" layoutX="79.0" layoutY="284.0" promptText="location" />
-      <Button layoutX="397.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="42.0" prefWidth="131.0" text="Button" />
+      <Button layoutX="207.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="42.0" prefWidth="131.0" text="Buy" />
       <TextField fx:id="StandardTiket" layoutX="387.0" layoutY="328.0" text="STANDARD" />
    </children>
 </AnchorPane>
