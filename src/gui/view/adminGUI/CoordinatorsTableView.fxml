@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.adminControllers.CoordinatorsTableView">
+   <children>
+      <TableView fx:id="coordinatorTable" layoutX="105.0" layoutY="110.0" prefHeight="200.0" prefWidth="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Coordinator's Name" />
+            <TableColumn fx:id="usernameColumn" prefWidth="200.0" text="Coordinator's Username" />
+            <TableColumn fx:id="passwordColumn" prefWidth="140.0" text="Coordinator's Password" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

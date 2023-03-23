@@ -1,8 +1,6 @@
 package gui.model;
 
-import be.Admin;
 import be.BarEvent;
-import be.EventCoordinator;
 import bll.EventCoordinatorManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,7 +43,5 @@ public class EventCoordinatorModel {
         allEvents.clear();
         allEvents.setAll(eventCoordinatorManager.getAllBarEvents());
     }
-
-
 
 }

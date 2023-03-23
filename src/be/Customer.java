@@ -1,14 +1,15 @@
 package be;
 
 public class Customer {
-    int id;
-    String name;
-    String email;
+   private int id;
+    private String name;
+    private String email;
 
     public Customer(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
+
     }
 
     public int getId() {
@@ -34,4 +35,6 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }

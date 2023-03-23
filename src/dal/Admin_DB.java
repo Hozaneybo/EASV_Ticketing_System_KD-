@@ -18,7 +18,7 @@ public class Admin_DB {
         dbConnector = new DBConnector();
     }
 
-    public Admin logIn(String username, String password) throws SQLServerException {
+    /*public Admin logIn(String username, String password) throws SQLServerException {
         String sql = "Select * FROM Admin WHERE username = ? AND password = ?";
 
         try(Connection connection = dbConnector.getConnected()){
@@ -31,8 +31,8 @@ public class Admin_DB {
 
             if(result.next()){
                 int id = result.getInt("Id");
-                username = result.getString("username");
-                password = result.getString("password");
+                username = result.getString("Username");
+                password = result.getString("Password");
 
                 return  new Admin(id, username, password);
 
@@ -43,7 +43,7 @@ public class Admin_DB {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     public EventCoordinator createNewEventCoordinator(String fullName, String username, String password) throws Exception {
         // Creates an SQL command
@@ -78,11 +78,11 @@ public class Admin_DB {
             throw new Exception("Could not create an EventCoordinator", ex);
         }
     }
-    public List<EventCoordinator> getAllEventCoordinator() throws SQLException {
-        List<EventCoordinator> allEventCoordinator = new ArrayList<>();
+    public List<EventCoordinator> getAllEventCoordinators() throws SQLException {
+        List<EventCoordinator> allEventCoordinators = new ArrayList<>();
 
         try (Connection conn = dbConnector.getConnected()) {
-            String sql = "SELECT * FROM BarEvent;";
+            String sql = "SELECT * FROM EventCoordinator;";
             Statement statement = conn.createStatement();
             //Run the SQL statement
             if(statement.execute(sql))
@@ -95,11 +95,38 @@ public class Admin_DB {
                     String userName = resultSet.getString("username");
                     String password = resultSet.getString("password");
 
-                    allEventCoordinator.add(new EventCoordinator(id, fullName, userName, password));
+                    allEventCoordinators.add(new EventCoordinator(id, fullName, userName, password));
                 }
             }
         }
 
-        return allEventCoordinator;
+        return allEventCoordinators;
     }
+
+    public List<BarEvent> getAllBarEvents() throws SQLException {
+        List<BarEvent> allBarEvents = new ArrayList<>();
+
+        try (Connection conn = dbConnector.getConnected()) {
+            String sql = "SELECT * FROM BarEvent;";
+            Statement statement = conn.createStatement();
+            //Run the SQL statement
+            if(statement.execute(sql))
+            {
+                ResultSet resultSet = statement.getResultSet();
+                while (resultSet.next())
+                {
+                    int id = resultSet.getInt("ID");
+                    String eventName = resultSet.getString("Event_Name");
+                    String eventAddress = resultSet.getString("Event_Address");
+                    String notes = resultSet.getString("Notes");
+                    String startTime = resultSet.getString("Start_Time");
+                    String endTime = resultSet.getString("End_Time");
+                    allBarEvents.add(new BarEvent(id, eventName, eventAddress, notes, startTime, endTime));
+                }
+            }
+        }
+
+        return allBarEvents;
+    }
+
 }

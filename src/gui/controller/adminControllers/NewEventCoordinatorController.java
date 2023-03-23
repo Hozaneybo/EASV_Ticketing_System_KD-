@@ -1,4 +1,4 @@
-package gui.controller;
+package gui.controller.adminControllers;
 
 import be.EventCoordinator;
 import gui.model.AdminModel;
@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -23,23 +24,31 @@ public class NewEventCoordinatorController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            model =  new AdminModel();
+            model = new AdminModel();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
 
-    public void CreateNewCoordinator(ActionEvent event) throws Exception {
+    public void CreateNewCoordinator(ActionEvent event)  {
         String fullName = FullNameTXT.getText();
         String userName = UserNameTXT.getText();
         String password = PasswordTXT.getText();
 
-        model.createNewEventCoordinator(fullName, userName, password);
+        try {
+            model.createNewEventCoordinator(fullName, userName, password);
 
-        Node source = (Node) event.getSource();
-        Stage mStage = (Stage) source.getScene().getWindow();
-        mStage.close();
+            FullNameTXT.clear();
+            UserNameTXT.clear();
+            PasswordTXT.clear();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You have successfully created an event coordinator ..!");
+            alert.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

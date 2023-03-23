@@ -1,4 +1,3 @@
-
 package be;
 
 import java.util.UUID;
@@ -40,9 +39,6 @@ public class Ticket {
     public String getQrCode() {
         return qrCode;
     }
-
-
-
 
 }
 
