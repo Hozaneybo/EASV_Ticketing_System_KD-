@@ -1,0 +1,60 @@
+
+----- To create database in SQL Server ----------
+
+
+CREATE TABLE [dbo].[Admin] (
+    [Id]       INT           IDENTITY (1, 1) NOT NULL,
+    [Username] NVARCHAR (50) NOT NULL,
+    [Password] NVARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_Admin] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+ CREATE TABLE [dbo].[BarEvent] (
+    [id]             INT            IDENTITY (1, 1) NOT NULL,
+    [Event_Name]     NVARCHAR (55)  NOT NULL,
+    [Event_Address]  NVARCHAR (55)  NOT NULL,
+    [notes]          NVARCHAR (MAX) NULL,
+    [Start_Time]     NVARCHAR (55)  NOT NULL,
+    [End_Time]       NVARCHAR (55)  NULL,
+    [TicketType]     VARCHAR (50)   NOT NULL,
+    [Coordinator_id] INT            NOT NULL ,
+    CONSTRAINT [PK_BarEvent] PRIMARY KEY CLUSTERED ([id] ASC),
+   FOREIGN KEY  ([Coordinator_id]) REFERENCES EventCoordinator
+);
+
+CREATE TABLE [dbo].[Customer] (
+    [id]    INT           IDENTITY (1, 1) NOT NULL,
+    [Name]  NVARCHAR (50) NOT NULL,
+    [email] NVARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
+
+CREATE TABLE [dbo].[EventCoordinator] (
+    [id]       INT           IDENTITY (1, 1) NOT NULL,
+    [fullName] NVARCHAR (55) NOT NULL,
+    [username] NVARCHAR (55) NOT NULL,
+    [password] NVARCHAR (55) NOT NULL,
+    CONSTRAINT [PK_EventCoordinator] PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
+
+  CREATE TABLE [dbo].[Tickets] (
+    [ticket_id]      INT           IDENTITY (1, 1) NOT NULL,
+    [event_id]       INT           NOT NULL,
+    [customer_id]    INT           NOT NULL,
+    [coordinator_id] INT           NOT NULL,
+    [qr_code]        VARCHAR (100) NOT NULL,
+    CONSTRAINT [PK_Tickets] PRIMARY KEY CLUSTERED ([ticket_id] ASC),
+    FOREIGN KEY ([coordinator_id]) REFERENCES [dbo].[EventCoordinator] ([id]),
+    FOREIGN KEY ([customer_id]) REFERENCES [dbo].[Customer] ([id]),
+    FOREIGN KEY ([event_id]) REFERENCES [dbo].[BarEvent] ([id])
+);
+
+
+CREATE TABLE [dbo].[SpecialTicket] (
+    [id]      INT              IDENTITY (1, 1) NOT NULL,
+    [Qr_Code]  NVARCHAR (MAX)   NOT NULL,
+    [used]  BIT    NOT NULL
+    CONSTRAINT [PK_NewTable] PRIMARY KEY CLUSTERED ([id] ASC)
+);

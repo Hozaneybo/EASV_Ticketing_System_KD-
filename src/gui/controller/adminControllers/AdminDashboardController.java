@@ -72,7 +72,7 @@ public class AdminDashboardController implements Initializable {
 
 
     @FXML
-    private void showAllEvents() {
+    private  void showAllEvents() {
         eventBox.getChildren().clear();
 
         int eventsNumber = adminModel.getObservableEvents().size();
@@ -89,8 +89,8 @@ public class AdminDashboardController implements Initializable {
                     controller.getStartTimeLbl().setText(adminModel.getObservableEvents().get(i).getStartTime());
                     controller.getEndTimeLbl().setText(adminModel.getObservableEvents().get(i).getEndTime());
                     eventBox.getChildren().add(node);
-                } catch (IOException ex) {
-
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         }
@@ -113,4 +113,5 @@ public class AdminDashboardController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 }

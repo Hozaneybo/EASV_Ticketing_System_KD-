@@ -4,15 +4,13 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TicketController">
+<AnchorPane prefHeight="400.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TicketsControllers.BuyTicketController">
    <children>
-      <ImageView fx:id="qrCode" fitHeight="150.0" fitWidth="200.0" layoutX="516.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="customerNameField" layoutX="78.0" layoutY="33.0" promptText="name" />
       <TextField fx:id="customerEmailField" layoutX="78.0" layoutY="101.0" promptText="email" />
-      <Button layoutX="207.0" layoutY="332.0" mnemonicParsing="false" onAction="#submitBuying" prefHeight="42.0" prefWidth="131.0" text="Submit" />
+      <Button layoutX="207.0" layoutY="332.0" mnemonicParsing="false" onAction="#submitBuying" prefHeight="42.0" prefWidth="131.0" text="Buy Ticket" />
       <TextField fx:id="ticketQuantity" alignment="CENTER" layoutX="485.0" layoutY="341.0" prefHeight="25.0" prefWidth="69.0" promptText="Quantity" />
       <Label fx:id="eventNameLbl" layoutX="78.0" layoutY="200.0" prefHeight="25.0" prefWidth="200.0" text="Event Name" />
       <Label fx:id="eventLocationLbl" layoutX="78.0" layoutY="258.0" prefHeight="25.0" prefWidth="200.0" text="Location" />

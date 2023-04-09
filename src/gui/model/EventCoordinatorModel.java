@@ -1,15 +1,17 @@
 package gui.model;
 
-import be.BarEvent;
+import be.*;
 import bll.EventCoordinatorManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
 
+
 public class EventCoordinatorModel {
 
     private ObservableList<BarEvent> allEvents;
+    private ObservableList<Ticket> allTickets;
 
     private EventCoordinatorManager eventCoordinatorManager;
 
@@ -19,11 +21,12 @@ public class EventCoordinatorModel {
 
         allEvents = FXCollections.observableArrayList();
         allEvents.addAll(eventCoordinatorManager.getAllBarEvents());
+        allTickets = FXCollections.observableArrayList();
     }
     public ObservableList<BarEvent> getObservableEvents() {return allEvents;}
 
-    public void createNewBarEvent(String eventName, String eventAddress, String notes, String startTime, String endTime) throws Exception {
-        BarEvent barEvent = eventCoordinatorManager.createNewBarEvent(eventName, eventAddress, notes, startTime, endTime);
+    public void createNewBarEvent(String eventName, String eventAddress, String notes, String startTime, String endTime, TicketType type, int coordinator) throws Exception {
+        BarEvent barEvent = eventCoordinatorManager.createNewBarEvent(eventName, eventAddress, notes, startTime, endTime, type, coordinator);
         allEvents.add(barEvent);
         refreshEventListView();
 
@@ -43,5 +46,16 @@ public class EventCoordinatorModel {
         allEvents.clear();
         allEvents.setAll(eventCoordinatorManager.getAllBarEvents());
     }
+
+    public ObservableList<String> getTypes() {
+        ObservableList<String> ticketTypes = FXCollections.observableArrayList();
+        for (TicketType type : TicketType.values()) {
+            ticketTypes.add(type.toString());
+        }
+        return ticketTypes;
+
+
+    }
+
 
 }

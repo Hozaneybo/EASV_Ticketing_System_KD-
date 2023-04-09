@@ -1,6 +1,7 @@
 package bll;
 
 import be.BarEvent;
+import be.Customer;
 import dal.Customer_DB;
 
 import java.sql.SQLException;
@@ -16,5 +17,12 @@ public class CustomerManager {
     }
     public List<BarEvent> getAllBarEvents() throws SQLException {
         return customer_Db.getAllBarEvents();
+    }
+    public Customer createCustomer(String name, String email) throws Exception {
+        return customer_Db.createCustomer(name, email);
+    }
+
+    public List<Customer> getAllCustomer() throws SQLException {
+        return customer_Db.getAllCustomer();
     }
 }

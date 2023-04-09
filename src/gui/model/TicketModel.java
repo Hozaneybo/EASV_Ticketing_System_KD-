@@ -1,46 +1,37 @@
 package gui.model;
 
 import be.*;
+import bll.QrCodeManager;
 import bll.TicketManager;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import javafx.collections.ObservableList;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-
-
 
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class TicketModel {
 
     private TicketManager ticketManager;
-    private String [] types;
+    private QrCodeManager qrCodeManager;
+
 
 
     public TicketModel(){
         ticketManager = new TicketManager();
-        types = new String[]{"Standard", "Customized", "Special"};
+        qrCodeManager = new QrCodeManager();
     }
 
-    public String[] getTypes() {
-        return types;
-    }
 
     public BufferedImage printQRCodeOnTicket(){
-        return ticketManager.printQRCodeOnTicket();
+        return qrCodeManager.printQRCodeOnTicket();
     }
 
-    public String getTicketCategory(){
-        return ticketManager.getTicketCategory();
+
+    public  String readQRCodeFromFile(){
+       return qrCodeManager.readQRCodeFromFile();
     }
 
+    public Ticket createTicket(int event, int customer, int coordinator, String qrCode) throws Exception {
+        return ticketManager.createTicket(event, customer, coordinator, qrCode);
     }
+
+}
 

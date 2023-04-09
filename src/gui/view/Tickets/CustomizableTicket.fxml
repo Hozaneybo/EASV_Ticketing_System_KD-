@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="273.0" prefWidth="742.0" stylesheets="@../design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TicketsControllers.CustomizableTicketController">
+   <children>
+      <AnchorPane fx:id="bigAnchor" layoutX="19.0" layoutY="19.0" prefHeight="238.0" prefWidth="511.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+         <children>
+            <Label fx:id="eventName" layoutX="55.0" layoutY="14.0" prefHeight="34.0" prefWidth="382.0" text="events name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="eventAddress" layoutX="56.0" layoutY="48.0" prefHeight="34.0" prefWidth="264.0" text="address" />
+            <Label fx:id="eventStart" layoutX="54.0" layoutY="82.0" prefHeight="34.0" prefWidth="264.0" text="start" />
+            <Label fx:id="eventEnd" layoutX="52.0" layoutY="116.0" prefHeight="34.0" prefWidth="264.0" text="end" />
+            <Label fx:id="notes" layoutX="48.0" layoutY="150.0" prefHeight="34.0" prefWidth="264.0" text="note" />
+            <Label fx:id="customerName" layoutX="50.0" layoutY="184.0" prefHeight="34.0" prefWidth="174.0" text="name" />
+            <Label fx:id="customerEmail" layoutX="286.0" layoutY="184.0" prefHeight="34.0" prefWidth="174.0" text="email" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="littleAnchor" layoutX="545.0" layoutY="21.0" prefHeight="238.0" prefWidth="182.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+         <children>
+            <ImageView fx:id="qr_code_image" fitHeight="224.0" fitWidth="174.0" layoutX="4.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+   </children>
+   <styleClass>
+      <String fx:value="event-pane-custmoizeble" />
+      <String fx:value="body_background" />
+   </styleClass>
+</AnchorPane>

@@ -101,7 +101,7 @@ public class ECDashboardController implements Initializable {
 
     public void logOut(ActionEvent actionEvent) {
         Node source = (Node) actionEvent.getSource();
-        javafx.stage.Stage stage = (javafx.stage.Stage) source.getScene().getWindow();
+       Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/customerGUI/CustomerView.fxml"));
@@ -114,5 +114,17 @@ public class ECDashboardController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void email(ActionEvent actionEvent) {
+
+        try{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/EmailWindow.fxml"));
+        Node node =  loader.load();
+        eventBox.getChildren().add(node);
+
+    }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

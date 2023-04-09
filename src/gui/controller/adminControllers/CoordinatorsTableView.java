@@ -48,8 +48,8 @@ public class CoordinatorsTableView implements Initializable {
             usernameColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("username"));
             passwordColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("password"));
 
-
         }
 
     }
+
 }

@@ -1,12 +1,9 @@
 package bll;
 
-import be.Admin;
-import be.BarEvent;
-import be.EventCoordinator;
+import be.*;
 import dal.EventCoordinator_DB;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class EventCoordinatorManager {
@@ -22,8 +19,8 @@ public class EventCoordinatorManager {
     }
 
 
-    public BarEvent createNewBarEvent(String eventName, String eventAddress, String notes, String startTime, String endTime) throws Exception {
-        return eventCoordinatorDb.createBarEvent(eventName, eventAddress, notes, startTime, endTime);
+    public BarEvent createNewBarEvent(String eventName, String eventAddress, String notes, String startTime, String endTime, TicketType type, int coordinator) throws Exception {
+        return eventCoordinatorDb.createBarEvent(eventName, eventAddress, notes, startTime, endTime, type, coordinator);
     }
 
     public void updateBarEvent(BarEvent updatedBarEvent) throws Exception {

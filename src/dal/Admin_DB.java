@@ -3,7 +3,7 @@ package dal;
 import be.Admin;
 import be.BarEvent;
 import be.EventCoordinator;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import be.TicketType;
 import dal.database.DBConnector;
 
 import java.sql.*;
@@ -17,33 +17,6 @@ public class Admin_DB {
     public Admin_DB(){
         dbConnector = new DBConnector();
     }
-
-    /*public Admin logIn(String username, String password) throws SQLServerException {
-        String sql = "Select * FROM Admin WHERE username = ? AND password = ?";
-
-        try(Connection connection = dbConnector.getConnected()){
-            PreparedStatement statement = connection.prepareStatement(sql);
-
-            statement.setString(1, username);
-            statement.setString(2, password);
-
-            ResultSet result = statement.executeQuery();
-
-            if(result.next()){
-                int id = result.getInt("Id");
-                username = result.getString("Username");
-                password = result.getString("Password");
-
-                return  new Admin(id, username, password);
-
-            } else{
-                return null;
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 
     public EventCoordinator createNewEventCoordinator(String fullName, String username, String password) throws Exception {
         // Creates an SQL command
@@ -121,12 +94,66 @@ public class Admin_DB {
                     String notes = resultSet.getString("Notes");
                     String startTime = resultSet.getString("Start_Time");
                     String endTime = resultSet.getString("End_Time");
-                    allBarEvents.add(new BarEvent(id, eventName, eventAddress, notes, startTime, endTime));
+                    TicketType type = TicketType.valueOf(resultSet.getString("TicketType"));
+                    allBarEvents.add(new BarEvent(id, eventName, eventAddress, notes, startTime, endTime, type));
                 }
             }
         }
-
         return allBarEvents;
     }
+
+    public void updateEventCoordinator(EventCoordinator coordinator) {
+
+        String sql = "UPDATE EventCoordinator SET fullname = ? , username = ?, password = ? WHERE id = ? ";
+
+        try (Connection connection = dbConnector.getConnected()) {
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, coordinator.getFullName());
+            statement.setString(2, coordinator.getUsername());
+            statement.setString(3, coordinator.getPassword());
+            statement.setInt(4,coordinator.getId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteEventCoordinator(EventCoordinator coordinator){
+
+        String sql = "DELETE FROM EventCoordinator WHERE id = ? ";
+        try (Connection connection = dbConnector.getConnected()){
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, coordinator.getId());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteEvent ( BarEvent event){
+
+        String sql = "DELETE FROM Event WHERE Id = ?";
+        try (Connection connection = dbConnector.getConnected()){
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, event.getId());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 }

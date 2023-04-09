@@ -1,10 +1,8 @@
 package gui.model;
 
-import be.Admin;
 import be.BarEvent;
 import be.EventCoordinator;
 import bll.AdminManager;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -29,9 +27,7 @@ public class AdminModel {
         allEventCoordinator.addAll(adminManager.getAllEventCoordinators());
     }
     public ObservableList<EventCoordinator> getObservableEventCoordinator() {return allEventCoordinator;}
-   /* public Admin logIn(String username, String password) throws SQLServerException {
-        return adminManager.logIn(username, password);
-    }*/
+
     public void createNewEventCoordinator(String fullName, String username, String password) throws Exception
     {
         EventCoordinator eventCoordinator = adminManager.createNewEventCoordinator( fullName, username, password);
@@ -39,4 +35,20 @@ public class AdminModel {
     }
 
     public ObservableList<BarEvent> getObservableEvents() {return allEvents;}
+
+    public void updateEventCoordinator(EventCoordinator coordinator){
+         adminManager.updateEventCoordinator(coordinator);
+         allEventCoordinator.addAll(coordinator);
+    }
+
+    public void deleteEventCoordinator(EventCoordinator coordinator){
+        adminManager.deleteEventCoordinator(coordinator);
+        allEventCoordinator.remove(coordinator);
+    }
+
+    public void deleteEvent ( BarEvent event){
+        adminManager.deleteEvent(event);
+        allEvents.remove(event);
+    }
+
 }

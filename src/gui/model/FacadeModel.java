@@ -9,6 +9,7 @@ public class FacadeModel {
     private CustomerModel customerModel;
     private AdminModel adminModel;
     private LogInModel logInModel;
+    private SpecialTicketModel specialTicketModel;
 
 
 
@@ -20,6 +21,7 @@ public class FacadeModel {
         customerModel = new CustomerModel();
         adminModel = new AdminModel();
         logInModel = new LogInModel();
+        specialTicketModel = new SpecialTicketModel();
     }
 
     public EventCoordinatorModel getEventCoordinatorModel() {
@@ -40,5 +42,8 @@ public class FacadeModel {
 
     public LogInModel getLogInModel() {
         return logInModel;
+    }
+    public SpecialTicketModel getSpecialTicketModel(){
+        return specialTicketModel;
     }
 }

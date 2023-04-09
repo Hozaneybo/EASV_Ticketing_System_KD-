@@ -3,7 +3,7 @@ package gui.controller;
 import be.Admin;
 import be.EventCoordinator;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import gui.model.LogInModel;
+import gui.model.FacadeModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,27 +11,50 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class LogIn implements Initializable {
+public class LogInController implements Initializable {
+    public Button logInButton;
     @FXML
     private PasswordField passwordField;
 
     @FXML
     private TextField usernameField;
-    private LogInModel logInModel;
+    public FacadeModel facadeModel;
 
+    private int CoordinatorId;
+
+    public int getCoordinatorId() {
+        return CoordinatorId;
+    }
+
+    private void setCoordinatorId(int id) {
+        this.CoordinatorId = id;
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        logInModel = new LogInModel();
 
+        try {
+            facadeModel = new FacadeModel();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database Error");
+            alert.setHeaderText("Unable to connect to database");
+            alert.setContentText("An error occurred while connecting to the database.");
+            alert.showAndWait();
+            e.printStackTrace(); // Or log the error
+            return; // Exit the method to prevent further errors
+        }
 
     }
        @FXML
@@ -39,9 +62,11 @@ public class LogIn implements Initializable {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
+
+
         try {
-            Admin admin = logInModel.adminLogIn(username, password);
-            EventCoordinator coordinator = logInModel .coordinatorLogIn(username, password);
+            Admin admin = facadeModel.getLogInModel().adminLogIn(username, password);
+            EventCoordinator coordinator = facadeModel.getLogInModel().coordinatorLogIn(username, password);
 
             if (admin != null) {
                 // Login successful, navigate to the next screen
@@ -51,6 +76,7 @@ public class LogIn implements Initializable {
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();
+
             } else if (coordinator != null) {
 
                 // Login successful, navigate to the next screen
@@ -60,6 +86,8 @@ public class LogIn implements Initializable {
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();
+
+                setCoordinatorId(coordinator.getId());
 
             }
             else {
@@ -77,7 +105,24 @@ public class LogIn implements Initializable {
         }
     }
 
+    public int getId(){
 
+        int coordinator_id = 0;
 
+        for (EventCoordinator coordinator: facadeModel.getAdminModel().getObservableEventCoordinator()){
+            if(usernameField.getText().equals(coordinator.getUsername()) && passwordField.getText().equals(coordinator.getPassword())){
+             coordinator_id = coordinator.getId();
+                return coordinator_id;
+            }
+        }
+       return 0;
+    }
 
+  /*  public static void main(String[] args) {
+        LogInController controller = new LogInController();
+
+        //System.out.println(controller.facadeModel.getAdminModel().getObservableEventCoordinator());
+        //System.out.println(controller.getId());
+        System.out.println(controller.getCoordinatorId());
+    }*/
 }

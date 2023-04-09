@@ -1,31 +1,17 @@
 package dal;
 
 
-import be.Ticket;
-import be.TicketType;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import be.*;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.database.DBConnector;
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.util.UUID;
+import java.sql.*;
+
 
 
 public class Ticket_DB {
 
     private Ticket ticket;
     private DBConnector dbConnector;
-    TicketType ticketType;
 
     public Ticket_DB() {
         dbConnector = new DBConnector();
@@ -33,88 +19,72 @@ public class Ticket_DB {
 
     }
 
-      public BufferedImage printQRCodeOnTicket() {
+    public Ticket createTicket(int event, int customer, int coordinator, String qrCode) throws Exception {
 
-        // Generate QR code image
-        String qrCodeData = "ticket_data_here"; // Replace with the unique ticket data
-        int qrCodeSize = 200; // Set the size of the QR code image
-        BufferedImage qrCodeImage = generateQRCodeImage(qrCodeData, qrCodeSize);
+        String sql = "INSERT INTO Tickets VALUES (?,?,?,?);";
+        try (Connection connection = dbConnector.getConnected()) {
 
-        // Open ticket template image
-        File ticketFile = new File("src\\image\\QR-code.png"); // Replace with the path to the ticket template image
-        BufferedImage ticketImage = null;
-        try {
-            ticketImage = ImageIO.read(ticketFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        // Paste QR code onto ticket image
-        int x = 200;
-        int y = 200;
-        Graphics2D graphics = ticketImage.createGraphics();
-        graphics.drawImage(qrCodeImage, x, y, null);
+            statement.setInt(1, event);
+            statement.setInt(2, customer);
+            statement.setInt(3, coordinator);
+            statement.setString(4, qrCode);
 
-        // Save modified ticket image as a file
-        File printedTicketFile = new File("printed_ticket.png"); // Replace with the desired file format and name
-        try {
-            ImageIO.write(ticketImage, "png", printedTicketFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ticketImage;
-    }
+            statement.executeUpdate();
 
-    public BufferedImage generateQRCodeImage(String qrCodeData, int size) {
+            ResultSet result = statement.getGeneratedKeys();
+            int id = 0;
 
-        String uniqueID = UUID.randomUUID().toString();
+            if (result.next()) {
+                id = result.getInt(1);
+            }
 
-        // Create QR code content with the unique ID
-        String qrCodeContent = "https://www.easv.dk/da/uddannelser  " + uniqueID;
+            Ticket ticket1 = new Ticket(id, event, customer, coordinator, qrCode);
 
-        // Set QR code properties
-        int width = 200;
-        int height = 200;
-        String format = "png";
+            return ticket1;
 
-        Path path = FileSystems.getDefault().getPath("src/image/QR-code.png");
-
-        // Generate QR code image
-        BitMatrix bitMatrix = null;
-        try {
-            QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            bitMatrix = qrCodeWriter.encode(qrCodeContent, BarcodeFormat.QR_CODE, width, height, getQRCodeHints());
-            MatrixToImageWriter.writeToPath(bitMatrix, format, path);
-        } catch (WriterException | IOException e) {
-            e.printStackTrace();
-        }
-
-        return MatrixToImageWriter.toBufferedImage(bitMatrix);
-    }
-
-    private static java.util.Map<EncodeHintType, Object> getQRCodeHints() {
-        java.util.Map<EncodeHintType, Object> hints = new java.util.HashMap<>();
-        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
-        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-        hints.put(EncodeHintType.MARGIN, 1);
-        return hints;
-    }
-
-    public String getTicketCategory() {
-        if (this.ticketType == TicketType.STANDARD) {
-            return "Standard Ticket";
-        } else if (this.ticketType == TicketType.CUSTOMIZED) {
-            return "Customized Ticket";
-        } else if (this.ticketType == TicketType.SPECIAL) {
-            return "Special Ticket";
-        } else {
-            return "Unknown Ticket Type";
+        } catch (SQLServerException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
+          /*public ArrayList<Ticket> getAllTickets() throws SQLException {
+        //Create and return songs
+        ArrayList<Ticket> tickets = new ArrayList<>();
+
+        //Get connection to database
+        try (Connection connection = dbConnector.getConnected()) {
+            //Create an SQL command
+            String sql = "SELECT * FROM BarEvent e, Customer c, EventCoordinator co, tickets t " +
+                    "WHERE e.id = t.event_id AND c.id = t.customer_id AND co.id = t.coordinator_id;";
+
+            //Create some statements
+            Statement statement = connection.createStatement();
+
+            //Do what you suppose to do
+            if (statement.execute(sql)) {
+                ResultSet resultSet = statement.getResultSet();
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("ticket_id");
+                    int event_id = resultSet.getInt("even_id");
+                    int customer_id = resultSet.getInt("customer_id");
+                    int coordinatoe_id = resultSet.getInt("coordinator_id");
+                    String qr_code = resultSet.getString("qr_code");
+
+                    Ticket ticket1 = new Ticket(id, event_id, customer_id, coordinatoe_id, qr_code);
+                    tickets.add(ticket1);
+                }
+            }
+        }
+        return tickets;
+    }*/
 
 
 }
+
 
 
 

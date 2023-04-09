@@ -2,7 +2,6 @@ package gui.controller.adminControllers;
 
 import be.Admin;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import gui.model.AdminModel;
 import gui.model.LogInModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

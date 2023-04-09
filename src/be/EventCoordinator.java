@@ -2,9 +2,10 @@ package be;
 
 public class EventCoordinator {
 
-    int id;
+    private  int id;
 
-    String fullName, username, password;
+    private String fullName, username, password;
+    private Ticket ticket;
 
     public EventCoordinator(int id, String fullName, String username, String password) {
         this.id = id;
@@ -44,4 +45,13 @@ public class EventCoordinator {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
 }

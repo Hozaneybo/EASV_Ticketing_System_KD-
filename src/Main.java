@@ -15,7 +15,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
-       // Parent root = loader.load(getClass().getResource("/gui/view/CoordinatorDashboard.fxml"));
         Parent root = loader.load(getClass().getResource("/gui/view/customerGUI/CustomerView.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

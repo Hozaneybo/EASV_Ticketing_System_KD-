@@ -1,19 +1,15 @@
 package gui.controller.adminControllers;
 
-import be.EventCoordinator;
+
 import gui.model.AdminModel;
-import gui.model.EventCoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ResourceBundle;
 
 public class NewEventCoordinatorController implements Initializable {

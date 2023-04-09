@@ -37,6 +37,16 @@
                   <String fx:value="my-fill-text" />
                   <String fx:value="my-button-style" />
                </styleClass></Button>
+            <Button mnemonicParsing="false" onAction="#email" prefHeight="40.0" prefWidth="150.0" stylesheets="@../design.css" text="Email">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="my-fill-text" />
+                  <String fx:value="my-button-style" />
+               </styleClass>
+            </Button>
             <Button mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="150.0" stylesheets="@../design.css" text="LogOut">
                <cursor>
                   <Cursor fx:constant="HAND" />

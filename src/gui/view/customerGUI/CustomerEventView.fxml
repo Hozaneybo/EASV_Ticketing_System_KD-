@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="340.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.costumerControllers.CustomerEventViewController">
+<AnchorPane prefHeight="340.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.costumerControllers.CustomerEventViewController">
    <children>
       <Pane layoutX="50.0" layoutY="20.0" prefHeight="300.0" prefWidth="550.0" styleClass="event_background" stylesheets="@../design.css">
          <children>
@@ -55,7 +53,7 @@
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>
             </Label>
-            <Button layoutX="386.0" layoutY="250.0" mnemonicParsing="false" onAction="#buyTickets" prefHeight="32.0" prefWidth="150.0" style="-fx-background-radius: 25;" stylesheets="@../design.css" text="Buy Tickets">
+            <Button fx:id="buyTicketButton" layoutX="386.0" layoutY="250.0" mnemonicParsing="false" onAction="#buyTickets" prefHeight="32.0" prefWidth="150.0" style="-fx-background-radius: 25;" stylesheets="@../design.css" text="Buy Tickets">
                <styleClass>
                   <String fx:value="my-button-style" />
                   <String fx:value="my-button-style" />

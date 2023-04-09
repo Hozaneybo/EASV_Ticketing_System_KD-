@@ -3,7 +3,6 @@ package bll;
 import be.*;
 import dal.Ticket_DB;
 
-import java.awt.image.BufferedImage;
 
 public class TicketManager {
 
@@ -14,12 +13,8 @@ public class TicketManager {
         ticketDb = new Ticket_DB();
     }
 
-    public BufferedImage printQRCodeOnTicket(){
-        return ticketDb.printQRCodeOnTicket();
-    }
-
-    public String getTicketCategory(){
-        return ticketDb.getTicketCategory();
+    public Ticket createTicket(int event, int customer, int coordinator, String qrCode) throws Exception {
+        return  ticketDb.createTicket(event, customer, coordinator, qrCode);
     }
 
 
