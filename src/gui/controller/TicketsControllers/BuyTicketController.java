@@ -2,6 +2,12 @@
 package gui.controller.TicketsControllers;
 
         import be.TicketType;
+        import com.itextpdf.text.Document;
+        import com.itextpdf.text.List;
+        import com.itextpdf.text.pdf.DefaultFontMapper;
+        import com.itextpdf.text.pdf.PdfContentByte;
+        import com.itextpdf.text.pdf.PdfTemplate;
+        import com.itextpdf.text.pdf.PdfWriter;
         import gui.model.FacadeModel;
 
         import javafx.embed.swing.SwingFXUtils;
@@ -9,17 +15,26 @@ package gui.controller.TicketsControllers;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
         import javafx.fxml.Initializable;
+        import javafx.print.PageRange;
+        import javafx.print.PrinterJob;
         import javafx.scene.Node;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
+        import javafx.scene.SnapshotParameters;
+        import javafx.scene.control.Alert;
         import javafx.scene.control.ComboBox;
         import javafx.scene.control.Label;
         import javafx.scene.control.TextField;
         import javafx.stage.Stage;
 
+        import java.awt.*;
         import java.awt.image.BufferedImage;
+        import java.io.FileOutputStream;
+        import java.io.FileWriter;
+        import java.io.IOException;
         import java.net.URL;
         import java.sql.SQLException;
+        import java.util.ArrayList;
         import java.util.ResourceBundle;
 
 public class BuyTicketController implements Initializable {
@@ -72,6 +87,8 @@ public class BuyTicketController implements Initializable {
         }
 
         buyMoreThanOneTicket();
+       // List<Node> tickets = new ArrayList<>();
+
 
 
 
@@ -86,11 +103,13 @@ public class BuyTicketController implements Initializable {
         if(quantity ==1) {
             showTicketsCategory();
             putTicketInDataBase();
+            //generateTicketsFile();
 
         } else {
             for (int j = 0; j < quantity; j++) {
                 showTicketsCategory();
                 putTicketInDataBase();
+                //generateTicketsFile();
             }
         }
     }
@@ -189,15 +208,17 @@ public class BuyTicketController implements Initializable {
    }
 
 
-    public void putTicketInDataBase(){
+    public void putTicketInDataBase()  {
 
             int eventsIndex = getEventIndex();
 
-            int event_id = facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getId();
-            int coordinator_id = 3;
-            String qr_code = facadeModel.getTicketModel().readQRCodeFromFile();
 
             try {
+
+                int event_id = facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getId();
+                int coordinator_id = facadeModel.getEventCoordinatorModel().getCoordinatorId(event_id);
+                String qr_code = facadeModel.getTicketModel().readQRCodeFromFile();
+
                 facadeModel.getCustomerModel().refreshCustomer();
                 int customer_id = facadeModel.getCustomerModel().getObservableCustomers().get(facadeModel.getCustomerModel().getObservableCustomers().size()-1).getId();
 
@@ -209,6 +230,7 @@ public class BuyTicketController implements Initializable {
             }
 
     }
+
 
 
 }

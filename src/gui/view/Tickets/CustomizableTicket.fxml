@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="273.0" prefWidth="742.0" stylesheets="@../design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TicketsControllers.CustomizableTicketController">
+<AnchorPane prefHeight="275.0" prefWidth="750.0" stylesheets="@../design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TicketsControllers.CustomizableTicketController">
    <children>
       <AnchorPane fx:id="bigAnchor" layoutX="19.0" layoutY="19.0" prefHeight="238.0" prefWidth="511.0" style="-fx-background-color: white; -fx-background-radius: 15;">
          <children>

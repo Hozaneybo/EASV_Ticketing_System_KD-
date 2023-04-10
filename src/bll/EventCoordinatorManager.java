@@ -31,4 +31,8 @@ public class EventCoordinatorManager {
         eventCoordinatorDb.deleteBarEvent(barEvent);
     }
 
+    public int getCoordinatorId(int event_id) throws SQLException {
+       return eventCoordinatorDb.getCoordinatorId(event_id);
+    }
+
 }

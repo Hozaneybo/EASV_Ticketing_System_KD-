@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class EventCoordinatorModel {
@@ -55,6 +56,9 @@ public class EventCoordinatorModel {
         return ticketTypes;
 
 
+    }
+    public int getCoordinatorId(int event_id) throws SQLException {
+        return eventCoordinatorManager.getCoordinatorId(event_id);
     }
 
 

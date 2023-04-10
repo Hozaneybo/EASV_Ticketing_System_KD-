@@ -64,17 +64,16 @@ public class ECDashboardController implements Initializable {
     }
 
     @FXML
-    private void createNewEvent(ActionEvent actionEvent) {
+    private void createNewEvent(ActionEvent actionEvent){
 
         eventBox.getChildren().clear();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/CreateEventView.fxml"));
         Node node = null;
-        try {
+        try{
             node = loader.load();
-        } catch (IOException e) {
+        }catch (Exception e){
             e.printStackTrace();
-            throw new RuntimeException(e);
-
         }
         eventBox.getChildren().add(node);
     }
