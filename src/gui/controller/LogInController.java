@@ -43,11 +43,7 @@ public class LogInController implements Initializable {
         try {
             facadeModel = new FacadeModel();
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Database Error");
-            alert.setHeaderText("Unable to connect to database");
-            alert.setContentText("An error occurred while connecting to the database.");
-            alert.showAndWait();
+            facadeModel.getAlert("Database connection error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
             e.printStackTrace();
         }
 
@@ -87,16 +83,15 @@ public class LogInController implements Initializable {
             }
             else {
                 // Login failed, show an error message
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Login Error");
-                alert.setHeaderText("Invalid Credentials");
-                alert.setContentText("The username or password you entered is incorrect.");
-                alert.showAndWait();
+                facadeModel.getAlert("Login error", "Invalid Data",
+                        "Please enter the correct information", Alert.AlertType.ERROR);
             }
         } catch (IOException e) {
             // Handle FXML loading errors
+            facadeModel.getAlert("FXML loding error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
         } catch (SQLServerException e) {
             // Handle database connection errors
+            facadeModel.getAlert("Database connection error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 }

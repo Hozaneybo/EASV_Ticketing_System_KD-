@@ -2,6 +2,7 @@ package gui.controller.adminControllers;
 
 import gui.controller.coordinatorControllers.EventViewController;
 import gui.model.AdminModel;
+import gui.model.FacadeModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -21,6 +23,7 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private VBox eventBox;
     private AdminModel adminModel;
+    private FacadeModel facadeModel;
 
 
 
@@ -32,7 +35,10 @@ public class AdminDashboardController implements Initializable {
         try {
             adminModel = new AdminModel();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Database connection error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
+
+           // throw new RuntimeException(e);
+
         }
 
     }
@@ -49,7 +55,6 @@ public class AdminDashboardController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         eventBox.getChildren().add(node);
     }
 

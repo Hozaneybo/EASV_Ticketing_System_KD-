@@ -1,5 +1,7 @@
 package gui.model;
 
+import javafx.scene.control.Alert;
+
 import java.sql.SQLException;
 
 public class FacadeModel {
@@ -45,5 +47,14 @@ public class FacadeModel {
     }
     public SpecialTicketModel getSpecialTicketModel(){
         return specialTicketModel;
+    }
+
+    public Alert getAlert(String title, String headerText, String context, Alert.AlertType alertType){
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(context);
+        alert.showAndWait();
+        return alert;
     }
 }
