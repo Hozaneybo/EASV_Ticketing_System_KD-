@@ -19,5 +19,11 @@
     <orderEntry type="library" name="itextpdf-5.0.6" level="project" />
     <orderEntry type="library" name="javase-3.0.1 (2)" level="project" />
     <orderEntry type="library" name="jfoenix-9.0.10 (2)" level="project" />
+    <orderEntry type="library" name="pdfbox-app-3.0.0-alpha3" level="project" />
+    <orderEntry type="library" name="barcodes-7.2.5" level="project" />
+    <orderEntry type="library" name="slf4j" level="project" />
+    <orderEntry type="library" name="hyph-7.2.5" level="project" />
+    <orderEntry type="library" name="font-asian-7.2.5" level="project" />
+    <orderEntry type="library" name="ch.qos.logback.classic" level="project" />
   </component>
 </module>
