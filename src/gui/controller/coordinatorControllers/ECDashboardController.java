@@ -72,32 +72,14 @@ public class ECDashboardController implements Initializable {
         try {
             node = loader.load();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
+
         }
         eventBox.getChildren().add(node);
     }
 
-    public void NewEventCoordinator(ActionEvent event) throws IOException {
-        try {
-            // Load the FXML file for the event coordinator form
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/adminGUI/NewEventCoordinator.fxml"));
-            Parent root = loader.load();
 
-            // Create a new stage (window) for the event coordinator form
-            Stage eventCoordinatorStage = new Stage();
-            eventCoordinatorStage.setTitle("New Event Coordinator");
-
-            // Set the scene for the stage with the FXML contents
-            Scene scene = new Scene(root);
-            eventCoordinatorStage.setScene(scene);
-
-            // Show the event coordinator form
-            eventCoordinatorStage.show();
-        } catch (IOException e) {
-            // Handle any errors that occur while loading the FXML file
-            e.printStackTrace();
-        }
-    }
 
     public void logOut(ActionEvent actionEvent) {
         Node source = (Node) actionEvent.getSource();
@@ -117,6 +99,7 @@ public class ECDashboardController implements Initializable {
     }
 
     public void email(ActionEvent actionEvent) {
+        eventBox.getChildren().clear();
 
         try{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/EmailWindow.fxml"));

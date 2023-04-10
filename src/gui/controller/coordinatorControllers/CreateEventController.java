@@ -2,14 +2,17 @@ package gui.controller.coordinatorControllers;
 
 
 import be.TicketType;
+import gui.controller.LogInController;
 import gui.model.EventCoordinatorModel;
 import gui.model.FacadeModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +21,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class CreateEventController implements Initializable {
-    public ComboBox<String> cboxTicketType;
+    @FXML
+    private ComboBox<String> cboxTicketType;
 
     private EventCoordinatorModel eventCoordinatorModel;
 
@@ -41,10 +45,11 @@ public class CreateEventController implements Initializable {
     private int coordinator_id;
 
 
-    public CreateEventController(int coordinator_id){
+
+    /*public CreateEventController(int coordinator_id){
         this.coordinator_id = coordinator_id;
 
-    }
+    }*/
 
 
 
@@ -83,12 +88,17 @@ public class CreateEventController implements Initializable {
 
         TicketType type = TicketType.valueOf(cboxTicketType.getValue());
 
+        //Stage stage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
+        //coordinator_id = Integer.parseInt(stage.getTitle().substring(stage.getTitle().length()-1));
+
         try {
+
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LogIn.fxml"));
             Parent root = loader.load();
 
-           // LogInController controller = loader.getController();
-            //int coordinator_id = controller.getId();
+            LogInController controller = loader.getController();
+            int coordinator_id = controller.getCoordinatorId();
 
             eventCoordinatorModel.createNewBarEvent(eventName, eventAddress, notes, startTime, endTime, type, coordinator_id);
 

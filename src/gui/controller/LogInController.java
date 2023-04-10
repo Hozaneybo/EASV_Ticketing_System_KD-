@@ -3,6 +3,7 @@ package gui.controller;
 import be.Admin;
 import be.EventCoordinator;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import gui.controller.coordinatorControllers.CreateEventController;
 import gui.model.FacadeModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,16 +31,13 @@ public class LogInController implements Initializable {
     private TextField usernameField;
     public FacadeModel facadeModel;
 
-    private int CoordinatorId;
+    public static int id;
+
 
     public int getCoordinatorId() {
-        return CoordinatorId;
+        return id;
     }
 
-    private void setCoordinatorId(int id) {
-        this.CoordinatorId = id;
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -85,9 +83,10 @@ public class LogInController implements Initializable {
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(scene);
+                //stage.setTitle("Wlecome Coordinator: " + String.valueOf(coordinator.getId()));
+                id = coordinator.getId();
                 stage.show();
 
-                setCoordinatorId(coordinator.getId());
 
             }
             else {
@@ -105,24 +104,4 @@ public class LogInController implements Initializable {
         }
     }
 
-    public int getId(){
-
-        int coordinator_id = 0;
-
-        for (EventCoordinator coordinator: facadeModel.getAdminModel().getObservableEventCoordinator()){
-            if(usernameField.getText().equals(coordinator.getUsername()) && passwordField.getText().equals(coordinator.getPassword())){
-             coordinator_id = coordinator.getId();
-                return coordinator_id;
-            }
-        }
-       return 0;
-    }
-
-  /*  public static void main(String[] args) {
-        LogInController controller = new LogInController();
-
-        //System.out.println(controller.facadeModel.getAdminModel().getObservableEventCoordinator());
-        //System.out.println(controller.getId());
-        System.out.println(controller.getCoordinatorId());
-    }*/
 }
