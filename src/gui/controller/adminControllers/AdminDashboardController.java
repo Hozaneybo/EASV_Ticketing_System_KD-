@@ -92,6 +92,8 @@ public class AdminDashboardController implements Initializable {
                     controller.getEventNotes().setText(adminModel.getObservableEvents().get(i).getNotes());
                     controller.getStartTimeLbl().setText(adminModel.getObservableEvents().get(i).getStartTime());
                     controller.getEndTimeLbl().setText(adminModel.getObservableEvents().get(i).getEndTime());
+                    controller.getEventIdLabel().setText(String.valueOf(adminModel.getObservableEvents().get(i).getId()));
+                    controller.getUpdateBtn().setVisible(false);
                     eventBox.getChildren().add(node);
                 } catch (Exception ex) {
                     ex.printStackTrace();

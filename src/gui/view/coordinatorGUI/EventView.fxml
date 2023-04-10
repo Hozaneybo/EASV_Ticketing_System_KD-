@@ -73,7 +73,7 @@
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>
             </Label>
-            <Button layoutX="319.0" layoutY="250.0" mnemonicParsing="false" onAction="#updateEvent" prefHeight="32.0" prefWidth="105.0" style="-fx-background-radius: 25;" stylesheets="@../design.css" text="Update">
+            <Button fx:id="updateBtn" layoutX="319.0" layoutY="250.0" mnemonicParsing="false" onAction="#updateEvent" prefHeight="32.0" prefWidth="105.0" style="-fx-background-radius: 25;" stylesheets="@../design.css" text="Update">
                <styleClass>
                   <String fx:value="my-button-style" />
                   <String fx:value="my-button-style" />
@@ -81,6 +81,7 @@
                   <String fx:value="body_background" />
                </styleClass>
             </Button>
+            <Label fx:id="eventIdLabel" layoutX="505.0" layoutY="15.0" text="Label" />
          </children>
          <styleClass>
             <String fx:value="event_background" />

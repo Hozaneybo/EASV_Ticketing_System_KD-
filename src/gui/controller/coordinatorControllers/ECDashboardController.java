@@ -55,6 +55,7 @@ public class ECDashboardController implements Initializable {
                     controller.getEventNotes().setText(eventCoordinatorModel.getObservableEvents().get(i).getNotes());
                     controller.getStartTimeLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getStartTime());
                     controller.getEndTimeLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getEndTime());
+                    controller.getEventIdLabel().setText(String.valueOf(eventCoordinatorModel.getObservableEvents().get(i).getId()));
                     eventBox.getChildren().add(node);
                 } catch (IOException ex) {
 

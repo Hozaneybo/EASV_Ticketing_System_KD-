@@ -36,6 +36,9 @@ public class BarEvent {
         this.type = type;
     }
 
+    public BarEvent(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;
