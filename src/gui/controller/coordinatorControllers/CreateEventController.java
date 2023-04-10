@@ -2,6 +2,7 @@ package gui.controller.coordinatorControllers;
 
 
 import be.TicketType;
+import gui.controller.LogInController;
 import gui.model.EventCoordinatorModel;
 import gui.model.FacadeModel;
 import javafx.event.ActionEvent;
@@ -41,11 +42,6 @@ public class CreateEventController implements Initializable {
     private int coordinator_id;
 
 
-    public CreateEventController(int coordinator_id){
-        this.coordinator_id = coordinator_id;
-
-    }
-
 
 
     @Override
@@ -84,11 +80,11 @@ public class CreateEventController implements Initializable {
         TicketType type = TicketType.valueOf(cboxTicketType.getValue());
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LogIn.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LogInController.fxml"));
             Parent root = loader.load();
 
-           // LogInController controller = loader.getController();
-            //int coordinator_id = controller.getId();
+            LogInController controller = loader.getController();
+            int coordinator_id = controller.getCoordinatorId();
 
             eventCoordinatorModel.createNewBarEvent(eventName, eventAddress, notes, startTime, endTime, type, coordinator_id);
 

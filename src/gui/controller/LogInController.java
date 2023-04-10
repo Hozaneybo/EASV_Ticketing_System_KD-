@@ -52,8 +52,7 @@ public class LogInController implements Initializable {
             alert.setHeaderText("Unable to connect to database");
             alert.setContentText("An error occurred while connecting to the database.");
             alert.showAndWait();
-            e.printStackTrace(); // Or log the error
-            return; // Exit the method to prevent further errors
+            e.printStackTrace();
         }
 
     }
@@ -105,7 +104,7 @@ public class LogInController implements Initializable {
         }
     }
 
-    public int getId(){
+   /* public int getId(){
 
         int coordinator_id = 0;
 
@@ -116,7 +115,7 @@ public class LogInController implements Initializable {
             }
         }
        return 0;
-    }
+    }*/
 
   /*  public static void main(String[] args) {
         LogInController controller = new LogInController();

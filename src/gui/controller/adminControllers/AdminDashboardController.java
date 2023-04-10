@@ -49,7 +49,7 @@ public class AdminDashboardController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        NewEventCoordinatorController controller = loader.getController();
+
         eventBox.getChildren().add(node);
     }
 
@@ -64,7 +64,6 @@ public class AdminDashboardController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        CoordinatorsTableView controller = loader.getController();
         eventBox.getChildren().add(node);
 
     }

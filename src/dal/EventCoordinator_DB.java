@@ -129,4 +129,21 @@ public class EventCoordinator_DB {
         }
     }
 
+    public int getCoordinatorId(int event_id) throws SQLException {
+        int coordinatorId = 0;
+
+        try (Connection conn = dbConnector.getConnected()) {
+            String sql = "SELECT Coordinator_id FROM BarEvent WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, event_id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                coordinatorId = resultSet.getInt("Coordinator_id");
+            }
+        }
+
+        return coordinatorId;
+    }
+
+
 }
