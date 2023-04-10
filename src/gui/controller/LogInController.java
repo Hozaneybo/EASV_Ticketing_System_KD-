@@ -30,16 +30,12 @@ public class LogInController implements Initializable {
     private TextField usernameField;
     public FacadeModel facadeModel;
 
-    private int CoordinatorId;
+    private static int coordinatorId;
 
     public int getCoordinatorId() {
-        return CoordinatorId;
+        return LogInController.coordinatorId;
     }
 
-    private void setCoordinatorId(int id) {
-        this.CoordinatorId = id;
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,9 +80,9 @@ public class LogInController implements Initializable {
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(scene);
+                coordinatorId = coordinator.getId();
                 stage.show();
 
-                setCoordinatorId(coordinator.getId());
 
             }
             else {
@@ -103,25 +99,4 @@ public class LogInController implements Initializable {
             // Handle database connection errors
         }
     }
-
-   /* public int getId(){
-
-        int coordinator_id = 0;
-
-        for (EventCoordinator coordinator: facadeModel.getAdminModel().getObservableEventCoordinator()){
-            if(usernameField.getText().equals(coordinator.getUsername()) && passwordField.getText().equals(coordinator.getPassword())){
-             coordinator_id = coordinator.getId();
-                return coordinator_id;
-            }
-        }
-       return 0;
-    }*/
-
-  /*  public static void main(String[] args) {
-        LogInController controller = new LogInController();
-
-        //System.out.println(controller.facadeModel.getAdminModel().getObservableEventCoordinator());
-        //System.out.println(controller.getId());
-        System.out.println(controller.getCoordinatorId());
-    }*/
 }

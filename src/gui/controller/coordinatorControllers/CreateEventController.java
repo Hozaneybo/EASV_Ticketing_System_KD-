@@ -37,12 +37,6 @@ public class CreateEventController implements Initializable {
     private TextArea noteArea;
     private FacadeModel facadeModel;
 
-    private int getCoordinator_id;
-
-    private int coordinator_id;
-
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,13 +49,6 @@ public class CreateEventController implements Initializable {
         cboxTicketType.setItems(facadeModel.getEventCoordinatorModel().getTypes());
     }
 
-    public int getGetCoordinator_id() {
-        return getCoordinator_id;
-    }
-
-    public void setGetCoordinator_id(int getCoordinator_id) {
-        this.getCoordinator_id = getCoordinator_id;
-    }
 
     @FXML
     void addEvent(ActionEvent event) {
@@ -80,7 +67,7 @@ public class CreateEventController implements Initializable {
         TicketType type = TicketType.valueOf(cboxTicketType.getValue());
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LogInController.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LogIn.fxml"));
             Parent root = loader.load();
 
             LogInController controller = loader.getController();
