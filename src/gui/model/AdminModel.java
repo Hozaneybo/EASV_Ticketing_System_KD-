@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class AdminModel {
@@ -35,6 +36,10 @@ public class AdminModel {
     }
 
     public ObservableList<BarEvent> getObservableEvents() {return allEvents;}
+
+   /* public void getCoordinatorByName(String name){
+         adminManager.getCoordinatorByName(name);
+    }*/
 
     public void updateEventCoordinator(EventCoordinator coordinator){
          adminManager.updateEventCoordinator(coordinator);

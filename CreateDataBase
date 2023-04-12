@@ -34,7 +34,7 @@ CREATE TABLE [dbo].[EventCoordinator] (
     [id]       INT           IDENTITY (1, 1) NOT NULL,
     [fullName] NVARCHAR (55) NOT NULL,
     [username] NVARCHAR (55) NOT NULL,
-    [password] NVARCHAR (55) NOT NULL,
+    [password] VARCHAR (MAX) NOT NULL,
     CONSTRAINT [PK_EventCoordinator] PRIMARY KEY CLUSTERED ([id] ASC)
 );
 

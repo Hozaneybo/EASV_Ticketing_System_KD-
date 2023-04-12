@@ -66,9 +66,9 @@ public class EventCoordinator_DB {
         }
     }
     // Update an existing BarEvent object in the database
-    public void updateBarEvent(BarEvent event) throws Exception {
+    public void updateBarEvent( BarEvent event) throws Exception {
         try (Connection conn = dbConnector.getConnected()) {
-            String sql = "UPDATE BarEvent SET Event_Name = ?, Event_Address = ?, Notes = ?, Start_Time = ?, End_Time = ?, TicketType = ? WHERE ID = ?;";
+            String sql = "UPDATE BarEvent SET Event_Name = ?, Event_Address = ?, Notes = ?, Start_Time = ?, End_Time = ?, TicketType = ? WHERE id = ?;";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, event.getEventName());
             stmt.setString(2, event.getEventAddress());

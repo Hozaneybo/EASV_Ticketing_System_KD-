@@ -23,8 +23,8 @@ public class EventCoordinatorManager {
         return eventCoordinatorDb.createBarEvent(eventName, eventAddress, notes, startTime, endTime, type, coordinator);
     }
 
-    public void updateBarEvent(BarEvent updatedBarEvent) throws Exception {
-        eventCoordinatorDb.updateBarEvent(updatedBarEvent);
+    public void updateBarEvent(BarEvent event) throws Exception {
+        eventCoordinatorDb.updateBarEvent(event);
     }
 
     public void deleteBarEvent(BarEvent barEvent) throws Exception {

@@ -37,8 +37,8 @@ public class EventCoordinatorModel {
         eventCoordinatorManager.deleteBarEvent(deletedBarEvent);
     }
 
-    public void updateBarEvent(BarEvent barEvent) throws Exception {
-        eventCoordinatorManager.updateBarEvent(barEvent);
+    public void updateBarEvent(BarEvent event) throws Exception {
+        eventCoordinatorManager.updateBarEvent(event);
         refreshEventListView();
     }
 

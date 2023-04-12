@@ -54,8 +54,21 @@ public class LogInController implements Initializable {
         String password = passwordField.getText();
 
 
+        /*   // Get the EventCoordinator object from the database based on the username
+            EventCoordinator eventCoordinator = facadeModel.getAdminModel().getCoordinatorByName(username);
+            // Check if the password matches
+           if (eventCoordinator.checkPassword(password)) {
+               // Password matches
+               // ...
+           } else {
+               // Password does not match
+               // ...
+           }
+*/
 
-        try {
+
+
+           try {
             Admin admin = facadeModel.getLogInModel().adminLogIn(username, password);
             EventCoordinator coordinator = facadeModel.getLogInModel().coordinatorLogIn(username, password);
 

@@ -4,7 +4,9 @@ import be.Admin;
 import be.BarEvent;
 import be.EventCoordinator;
 import be.TicketType;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.database.DBConnector;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,6 +21,9 @@ public class Admin_DB {
     }
 
     public EventCoordinator createNewEventCoordinator(String fullName, String username, String password) throws Exception {
+
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
         // Creates an SQL command
         String sql = "INSERT INTO EventCoordinator (fullName, username, password) VALUES (?,?,?);";
 
@@ -30,7 +35,7 @@ public class Admin_DB {
             // Bind parameters
             stmt.setString(1, fullName);
             stmt.setString(2, username);
-            stmt.setString(3, password);
+            stmt.setString(3, hashedPassword);
 
             // Run the specified SQL statement
             stmt.executeUpdate();
@@ -51,6 +56,33 @@ public class Admin_DB {
             throw new Exception("Could not create an EventCoordinator", ex);
         }
     }
+
+   /* public List<EventCoordinator> getCoordinatorByName(String name){
+        List<EventCoordinator> username = new ArrayList<>();
+
+        try (Connection connection = dbConnector.getConnected()){
+            String sql = "SELECT username FROM EventCoordinator;";
+            Statement statement = connection.createStatement();
+
+            if(statement.execute(sql)){
+
+                ResultSet resultSet = statement.getResultSet();
+                while(resultSet.next()){
+                    String userName = resultSet.getString("username");
+
+                    username.add(userName);
+                }
+            }
+
+        } catch (SQLServerException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return username;
+    }*/
+
     public List<EventCoordinator> getAllEventCoordinators() throws SQLException {
         List<EventCoordinator> allEventCoordinators = new ArrayList<>();
 

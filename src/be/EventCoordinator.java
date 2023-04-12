@@ -1,5 +1,7 @@
 package be;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class EventCoordinator {
 
     private  int id;
@@ -12,6 +14,10 @@ public class EventCoordinator {
         this.fullName = fullName;
         this.username = username;
         this.password = password;
+    }
+
+    public EventCoordinator(String username){
+        this.username = username;
     }
 
     public int getId() {
@@ -52,6 +58,10 @@ public class EventCoordinator {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    public boolean checkPassword(String plainTextPassword) {
+        return BCrypt.checkpw(plainTextPassword, password);
     }
 
 }

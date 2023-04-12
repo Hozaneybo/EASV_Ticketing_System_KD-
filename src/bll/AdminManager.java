@@ -27,6 +27,10 @@ public class AdminManager {
         return adminDb.getAllEventCoordinators();
     }
 
+   /* public List<String> getCoordinatorByName(String name){
+        return adminDb.getCoordinatorByName(name);
+    }*/
+
     public List<BarEvent> getAllBarEvents() throws SQLException {
         return adminDb.getAllBarEvents();
     }
