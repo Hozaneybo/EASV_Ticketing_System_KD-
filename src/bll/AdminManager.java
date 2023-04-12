@@ -31,7 +31,7 @@ public class AdminManager {
         return adminDb.getAllBarEvents();
     }
 
-    public void updateEventCoordinator(EventCoordinator coordinator){
+    public void updateEventCoordinator(EventCoordinator coordinator) throws Exception {
         adminDb.updateEventCoordinator(coordinator);
     }
 

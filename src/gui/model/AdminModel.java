@@ -36,7 +36,7 @@ public class AdminModel {
 
     public ObservableList<BarEvent> getObservableEvents() {return allEvents;}
 
-    public void updateEventCoordinator(EventCoordinator coordinator){
+    public void updateEventCoordinator(EventCoordinator coordinator) throws Exception {
          adminManager.updateEventCoordinator(coordinator);
          allEventCoordinator.addAll(coordinator);
     }

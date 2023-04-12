@@ -17,7 +17,7 @@ public class LogInModel {
         return logInManager.adminLogIn(username, password);
     }
 
-    public EventCoordinator coordinatorLogIn(String username, String password) throws SQLServerException {
+    public EventCoordinator coordinatorLogIn(String username, String password) throws Exception {
         return logInManager.coordinatorLogIn(username, password);
     }
 }
