@@ -4,7 +4,6 @@ import be.Admin;
 import be.BarEvent;
 import be.EventCoordinator;
 import be.TicketType;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.database.DBConnector;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -21,11 +20,14 @@ public class Admin_DB {
     }
 
     public EventCoordinator createNewEventCoordinator(String fullName, String username, String password) throws Exception {
+        // Generate a random salt
+        String salt = BCrypt.gensalt();
 
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        // Hash the password with the salt
+        String hashedPassword = BCrypt.hashpw(password, salt);
 
         // Creates an SQL command
-        String sql = "INSERT INTO EventCoordinator (fullName, username, password) VALUES (?,?,?);";
+        String sql = "INSERT INTO EventCoordinator (fullName, username, password, salt) VALUES (?,?,?,?);";
 
         // Get connection to database
         try (Connection connection = dbConnector.getConnected()) {
@@ -36,6 +38,7 @@ public class Admin_DB {
             stmt.setString(1, fullName);
             stmt.setString(2, username);
             stmt.setString(3, hashedPassword);
+            stmt.setString(4, salt);
 
             // Run the specified SQL statement
             stmt.executeUpdate();
@@ -49,7 +52,7 @@ public class Admin_DB {
             }
 
             // Create an EventCoordinator object and send up the layers
-            EventCoordinator eventCoordinator = new EventCoordinator(id, fullName, username, password);
+            EventCoordinator eventCoordinator = new EventCoordinator(id, fullName, username, hashedPassword);
             return eventCoordinator;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -57,31 +60,6 @@ public class Admin_DB {
         }
     }
 
-   /* public List<EventCoordinator> getCoordinatorByName(String name){
-        List<EventCoordinator> username = new ArrayList<>();
-
-        try (Connection connection = dbConnector.getConnected()){
-            String sql = "SELECT username FROM EventCoordinator;";
-            Statement statement = connection.createStatement();
-
-            if(statement.execute(sql)){
-
-                ResultSet resultSet = statement.getResultSet();
-                while(resultSet.next()){
-                    String userName = resultSet.getString("username");
-
-                    username.add(userName);
-                }
-            }
-
-        } catch (SQLServerException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return username;
-    }*/
 
     public List<EventCoordinator> getAllEventCoordinators() throws SQLException {
         List<EventCoordinator> allEventCoordinators = new ArrayList<>();
@@ -134,25 +112,35 @@ public class Admin_DB {
         return allBarEvents;
     }
 
-    public void updateEventCoordinator(EventCoordinator coordinator) {
+    public void updateEventCoordinator(EventCoordinator coordinator) throws Exception {
+        // Generate a new random salt
+        String salt = BCrypt.gensalt();
 
-        String sql = "UPDATE EventCoordinator SET fullname = ? , username = ?, password = ? WHERE id = ? ";
+        // Hash the password with the new salt
+        String hashedPassword = BCrypt.hashpw(coordinator.getPassword(), salt);
+
+        // Creates an SQL command
+        String sql = "UPDATE EventCoordinator SET fullName=?, password=?, salt=? WHERE id=?;";
 
         try (Connection connection = dbConnector.getConnected()) {
+            // Creates a statement
+            PreparedStatement stmt = connection.prepareStatement(sql);
 
-            PreparedStatement statement = connection.prepareStatement(sql);
+            // Bind parameters
+            stmt.setString(1, coordinator.getFullName());
+            stmt.setString(2, hashedPassword);
+            stmt.setString(3, salt);
+            stmt.setInt(4, coordinator.getId());
 
-            statement.setString(1, coordinator.getFullName());
-            statement.setString(2, coordinator.getUsername());
-            statement.setString(3, coordinator.getPassword());
-            statement.setInt(4,coordinator.getId());
-            statement.executeUpdate();
+            // Run the specified SQL statement
+            stmt.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not update the EventCoordinator", ex);
         }
     }
+
 
     public void deleteEventCoordinator(EventCoordinator coordinator){
 

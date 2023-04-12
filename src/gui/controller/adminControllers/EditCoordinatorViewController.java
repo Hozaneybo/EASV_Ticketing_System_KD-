@@ -49,7 +49,11 @@ public class EditCoordinatorViewController implements Initializable {
     @FXML
     void submitEditing(ActionEvent event) {
         EventCoordinator toBeUpdated = new EventCoordinator(parseInt(coordinatorIdLabel.getText()), coordinatorNameE.getText(), coordinatorUsernameE.getText(), coordinatorPasswordE.getText());
-        facadeModel.getAdminModel().updateEventCoordinator(toBeUpdated);
+        try {
+            facadeModel.getAdminModel().updateEventCoordinator(toBeUpdated);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();

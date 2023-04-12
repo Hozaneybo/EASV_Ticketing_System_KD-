@@ -70,7 +70,12 @@ public class LogInController implements Initializable {
 
            try {
             Admin admin = facadeModel.getLogInModel().adminLogIn(username, password);
-            EventCoordinator coordinator = facadeModel.getLogInModel().coordinatorLogIn(username, password);
+            EventCoordinator coordinator = null;
+            try {
+                coordinator = facadeModel.getLogInModel().coordinatorLogIn(username, password);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
             if (admin != null) {
                 // Login successful, navigate to the next screen

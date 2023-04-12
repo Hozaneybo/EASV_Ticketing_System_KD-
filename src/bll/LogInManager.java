@@ -18,7 +18,7 @@ public class LogInManager {
         return loginDAO.adminLogIn(username, password);
     }
 
-    public EventCoordinator coordinatorLogIn(String username, String password) throws SQLServerException {
+    public EventCoordinator coordinatorLogIn(String username, String password) throws Exception {
         return loginDAO.coordinatorLogIn(username, password);
     }
 }
