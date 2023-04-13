@@ -1,7 +1,0 @@
-Ticket 1:
-Event name: Welcome to your class
-Event location: bilvardegade
-Ticket type: STANDARD
-Customer name: roni
-Customer email: bakir
-

@@ -67,6 +67,7 @@ public class BuyTicketController implements Initializable {
             }
         }
         buyMoreThanOneTicket();
+        saveTicketsAsPDF();
 
         // List<Node> tickets = new ArrayList<>();
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -101,7 +102,6 @@ public class BuyTicketController implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("Standard Ticket");
                 stage.show();
-                ticketAsPDF();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -127,7 +127,6 @@ public class BuyTicketController implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("Customize Ticket");
                 stage.show();
-                ticketAsPDF();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -145,33 +144,59 @@ public class BuyTicketController implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("Special Ticket");
                 stage.show();
-                ticketAsPDF();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    public void ticketAsPDF() throws IOException {
-        WritableImage snapshot = scene.snapshot(null);
-        File file = new File(System.getProperty("user.home") + "/Desktop/Ticket.pdf");
-        int i = 1;
-        while (file.exists()) {
-            file = new File(System.getProperty("user.home") + "/Desktop/Ticket" + "(" + i + ")" + ".pdf");
-            i++;
-        }
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            PdfWriter writer = new PdfWriter(out);
-            PdfDocument pdfDoc = new PdfDocument(writer);
-            Document document = new Document(pdfDoc);
-            ImageData imageData = ImageDataFactory.create(SwingFXUtils.fromFXImage(snapshot, null), null);
-            Image image = new Image(imageData);
-            document.add(image);
-            document.close();
+    public void saveTicketsAsPDF() throws IOException {
+
+        int quantity = Integer.parseInt(ticketQuantity.getText());
+
+        File file = new File("ticketsToPrint/tickets.pdf");
+
+        try (FileOutputStream out = new FileOutputStream(file);
+             PdfWriter writer = new PdfWriter(out);
+             PdfDocument pdfDoc = new PdfDocument(writer);
+             Document document = new Document(pdfDoc)) {
+
+            for (int i = 0; i < quantity; i++) {
+                WritableImage snapshot = scene.snapshot(null);
+                ImageData imageData = ImageDataFactory.create(SwingFXUtils.fromFXImage(snapshot, null), null);
+                Image image = new Image(imageData);
+                document.add(image);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    /* public void printTickets() {
+
+         if (receiptMethod.getValue().equals("Print")) {
+             try {
+                 // Load the PDF document
+                 PDDocument document = PDDocument.load(new File("ticketsToPrint/tickets.pdf"));
+
+                 // Create a print job
+                 PrinterJob job = PrinterJob.getPrinterJob();
+                 job.setPageable(new PDFPageable(document));
+
+                 // Show the print dialog
+                 if (job.printDialog()) {
+                     // Print the document
+                     job.print();
+                 }
+
+                 // Close the PDF document
+                 document.close();
+
+             } catch (IOException | PrinterException e) {
+                 e.printStackTrace();
+             }
+         }
+     }*/
     public void putTicketInDataBase() {
         int eventsIndex = getEventIndex();
         try {
