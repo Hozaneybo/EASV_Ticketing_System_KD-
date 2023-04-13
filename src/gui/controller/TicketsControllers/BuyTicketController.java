@@ -152,8 +152,16 @@ public class BuyTicketController implements Initializable {
     public void saveTicketsAsPDF() throws IOException {
 
         int quantity = Integer.parseInt(ticketQuantity.getText());
+        String fileName = "ticketsToPrint/tickets.pdf";
 
-        File file = new File("ticketsToPrint/tickets.pdf");
+        File file = new File(fileName);
+        int num = 1;
+        while (file.exists())
+        {
+            fileName = "ticketsToPrint/tickets" + "(" + num + ")" + ".pdf";
+            file = new File(fileName);
+            num ++;
+        }
 
         try (FileOutputStream out = new FileOutputStream(file);
              PdfWriter writer = new PdfWriter(out);
