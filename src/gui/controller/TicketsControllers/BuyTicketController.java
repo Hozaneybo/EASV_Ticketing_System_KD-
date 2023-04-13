@@ -67,14 +67,14 @@ public class BuyTicketController implements Initializable {
             }
         }
         buyMoreThanOneTicket();
-        ticketAsPDF();
+
         // List<Node> tickets = new ArrayList<>();
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
     public void buyMoreThanOneTicket() throws IOException {
         int quantity = Integer.parseInt(ticketQuantity.getText());
-        for (int j = 0; j < quantity; j++) {
+        for ( int j = 0; j < quantity; j++) {
             showTicketsCategory();
             putTicketInDataBase();
         }
@@ -101,6 +101,7 @@ public class BuyTicketController implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("Standard Ticket");
                 stage.show();
+                ticketAsPDF();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -126,6 +127,7 @@ public class BuyTicketController implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("Customize Ticket");
                 stage.show();
+                ticketAsPDF();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -143,6 +145,7 @@ public class BuyTicketController implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("Special Ticket");
                 stage.show();
+                ticketAsPDF();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -150,7 +153,12 @@ public class BuyTicketController implements Initializable {
     }
     public void ticketAsPDF() throws IOException {
         WritableImage snapshot = scene.snapshot(null);
-        File file = new File(System.getProperty("user.home") + "/Desktop/scene.pdf");
+        File file = new File(System.getProperty("user.home") + "/Desktop/Ticket.pdf");
+        int i = 1;
+        while (file.exists()) {
+            file = new File(System.getProperty("user.home") + "/Desktop/Ticket" + "(" + i + ")" + ".pdf");
+            i++;
+        }
         try {
             FileOutputStream out = new FileOutputStream(file);
             PdfWriter writer = new PdfWriter(out);
