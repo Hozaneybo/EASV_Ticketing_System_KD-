@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EventViewController implements Initializable {
@@ -90,15 +92,18 @@ public class EventViewController implements Initializable {
 
         // Pass the data to the UpdateEventViewController
         controller.getEventNameFieldE().setText(eventNameLbl.getText());
-        controller.getStreetField().setPromptText("Type the new address...");
-        controller.getCityFieldE().setPromptText("City");
-        controller.getPostCodeFieldE().setPromptText("Postal code");
-        controller.getStartDateFieldE().setPromptText("Choose the new date ....");
-        controller.getStartHourFieldE().setPromptText("Hour");
-        controller.getStartMinFieldE().setPromptText("Min");
-        controller.getEndDateFieldE().setPromptText("Choose the new end date (optional) ....");
-        controller.getEndHourFieldE().setPromptText("Hour");
-        controller.getEndMinFieldE().setPromptText("Min");
+        controller.getStreetTextArea().setText(eventAddressLbl.getText());
+        String startDateString = startTimeLbl.getText().substring(0, 10);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate startDate = LocalDate.parse(startDateString, formatter);
+        controller.getStartDateFieldE().setValue(startDate);
+        controller.getStartHourFieldE().setText(startTimeLbl.getText().substring(11, 13));
+        controller.getStartMinFieldE().setText(startTimeLbl.getText().substring(14));
+        String endDateString = endTimeLbl.getText().substring(0, 10);
+        LocalDate endDate = LocalDate.parse(endDateString, formatter);
+        controller.getEndDateFieldE().setValue(endDate);
+        controller.getEndHourFieldE().setText(endTimeLbl.getText().substring(11, 13));
+        controller.getEndMinFieldE().setText(endTimeLbl.getText().substring(14));
         String[] options = {"STANDARD", "CUSTOMIZED", "SPECIAL"};
         controller.getCboxTicketTypeE().getItems().addAll(options);
         controller.getEventIdLabel().setText(eventIdLabel.getText());
