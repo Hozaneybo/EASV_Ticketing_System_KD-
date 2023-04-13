@@ -1,36 +1,26 @@
 package be;
-
 public class Admin {
-
     int id;
     String username;
     String password;
-
-    public Admin(int id, String username, String password){
-
+    public Admin(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
-
-    public int getId(){
+    public int getId() {
         return id;
     }
-    public String getName(){
+    public String getName() {
         return username;
     }
-
-    public void setName(String name){
+    public void setName(String name) {
         this.username = name;
     }
-
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
-
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
-
-
 }

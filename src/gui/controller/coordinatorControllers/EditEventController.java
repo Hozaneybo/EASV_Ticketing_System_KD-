@@ -27,8 +27,6 @@ public class EditEventController implements Initializable {
     @FXML
     private ComboBox<String> cboxTicketTypeE;
 
-    @FXML
-    private TextField cityFieldE;
 
     @FXML
     private DatePicker endDateFieldE;
@@ -48,8 +46,6 @@ public class EditEventController implements Initializable {
     @FXML
     private TextArea noteAreaE;
 
-    @FXML
-    private TextField postCodeFieldE;
 
     @FXML
     private DatePicker startDateFieldE;
@@ -61,7 +57,7 @@ public class EditEventController implements Initializable {
     private TextField startMinFieldE;
 
     @FXML
-    private TextField streetField;
+    private TextArea streetField;
 
     @FXML
     private CheckBox womenOption;
@@ -75,6 +71,7 @@ public class EditEventController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getFacadeModelInNewThread();
+        fieldsProperties();
 
     }
     public CheckBox getBeerOption() {
@@ -85,9 +82,6 @@ public class EditEventController implements Initializable {
         return cboxTicketTypeE;
     }
 
-    public TextField getCityFieldE() {
-        return cityFieldE;
-    }
 
     public Label getEventIdLabel() {
         return eventIdLabel;
@@ -117,9 +111,6 @@ public class EditEventController implements Initializable {
         return noteAreaE;
     }
 
-    public TextField getPostCodeFieldE() {
-        return postCodeFieldE;
-    }
 
     public DatePicker getStartDateFieldE() {
         return startDateFieldE;
@@ -133,7 +124,7 @@ public class EditEventController implements Initializable {
         return startMinFieldE;
     }
 
-    public TextField getStreetField() {
+    public TextArea getStreetTextArea() {
         return streetField;
     }
 
@@ -146,7 +137,7 @@ public class EditEventController implements Initializable {
         //TODO submitEditing BarEvent
         int eventId = Integer.parseInt(eventIdLabel.getText());
         String eventName = eventNameFieldE.getText().toUpperCase();
-        String eventAddress = streetField.getText() + ", " + postCodeFieldE.getText() + " " + cityFieldE.getText();
+        String eventAddress = streetField.getText();
         String notes = noteAreaE.getText();
         String startTime = null;
         if (startDateFieldE.getValue() != null) {
@@ -191,6 +182,98 @@ public class EditEventController implements Initializable {
         Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
+    }
+
+    private void fieldsProperties() {
+        endDateFieldE.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (startDateFieldE.getValue() != null && newValue != null && newValue.isBefore(startDateFieldE.getValue())) {
+                endDateFieldE.setValue(startDateFieldE.getValue());
+            }
+        });
+        startHourFieldE.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) { // focus lost
+                String hourText = startHourFieldE.getText();
+                if (hourText.length() == 1) {
+                    // if input consists of one digit, add a leading 0
+                    hourText = "0" + hourText;
+                }
+                int hour = Integer.parseInt(hourText);
+                if (hour < 0 || hour > 23) {
+                    // if input is outside the range [0, 23], set to the closest valid value
+                    hour = Math.min(Math.max(0, hour), 23);
+                    hourText = String.format("%02d", hour);
+                }
+                startHourFieldE.setText(hourText);
+            }
+        });
+        startMinFieldE.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) { // focus lost
+                String minText = startMinFieldE.getText();
+                if (minText.length() == 1) {
+                    // if input consists of one digit, add a leading 0
+                    minText = "0" + minText;
+                }
+                int minute = Integer.parseInt(minText);
+                if (minute < 0 || minute > 59) {
+                    // if input is outside the range [0, 23], set to the closest valid value
+                    minute = Math.min(Math.max(0, minute), 59);
+                    minText = String.format("%02d", minute);
+                }
+                startMinFieldE.setText(minText);
+            }
+        });
+        startHourFieldE.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                startHourFieldE.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        startMinFieldE.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                startMinFieldE.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        endHourFieldE.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) { // focus lost
+                String hourText = endHourFieldE.getText();
+                if (hourText.length() == 1) {
+                    // if input consists of one digit, add a leading 0
+                    hourText = "0" + hourText;
+                }
+                int hour = Integer.parseInt(hourText);
+                if (hour < 0 || hour > 23) {
+                    // if input is outside the range [0, 23], set to the closest valid value
+                    hour = Math.min(Math.max(0, hour), 23);
+                    hourText = String.format("%02d", hour);
+                }
+                endHourFieldE.setText(hourText);
+            }
+        });
+        endMinFieldE.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) { // focus lost
+                String minText = endMinFieldE.getText();
+                if (minText.length() == 1) {
+                    // if input consists of one digit, add a leading 0
+                    minText = "0" + minText;
+                }
+                int minute = Integer.parseInt(minText);
+                if (minute < 0 || minute > 59) {
+                    // if input is outside the range [0, 23], set to the closest valid value
+                    minute = Math.min(Math.max(0, minute), 59);
+                    minText = String.format("%02d", minute);
+                }
+                endMinFieldE.setText(minText);
+            }
+        });
+        endHourFieldE.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                endHourFieldE.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        endMinFieldE.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                endMinFieldE.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
 
 }
