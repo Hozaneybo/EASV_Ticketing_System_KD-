@@ -2,6 +2,7 @@ package gui.controller.coordinatorControllers;
 
 import be.BarEvent;
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,12 +29,13 @@ public class EventViewController implements Initializable {
     @FXML
     private Label endTimeLbl, eventAddressLbl, eventNameLbl, eventNotes, startTimeLbl, eventIdLabel;
 
+    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getFacadeModelInNewThread();
-
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
     }
     public Label getEndTimeLbl() {
         return endTimeLbl;
@@ -116,19 +118,5 @@ public class EventViewController implements Initializable {
         eventCoordinatorStage.setResizable(false);
         eventCoordinatorStage.show();
 
-    }
-
-    private void getFacadeModelInNewThread() {
-        Task < Void > task = new Task < Void > () {
-            @Override
-            protected Void call() throws Exception {
-                facadeModel = new FacadeModel();
-
-                return null;
-            }
-        };
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
     }
 }

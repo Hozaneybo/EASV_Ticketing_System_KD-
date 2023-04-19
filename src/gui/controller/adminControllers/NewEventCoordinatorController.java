@@ -1,6 +1,5 @@
 package gui.controller.adminControllers;
 
-import gui.model.AdminModel;
 import gui.model.FacadeModel;
 import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
@@ -10,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class NewEventCoordinatorController implements Initializable {
