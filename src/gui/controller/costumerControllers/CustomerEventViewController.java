@@ -2,6 +2,7 @@ package gui.controller.costumerControllers;
 
 import gui.controller.TicketsControllers.BuyTicketController;
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,13 +28,13 @@ public class CustomerEventViewController implements Initializable {
 
 
 
+    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-       getAllEventsInNewThread();
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
     }
 
 
@@ -104,21 +105,6 @@ public class CustomerEventViewController implements Initializable {
 
     }
 
-    public void getAllEventsInNewThread(){
-
-        Task<Void> task = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-
-                facadeModel = new FacadeModel();
-                return null;
-            }
-        };
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
-
-    }
 
 }
 

@@ -1,7 +1,9 @@
 package gui.controller.adminControllers;
 
+
 import gui.model.AdminModel;
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,17 +18,17 @@ public class NewEventCoordinatorController implements Initializable {
 
     @FXML
     private TextField FullNameTXT, UserNameTXT, PasswordTXT;
+    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            facadeModel = new FacadeModel();
-        } catch (SQLException e) {
-            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
-        }
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
     }
 
-    public void CreateNewCoordinator(ActionEvent event) {
+
+    public void CreateNewCoordinator(ActionEvent event)  {
         String fullName = FullNameTXT.getText();
         String userName = UserNameTXT.getText();
         String password = PasswordTXT.getText();
@@ -37,10 +39,13 @@ public class NewEventCoordinatorController implements Initializable {
             FullNameTXT.clear();
             UserNameTXT.clear();
             PasswordTXT.clear();
-            facadeModel.getAlert("", "Create a new coordinator", "You have successfully created an event coordinator ..!", Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You have successfully created an event coordinator ..!");
+            alert.show();
 
         } catch (Exception e) {
-            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
+            throw new RuntimeException(e);
         }
+
     }
+
 }

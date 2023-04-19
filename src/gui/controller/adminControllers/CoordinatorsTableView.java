@@ -2,13 +2,13 @@ package gui.controller.adminControllers;
 
 import be.EventCoordinator;
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,41 +16,45 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CoordinatorsTableView implements Initializable {
 
     @FXML
-    private TableView < EventCoordinator > coordinatorTable;
+    private TableView<EventCoordinator> coordinatorTable;
 
     @FXML
-    private TableColumn < EventCoordinator, Integer > idColumn;
+    private TableColumn<EventCoordinator, Integer> idColumn;
 
     @FXML
-    private TableColumn < EventCoordinator, String > nameColumn;
+    private TableColumn<EventCoordinator, String> nameColumn;
+
 
     @FXML
-    private TableColumn < EventCoordinator, String > usernameColumn;
+    private TableColumn<EventCoordinator, String> usernameColumn;
 
     private EventCoordinator selectedEventCoordinator;
+
+    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            facadeModel = new FacadeModel();
-        } catch (SQLException e) {
-            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
+
+        if(facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
+        {
+            coordinatorTable.setItems(facadeModel.getAdminModel().getObservableEventCoordinator());
+            idColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, Integer>("id"));
+            nameColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("fullName"));
+            usernameColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("username"));
+
         }
 
-        if (facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0) {
-            coordinatorTable.setItems(facadeModel.getAdminModel().getObservableEventCoordinator());
-            idColumn.setCellValueFactory(new PropertyValueFactory < EventCoordinator, Integer > ("id"));
-            nameColumn.setCellValueFactory(new PropertyValueFactory < EventCoordinator, String > ("fullName"));
-            usernameColumn.setCellValueFactory(new PropertyValueFactory < EventCoordinator, String > ("username"));
-        }
     }
+
+
 
     public void updateCoordinator(ActionEvent actionEvent) {
 
@@ -59,9 +63,9 @@ public class CoordinatorsTableView implements Initializable {
         try {
             root = loader.load();
         } catch (IOException e) {
-            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
+            throw new RuntimeException(e);
         }
-        if (facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
+        if(facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
             selectedEventCoordinator = coordinatorTable.getSelectionModel().getSelectedItem();
         EditCoordinatorViewController controller = loader.getController();
         controller.getCoordinatorIdLabel().setText(String.valueOf(selectedEventCoordinator.getId()));
@@ -80,7 +84,7 @@ public class CoordinatorsTableView implements Initializable {
     }
 
     public void deleteCoordinator(ActionEvent actionEvent) {
-        if (facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
+        if(facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
             selectedEventCoordinator = coordinatorTable.getSelectionModel().getSelectedItem();
 
         facadeModel.getAdminModel().deleteEventCoordinator(selectedEventCoordinator);

@@ -8,6 +8,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,8 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
@@ -34,10 +35,9 @@ public class BuyTicketController implements Initializable {
     @FXML
     private TextField customerNameField, ticketQuantity, customerEmailField;
     @FXML
-    private Label eventLocationLbl, eventNameLbl;
-    @FXML
     private ComboBox < String > ticketType;
     private FacadeModel facadeModel;
+    private FacadeModelLoader facadeModelLoader;
     private int eventIndex;
     private Scene scene;
     public void setEventIndex(int eventIndex) {
@@ -48,24 +48,56 @@ public class BuyTicketController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            facadeModel = new FacadeModel();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
         ticketType.setItems(facadeModel.getEventCoordinatorModel().getTypes());
     }
     @FXML
-    void submitBuying(ActionEvent event) throws IOException {
-        String name = customerNameField.getText();
-        String email = customerEmailField.getText();
-        if (!name.isEmpty() && !email.isEmpty()) {
-            try {
-                facadeModel.getCustomerModel().createCustomer(name, email);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    void submitBuying(ActionEvent event) {
+        String name = customerNameField.getText().trim();
+        String email = customerEmailField.getText().trim();
+        String ticket = ticketType.getValue();
+        String quantityStr = ticketQuantity.getText().trim();
+        int quantity;
+
+        // validate customerNameField
+        if (name.isEmpty() || name.length() > 20 || !name.matches("^[a-zA-Z ]+$")) {
+            facadeModel.getAlert("Invalid Input", null, "Please enter a valid name (up to 20 letters and spaces only).", Alert.AlertType.WARNING);
+            return;
         }
+
+        // validate customerEmailField
+        if (email.isEmpty() || !email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            facadeModel.getAlert("Invalid Input", null, "Please enter a valid email address.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        // check if ticket type is selected
+        if (ticket == null) {
+            facadeModel.getAlert("Invalid Input", null, "Please select a ticket type.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        // validate ticketQuantity
+
+        try {
+            quantity = Integer.parseInt(quantityStr);
+            if (quantity < 1 || quantity > 10) {
+                facadeModel.getAlert("Invalid Input", null, "Please enter a valid ticket quantity (1-10 only).", Alert.AlertType.WARNING);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            facadeModel.getAlert("Invalid Input", null, "Please enter a valid ticket quantity (1-50 only).", Alert.AlertType.WARNING);
+            return;
+        }
+
+        try {
+            facadeModel.getCustomerModel().createCustomer(name, email);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
         buyMoreThanOneTicket();
         saveTicketsAsPDF();
 
@@ -73,14 +105,15 @@ public class BuyTicketController implements Initializable {
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
-    public void buyMoreThanOneTicket() throws IOException {
+
+    public void buyMoreThanOneTicket() {
         int quantity = Integer.parseInt(ticketQuantity.getText());
-        for ( int j = 0; j < quantity; j++) {
+        for (int j = 0; j < quantity; j++) {
             showTicketsCategory();
             putTicketInDataBase();
         }
     }
-    private void showTicketsCategory() throws IOException {
+    private void showTicketsCategory() {
         if (ticketType.getValue().equals(TicketType.STANDARD.toString())) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/Tickets/StandardTicket.fxml"));
@@ -93,14 +126,14 @@ public class BuyTicketController implements Initializable {
                 controller.getEventStart().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getStartTime());
                 controller.getEventEnd().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEndTime());
                 controller.getCustomerName().setText(customerNameField.getText());
-                //eventNameLbl.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEventName());
-                //eventLocationLbl.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEventAddress());
+                controller.getCustomerEmailLabel().setText(customerEmailField.getText());
                 BufferedImage qrCodeImage = facadeModel.getTicketModel().printQRCodeOnTicket();
                 controller.getQr_code_image().setImage(SwingFXUtils.toFXImage(qrCodeImage, null));
                 Stage stage = new Stage();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Standard Ticket");
+                stage.setResizable(false);
                 stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -118,14 +151,13 @@ public class BuyTicketController implements Initializable {
                 controller.getEventEnd().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEndTime());
                 controller.getCustomerName().setText(customerNameField.getText());
                 controller.getCustomerEmail().setText(customerEmailField.getText());
-                eventNameLbl.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEventName());
-                eventLocationLbl.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEventAddress());
                 BufferedImage qrCodeImage = facadeModel.getTicketModel().printQRCodeOnTicket();
                 controller.getQr_code_image().setImage(SwingFXUtils.toFXImage(qrCodeImage, null));
                 Stage stage = new Stage();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Customize Ticket");
+                stage.setResizable(false);
                 stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -143,30 +175,27 @@ public class BuyTicketController implements Initializable {
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Special Ticket");
+                stage.setResizable(false);
                 stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    public void saveTicketsAsPDF() throws IOException {
+    public void saveTicketsAsPDF() {
 
         int quantity = Integer.parseInt(ticketQuantity.getText());
         String fileName = "ticketsToPrint/tickets.pdf";
 
         File file = new File(fileName);
         int num = 1;
-        while (file.exists())
-        {
+        while (file.exists()) {
             fileName = "ticketsToPrint/tickets" + "(" + num + ")" + ".pdf";
             file = new File(fileName);
-            num ++;
+            num++;
         }
 
-        try (FileOutputStream out = new FileOutputStream(file);
-             PdfWriter writer = new PdfWriter(out);
-             PdfDocument pdfDoc = new PdfDocument(writer);
-             Document document = new Document(pdfDoc)) {
+        try (FileOutputStream out = new FileOutputStream(file); PdfWriter writer = new PdfWriter(out); PdfDocument pdfDoc = new PdfDocument(writer); Document document = new Document(pdfDoc)) {
 
             for (int i = 0; i < quantity; i++) {
                 WritableImage snapshot = scene.snapshot(null);
@@ -180,31 +209,6 @@ public class BuyTicketController implements Initializable {
         }
     }
 
-    /* public void printTickets() {
-
-         if (receiptMethod.getValue().equals("Print")) {
-             try {
-                 // Load the PDF document
-                 PDDocument document = PDDocument.load(new File("ticketsToPrint/tickets.pdf"));
-
-                 // Create a print job
-                 PrinterJob job = PrinterJob.getPrinterJob();
-                 job.setPageable(new PDFPageable(document));
-
-                 // Show the print dialog
-                 if (job.printDialog()) {
-                     // Print the document
-                     job.print();
-                 }
-
-                 // Close the PDF document
-                 document.close();
-
-             } catch (IOException | PrinterException e) {
-                 e.printStackTrace();
-             }
-         }
-     }*/
     public void putTicketInDataBase() {
         int eventsIndex = getEventIndex();
         try {

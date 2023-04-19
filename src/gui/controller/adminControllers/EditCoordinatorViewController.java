@@ -4,6 +4,7 @@ package gui.controller.adminControllers;
 import be.EventCoordinator;
 import gui.model.FacadeModel;
 
+import gui.model.FacadeModelLoader;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,10 +25,13 @@ public class EditCoordinatorViewController implements Initializable {
     private Label coordinatorIdLabel;
     @FXML
     private TextField coordinatorNameE, coordinatorPasswordE, coordinatorUsernameE;
+    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getFacadeModelInNewThread();
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
     }
     public Label getCoordinatorIdLabel() {
         return coordinatorIdLabel;
@@ -58,17 +62,5 @@ public class EditCoordinatorViewController implements Initializable {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
-    }
-    private void getFacadeModelInNewThread() {
-        Task < Void > task = new Task < Void > () {
-            @Override
-            protected Void call() throws Exception {
-                facadeModel = new FacadeModel();
-                return null;
-            }
-        };
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
     }
 }

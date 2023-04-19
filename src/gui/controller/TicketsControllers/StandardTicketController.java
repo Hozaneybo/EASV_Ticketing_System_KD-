@@ -14,21 +14,13 @@ import java.util.ResourceBundle;
 public class StandardTicketController implements Initializable {
 
     @FXML
-    private Label customerName, eventAddress, eventEnd, eventName, eventStart, notes ;
+    private Label customerName, eventAddress, eventEnd, eventName, eventStart, notes, customerEmailLabel ;
     @FXML
     private ImageView qr_code_image;
-    @FXML
-    private FacadeModel facadeModel;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        try{
-            facadeModel = new FacadeModel();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
     }
 
@@ -58,5 +50,9 @@ public class StandardTicketController implements Initializable {
 
     public ImageView getQr_code_image() {
         return qr_code_image;
+    }
+
+    public Label getCustomerEmailLabel() {
+        return customerEmailLabel;
     }
 }

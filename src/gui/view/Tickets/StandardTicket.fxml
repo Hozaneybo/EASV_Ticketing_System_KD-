@@ -14,16 +14,16 @@
          </image>
       </ImageView>
       <ImageView fx:id="qr_code_image" fitHeight="100.0" fitWidth="100.0" layoutX="616.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" styleClass="transparent" />
-      <Label fx:id="eventName" layoutX="79.0" layoutY="32.0" prefHeight="34.0" prefWidth="382.0" styleClass="text-style-tickets" stylesheets="@../design.css" text="Event nane" textFill="#f3db28">
+      <Label fx:id="eventName" layoutX="79.0" layoutY="32.0" prefHeight="34.0" prefWidth="382.0" text="Event nane" textFill="#f3db28">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="eventAddress" layoutX="79.0" layoutY="66.0" prefHeight="34.0" prefWidth="264.0" styleClass="text-style-tickets" stylesheets="@../design.css" text="Address" textFill="#f3db28" />
-      <Label fx:id="eventStart" layoutX="79.0" layoutY="94.0" prefHeight="34.0" prefWidth="264.0" styleClass="text-style-tickets" stylesheets="@../design.css" text="event start" textFill="#f3db28" />
-      <Label fx:id="eventEnd" layoutX="79.0" layoutY="128.0" prefHeight="34.0" prefWidth="264.0" styleClass="text-style-tickets" stylesheets="@../design.css" text="evnet end" textFill="#f3db28" />
-      <Label fx:id="notes" layoutX="79.0" layoutY="162.0" prefHeight="34.0" prefWidth="264.0" styleClass="text-style-tickets" stylesheets="@../design.css" text="Notes" textFill="#f3db28" />
-      <Label fx:id="customerName" layoutX="79.0" layoutY="196.0" prefHeight="34.0" prefWidth="210.0" styleClass="text-style-tickets" stylesheets="@../design.css" text="Customer name " textFill="#f3db28" />
-      <Label fx:id="customerName1" layoutX="312.0" layoutY="196.0" prefHeight="34.0" prefWidth="210.0" styleClass="text-style-tickets" stylesheets="@../design.css" text="customer's email" textFill="#f3db28" />
+      <Label fx:id="eventAddress" layoutX="79.0" layoutY="66.0" prefHeight="34.0" prefWidth="264.0" text="Address" textFill="#f3db28" />
+      <Label fx:id="eventStart" layoutX="79.0" layoutY="94.0" prefHeight="34.0" prefWidth="264.0" text="event start" textFill="#f3db28" />
+      <Label fx:id="eventEnd" layoutX="79.0" layoutY="128.0" prefHeight="34.0" prefWidth="264.0" text="evnet end" textFill="#f3db28" />
+      <Label fx:id="notes" layoutX="79.0" layoutY="162.0" prefHeight="34.0" prefWidth="264.0" text="Notes" textFill="#f3db28" />
+      <Label fx:id="customerName" layoutX="79.0" layoutY="196.0" prefHeight="34.0" prefWidth="210.0" text="Customer name " textFill="#f3db28" />
+      <Label fx:id="customerEmailLabel" layoutX="312.0" layoutY="196.0" prefHeight="34.0" prefWidth="210.0" text="customer's email" textFill="#f3db28" />
    </children>
 </AnchorPane>
