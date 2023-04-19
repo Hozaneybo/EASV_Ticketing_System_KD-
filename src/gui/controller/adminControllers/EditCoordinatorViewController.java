@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -52,7 +53,7 @@ public class EditCoordinatorViewController implements Initializable {
         try {
             facadeModel.getAdminModel().updateEventCoordinator(toBeUpdated);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
         }
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

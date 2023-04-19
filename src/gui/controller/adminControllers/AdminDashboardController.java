@@ -1,7 +1,6 @@
 package gui.controller.adminControllers;
 
 import gui.controller.coordinatorControllers.EventViewController;
-import gui.model.AdminModel;
 import gui.model.FacadeModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,27 +25,18 @@ public class AdminDashboardController implements Initializable {
 
     @FXML
     private Label userName;
-    private AdminModel adminModel;
     private FacadeModel facadeModel;
-
-
-
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            adminModel = new AdminModel();
+            facadeModel = new FacadeModel();
         } catch (SQLException e) {
             facadeModel.getAlert("Database connection error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
-
-           // throw new RuntimeException(e);
 
         }
 
     }
-
 
     @FXML
     void createCoordinator(ActionEvent event) {
@@ -57,7 +47,7 @@ public class AdminDashboardController implements Initializable {
         try {
             node = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
         }
         eventBox.getChildren().add(node);
     }
@@ -77,30 +67,29 @@ public class AdminDashboardController implements Initializable {
 
     }
 
-
-
     @FXML
-    private  void showAllEvents() {
+    private void showAllEvents() {
         eventBox.getChildren().clear();
 
-        int eventsNumber = adminModel.getObservableEvents().size();
+        int eventsNumber = facadeModel.getAdminModel().getObservableEvents().size();
 
-        if ( eventsNumber != 0) {
+        if (eventsNumber != 0) {
             for (int i = 0; i < eventsNumber; i++) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/EventView.fxml"));
                     Node node = loader.load();
                     EventViewController controller = loader.getController();
-                    controller.getEventNameLbl().setText(adminModel.getObservableEvents().get(i).getEventName());
-                    controller.getEventAddressLbl().setText(adminModel.getObservableEvents().get(i).getEventAddress());
-                    controller.getEventNotes().setText(adminModel.getObservableEvents().get(i).getNotes());
-                    controller.getStartTimeLbl().setText(adminModel.getObservableEvents().get(i).getStartTime());
-                    controller.getEndTimeLbl().setText(adminModel.getObservableEvents().get(i).getEndTime());
-                    controller.getEventIdLabel().setText(String.valueOf(adminModel.getObservableEvents().get(i).getId()));
+                    controller.getEventNameLbl().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getEventName());
+                    controller.getEventAddressLbl().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getEventAddress());
+                    controller.getEventNotes().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getNotes());
+                    controller.getStartTimeLbl().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getStartTime());
+                    controller.getEndTimeLbl().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getEndTime());
+                    controller.getEventIdLabel().setText(String.valueOf(facadeModel.getAdminModel().getObservableEvents().get(i).getId()));
                     controller.getUpdateBtn().setVisible(false);
                     eventBox.getChildren().add(node);
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    facadeModel.getAlert("Data connection error", "something went wrong", ex.getMessage(), Alert.AlertType.ERROR);
                 }
             }
         }
@@ -117,7 +106,7 @@ public class AdminDashboardController implements Initializable {
         try {
             root = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);

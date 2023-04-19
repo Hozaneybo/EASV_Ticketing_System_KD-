@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap');
+
+.text-style-tickets{
+    -fx-font-family: 'Cormorant Garamond', "consolas", sans-serif;
+}
+
+
 .bottom_bar_color
 {
 -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #0B1E3E, #4E154C);

@@ -22,51 +22,27 @@ import static java.lang.Integer.parseInt;
 public class EditEventController implements Initializable {
 
     @FXML
-    private CheckBox beerOption;
+    private CheckBox beerOption, foodOption, womenOption;
 
     @FXML
-    private ComboBox<String> cboxTicketTypeE;
-
-
-    @FXML
-    private DatePicker endDateFieldE;
+    private ComboBox < String > cboxTicketTypeE;
 
     @FXML
-    private TextField endHourFieldE;
+    private DatePicker endDateFieldE, startDateFieldE;
 
     @FXML
-    private TextField endMinFieldE;
-
-    @FXML
-    private TextField eventNameFieldE;
-
-    @FXML
-    private CheckBox foodOption;
+    private TextField endHourFieldE, endMinFieldE, eventNameFieldE, startHourFieldE, startMinFieldE;
 
     @FXML
     private TextArea noteAreaE;
-
-
-    @FXML
-    private DatePicker startDateFieldE;
-
-    @FXML
-    private TextField startHourFieldE;
-
-    @FXML
-    private TextField startMinFieldE;
 
     @FXML
     private TextArea streetField;
 
     @FXML
-    private CheckBox womenOption;
-
-    @FXML
     private Label eventIdLabel;
 
     private FacadeModel facadeModel;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,10 +54,9 @@ public class EditEventController implements Initializable {
         return beerOption;
     }
 
-    public ComboBox<String> getCboxTicketTypeE() {
+    public ComboBox < String > getCboxTicketTypeE() {
         return cboxTicketTypeE;
     }
-
 
     public Label getEventIdLabel() {
         return eventIdLabel;
@@ -111,7 +86,6 @@ public class EditEventController implements Initializable {
         return noteAreaE;
     }
 
-
     public DatePicker getStartDateFieldE() {
         return startDateFieldE;
     }
@@ -134,18 +108,17 @@ public class EditEventController implements Initializable {
 
     @FXML
     void submitEditing(ActionEvent event) {
-        //TODO submitEditing BarEvent
         int eventId = Integer.parseInt(eventIdLabel.getText());
         String eventName = eventNameFieldE.getText().toUpperCase();
         String eventAddress = streetField.getText();
         String notes = noteAreaE.getText();
         String startTime = null;
         if (startDateFieldE.getValue() != null) {
-            startTime = startDateFieldE.getValue().format(DateTimeFormatter.ofPattern("dd-MMM-yyy")).toString() + " " + startHourFieldE.getText() + ":" + startMinFieldE.getText();
+            startTime = startDateFieldE.getValue().format(DateTimeFormatter.ofPattern("dd-MMM-yyy")) + " " + startHourFieldE.getText() + ":" + startMinFieldE.getText();
         }
         String endTime = null;
         if (endDateFieldE.getValue() != null) {
-            endTime = endDateFieldE.getValue().format(DateTimeFormatter.ofPattern("dd-MMM-yyy")).toString() + " " + endHourFieldE.getText() + ":" + endMinFieldE.getText();
+            endTime = endDateFieldE.getValue().format(DateTimeFormatter.ofPattern("dd-MMM-yyy")) + " " + endHourFieldE.getText() + ":" + endMinFieldE.getText();
         }
 
         TicketType type = TicketType.valueOf(cboxTicketTypeE.getValue());
@@ -160,19 +133,14 @@ public class EditEventController implements Initializable {
 
             facadeModel.getEventCoordinatorModel().updateBarEvent(toBeUpdated);
 
-
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
         }
 
     }
 
-
-    private void getFacadeModelInNewThread()
-    {
-        Task<Void> task = new Task<Void>() {
+    private void getFacadeModelInNewThread() {
+        Task < Void > task = new Task < Void > () {
             @Override
             protected Void call() throws Exception {
                 facadeModel = new FacadeModel();
