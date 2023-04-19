@@ -42,13 +42,6 @@ public class QrCodeManager {
         Graphics2D graphics = ticketImage.createGraphics();
         graphics.drawImage(qrCodeImage, x, y, null);
 
-        // Save modified ticket image as a file
-        File printedTicketFile = new File("printed_ticket.png"); // Replace with the desired file format and name
-        try {
-            ImageIO.write(ticketImage, "png", printedTicketFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return ticketImage;
     }
 

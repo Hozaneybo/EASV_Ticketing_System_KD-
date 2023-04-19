@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.adminControllers.NewEventCoordinatorController">
+<AnchorPane prefHeight="500.0" prefWidth="487.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.adminControllers.NewEventCoordinatorController">
    <children>
-      <TextField fx:id="FullNameTXT" layoutX="206.0" layoutY="97.0" />
-      <TextField fx:id="UserNameTXT" layoutX="203.0" layoutY="188.0" />
-      <TextField fx:id="PasswordTXT" layoutX="208.0" layoutY="287.0" />
-      <Text layoutX="123.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name" />
-      <Text layoutX="123.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name" />
-      <Text layoutX="123.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <Button fx:id="Create" layoutX="258.0" layoutY="351.0" mnemonicParsing="false" onAction="#CreateNewCoordinator" text="Button" />
+      <Pane prefHeight="500.0" prefWidth="487.0" style="-fx-background-color: DF2929;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text fill="#f3db28" layoutX="77.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name" wrappingWidth="104.11590576171875">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="FullNameTXT" layoutX="176.0" layoutY="129.0" prefWidth="200.0" />
+            <TextField fx:id="UserNameTXT" layoutX="175.0" layoutY="208.0" prefWidth="200.0" />
+            <Text fill="#f3db28" layoutX="77.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#f3db28" layoutX="77.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="PasswordTXT" layoutX="176.0" layoutY="287.0" prefWidth="200.0" />
+            <Button fx:id="Create" layoutX="183.0" layoutY="370.0" mnemonicParsing="false" onAction="#CreateNewCoordinator" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: DF2929;" text="Add" textFill="#f3db28">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Separator layoutX="176.0" layoutY="156.0" prefWidth="200.0" />
+            <Separator layoutX="175.0" layoutY="235.0" prefWidth="200.0" />
+            <Separator layoutX="177.0" layoutY="315.0" prefWidth="200.0" />
+            <Separator layoutX="204.0" layoutY="404.0" prefHeight="3.0" prefWidth="77.0" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

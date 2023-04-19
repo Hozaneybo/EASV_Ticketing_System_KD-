@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="282.0" prefWidth="578.0" styleClass="event-pane-special" stylesheets="@../design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TicketsControllers.SpecialTicketController">
+<AnchorPane prefHeight="234.0" prefWidth="578.0" styleClass="event-pane-special" stylesheets="@../design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TicketsControllers.SpecialTicketController">
    <children>
-      <TextField disable="true" layoutX="128.0" layoutY="32.0" prefHeight="31.0" prefWidth="321.0" styleClass="event-pane-custmoizeble" stylesheets="@../design.css" text="Welcome to this event, and enjoy your time..">
+      <TextField disable="true" layoutX="128.0" layoutY="12.0" prefHeight="31.0" prefWidth="321.0" styleClass="event-pane-custmoizeble" stylesheets="@../design.css" text="Welcome to this event, and enjoy your time..">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </TextField>
-      <ImageView fx:id="qr_code" fitHeight="179.0" fitWidth="193.0" layoutX="196.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="qr_code" fitHeight="179.0" fitWidth="193.0" layoutX="192.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

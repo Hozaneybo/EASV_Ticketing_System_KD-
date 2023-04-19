@@ -93,8 +93,8 @@ public class BuyTicketController implements Initializable {
                 controller.getEventStart().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getStartTime());
                 controller.getEventEnd().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEndTime());
                 controller.getCustomerName().setText(customerNameField.getText());
-                eventNameLbl.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEventName());
-                eventLocationLbl.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEventAddress());
+                //eventNameLbl.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEventName());
+                //eventLocationLbl.setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(eventsIndex).getEventAddress());
                 BufferedImage qrCodeImage = facadeModel.getTicketModel().printQRCodeOnTicket();
                 controller.getQr_code_image().setImage(SwingFXUtils.toFXImage(qrCodeImage, null));
                 Stage stage = new Stage();

@@ -7,6 +7,15 @@
 -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebc934, #050000);
 }
 
+.body_background01
+ {
+     -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f3db28, #df2929);
+ }
+.body_background02
+{
+    -fx-background-color: linear-gradient(from 0% 25% to 0% 100%, #efcd44, #ecc918);
+}
+
 .vBox_background
 {
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #851414, #050000);
@@ -29,10 +38,18 @@
     -fx-font-family: "Algerian"
 }
 
+.my-fill-text-Vbox
+{
+    -fx-text-fill: #f3db28;
+    -fx-font-size: 18px;
+    -fx-font-family: "Algerian"
+}
+
 .my-button-style:hover {
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebc934, #050000);
 
 }
+
 
 .text-style {
     -fx-font-family: "Passion One";
@@ -41,6 +58,16 @@
 .event_background
 {
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ed3232, #4d0707);
+}
+
+.login_background
+{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ff0000, #7a0808);
+}
+
+.standardTicket_background
+{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #e715f6, #2f70da);
 }
 
 .root {
@@ -77,6 +104,30 @@
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #f3db28;
+    -fx-background-radius: 5em;
+}
+.scroll-pane > .corner {
+    -fx-background-color:  DF2929;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+/*.scroll-pane {
+    -fx-background-color: #02030A;
+}*/
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
 }
 
 
