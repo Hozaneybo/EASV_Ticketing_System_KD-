@@ -4,10 +4,9 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class EventCoordinator {
 
-    private  int id;
+    private int id;
 
     private String fullName, username, password;
-    private Ticket ticket;
 
     public EventCoordinator(int id, String fullName, String username, String password) {
         this.id = id;
@@ -16,7 +15,7 @@ public class EventCoordinator {
         this.password = password;
     }
 
-    public EventCoordinator(String username){
+    public EventCoordinator(String username) {
         this.username = username;
     }
 
@@ -51,17 +50,4 @@ public class EventCoordinator {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
-
-    public boolean checkPassword(String plainTextPassword) {
-        return BCrypt.checkpw(plainTextPassword, password);
-    }
-
 }

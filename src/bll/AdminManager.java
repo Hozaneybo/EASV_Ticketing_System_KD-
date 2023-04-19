@@ -1,6 +1,5 @@
 package bll;
 
-
 import be.BarEvent;
 import be.EventCoordinator;
 import dal.Admin_DB;
@@ -10,28 +9,21 @@ import java.util.List;
 
 public class AdminManager {
 
-
     private Admin_DB adminDb;
 
-
-    public AdminManager(){
+    public AdminManager() {
         adminDb = new Admin_DB();
     }
 
-
     public EventCoordinator createNewEventCoordinator(String fullName, String username, String password) throws Exception {
-        return adminDb.createNewEventCoordinator( fullName, username, password);
+        return adminDb.createNewEventCoordinator(fullName, username, password);
     }
 
-    public List<EventCoordinator> getAllEventCoordinators() throws SQLException {
+    public List < EventCoordinator > getAllEventCoordinators() throws SQLException {
         return adminDb.getAllEventCoordinators();
     }
 
-   /* public List<String> getCoordinatorByName(String name){
-        return adminDb.getCoordinatorByName(name);
-    }*/
-
-    public List<BarEvent> getAllBarEvents() throws SQLException {
+    public List < BarEvent > getAllBarEvents() throws SQLException {
         return adminDb.getAllBarEvents();
     }
 
@@ -39,11 +31,11 @@ public class AdminManager {
         adminDb.updateEventCoordinator(coordinator);
     }
 
-    public void deleteEventCoordinator(EventCoordinator coordinator){
+    public void deleteEventCoordinator(EventCoordinator coordinator) {
         adminDb.deleteEventCoordinator(coordinator);
     }
 
-    public void deleteEvent ( BarEvent event){
+    public void deleteEvent(BarEvent event) {
         adminDb.deleteEvent(event);
     }
 }

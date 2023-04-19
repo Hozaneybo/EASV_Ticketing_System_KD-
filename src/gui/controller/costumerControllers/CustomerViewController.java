@@ -18,7 +18,6 @@ public class CustomerViewController implements Initializable {
     @FXML
     private VBox eventBox;
 
-
     private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
     int eventsNumber;
@@ -39,7 +38,7 @@ public class CustomerViewController implements Initializable {
         }
         eventsNumber = facadeModel.getCustomerModel().getObservableEvents().size();
 
-        if ( eventsNumber != 0) {
+        if (eventsNumber != 0) {
             for (int i = 0; i < eventsNumber; i++) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/customerGUI/CustomerEventView.fxml"));
@@ -48,7 +47,7 @@ public class CustomerViewController implements Initializable {
                     CustomerEventViewController controller = loader.getController();
 
                     // set the index of the event in the button
-                   controller.getBuyTicketButton().setUserData(i);
+                    controller.getBuyTicketButton().setUserData(i);
 
                     controller.setEventIndex(i);
 
@@ -79,7 +78,6 @@ public class CustomerViewController implements Initializable {
         }
         eventBox.getChildren().add(node);
 
-
     }
 
-    }
+}

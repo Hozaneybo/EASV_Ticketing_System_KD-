@@ -1,12 +1,9 @@
 package gui.controller.TicketsControllers;
 
-
-import gui.model.FacadeModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,10 +11,9 @@ import java.util.ResourceBundle;
 public class StandardTicketController implements Initializable {
 
     @FXML
-    private Label customerName, eventAddress, eventEnd, eventName, eventStart, notes, customerEmailLabel ;
+    private Label customerName, eventAddress, eventEnd, eventName, eventStart, notes, customerEmailLabel;
     @FXML
     private ImageView qr_code_image;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

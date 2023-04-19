@@ -15,14 +15,14 @@ public class CustomerManager {
         customer_Db = new Customer_DB();
 
     }
-    public List<BarEvent> getAllBarEvents() throws SQLException {
+    public List < BarEvent > getAllBarEvents() throws SQLException {
         return customer_Db.getAllBarEvents();
     }
     public Customer createCustomer(String name, String email) throws Exception {
         return customer_Db.createCustomer(name, email);
     }
 
-    public List<Customer> getAllCustomer() throws SQLException {
+    public List < Customer > getAllCustomer() throws SQLException {
         return customer_Db.getAllCustomer();
     }
 }

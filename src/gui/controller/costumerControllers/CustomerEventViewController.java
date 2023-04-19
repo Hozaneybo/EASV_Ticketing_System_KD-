@@ -26,8 +26,6 @@ public class CustomerEventViewController implements Initializable {
     private Button buyTicketButton;
     private int eventIndex;
 
-
-
     private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
 
@@ -36,7 +34,6 @@ public class CustomerEventViewController implements Initializable {
         facadeModelLoader = FacadeModelLoader.getInstance();
         facadeModel = facadeModelLoader.getFacadeModel();
     }
-
 
     public void setEventIndex(int eventIndex) {
         this.eventIndex = eventIndex;
@@ -52,7 +49,6 @@ public class CustomerEventViewController implements Initializable {
 
         // retrieve the index from the user data of the button
         int selectedEventIndex = (int) buyTicketButton.getUserData();
-
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/Tickets/BuyTicket.fxml"));
         Parent root = null;
@@ -71,7 +67,6 @@ public class CustomerEventViewController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
-
 
     public Label getEndTimeLbl() {
         return endTimeLbl;
@@ -105,6 +100,4 @@ public class CustomerEventViewController implements Initializable {
 
     }
 
-
 }
-

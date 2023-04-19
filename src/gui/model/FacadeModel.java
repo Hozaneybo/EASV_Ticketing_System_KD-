@@ -13,9 +13,6 @@ public class FacadeModel {
     private LogInModel logInModel;
     private SpecialTicketModel specialTicketModel;
 
-
-
-
     public FacadeModel() throws SQLException {
 
         eventCoordinatorModel = new EventCoordinatorModel();
@@ -45,11 +42,11 @@ public class FacadeModel {
     public LogInModel getLogInModel() {
         return logInModel;
     }
-    public SpecialTicketModel getSpecialTicketModel(){
+    public SpecialTicketModel getSpecialTicketModel() {
         return specialTicketModel;
     }
 
-    public Alert getAlert(String title, String headerText, String context, Alert.AlertType alertType){
+    public Alert getAlert(String title, String headerText, String context, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(headerText);

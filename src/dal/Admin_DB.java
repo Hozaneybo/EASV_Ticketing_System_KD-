@@ -1,6 +1,5 @@
 package dal;
 
-import be.Admin;
 import be.BarEvent;
 import be.EventCoordinator;
 import be.TicketType;
@@ -15,7 +14,7 @@ public class Admin_DB {
 
     private DBConnector dbConnector;
 
-    public Admin_DB(){
+    public Admin_DB() {
         dbConnector = new DBConnector();
     }
 
@@ -60,19 +59,16 @@ public class Admin_DB {
         }
     }
 
-
-    public List<EventCoordinator> getAllEventCoordinators() throws SQLException {
-        List<EventCoordinator> allEventCoordinators = new ArrayList<>();
+    public List < EventCoordinator > getAllEventCoordinators() throws SQLException {
+        List < EventCoordinator > allEventCoordinators = new ArrayList < > ();
 
         try (Connection conn = dbConnector.getConnected()) {
             String sql = "SELECT * FROM EventCoordinator;";
             Statement statement = conn.createStatement();
             //Run the SQL statement
-            if(statement.execute(sql))
-            {
+            if (statement.execute(sql)) {
                 ResultSet resultSet = statement.getResultSet();
-                while (resultSet.next())
-                {
+                while (resultSet.next()) {
                     int id = resultSet.getInt("id");
                     String fullName = resultSet.getString("fullName");
                     String userName = resultSet.getString("username");
@@ -86,18 +82,16 @@ public class Admin_DB {
         return allEventCoordinators;
     }
 
-    public List<BarEvent> getAllBarEvents() throws SQLException {
-        List<BarEvent> allBarEvents = new ArrayList<>();
+    public List < BarEvent > getAllBarEvents() throws SQLException {
+        List < BarEvent > allBarEvents = new ArrayList < > ();
 
         try (Connection conn = dbConnector.getConnected()) {
             String sql = "SELECT * FROM BarEvent;";
             Statement statement = conn.createStatement();
             //Run the SQL statement
-            if(statement.execute(sql))
-            {
+            if (statement.execute(sql)) {
                 ResultSet resultSet = statement.getResultSet();
-                while (resultSet.next())
-                {
+                while (resultSet.next()) {
                     int id = resultSet.getInt("ID");
                     String eventName = resultSet.getString("Event_Name");
                     String eventAddress = resultSet.getString("Event_Address");
@@ -141,11 +135,10 @@ public class Admin_DB {
         }
     }
 
-
-    public void deleteEventCoordinator(EventCoordinator coordinator){
+    public void deleteEventCoordinator(EventCoordinator coordinator) {
 
         String sql = "DELETE FROM EventCoordinator WHERE id = ? ";
-        try (Connection connection = dbConnector.getConnected()){
+        try (Connection connection = dbConnector.getConnected()) {
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, coordinator.getId());
@@ -158,10 +151,10 @@ public class Admin_DB {
         }
     }
 
-    public void deleteEvent ( BarEvent event){
+    public void deleteEvent(BarEvent event) {
 
         String sql = "DELETE FROM Event WHERE Id = ?";
-        try (Connection connection = dbConnector.getConnected()){
+        try (Connection connection = dbConnector.getConnected()) {
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, event.getId());
@@ -173,7 +166,5 @@ public class Admin_DB {
             throw new RuntimeException(e);
         }
     }
-
-
 
 }

@@ -13,29 +13,27 @@ import org.mindrot.jbcrypt.BCrypt;
 public class LoginDAO {
     private DBConnector dbConnector;
 
-    public LoginDAO()
-    {
+    public LoginDAO() {
         dbConnector = new DBConnector();
     }
 
     public Admin adminLogIn(String username, String password) {
         String sql = "SELECT * FROM Admin WHERE username = ? AND password = ?";
 
-        try(Connection connection = dbConnector.getConnected();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = dbConnector.getConnected(); PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, username);
             statement.setString(2, password);
 
             ResultSet result = statement.executeQuery();
 
-            if(result.next()){
+            if (result.next()) {
                 int id = result.getInt("Id");
                 username = result.getString("Username");
                 password = result.getString("Password");
 
-                return  new Admin(id, username, password);
+                return new Admin(id, username, password);
 
-            } else{
+            } else {
                 return null;
             }
 
@@ -78,6 +76,5 @@ public class LoginDAO {
             throw new Exception("Could not check login credentials", ex);
         }
     }
-
 
 }

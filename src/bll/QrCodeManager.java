@@ -50,7 +50,7 @@ public class QrCodeManager {
         String uniqueID = UUID.randomUUID().toString();
 
         // Create QR code content with the unique ID
-        String qrCodeContent =  uniqueID;
+        String qrCodeContent = uniqueID;
 
         // Set QR code properties
         int width = 200;
@@ -72,8 +72,8 @@ public class QrCodeManager {
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
-    public static java.util.Map<EncodeHintType, Object> getQRCodeHints() {
-        java.util.Map<EncodeHintType, Object> hints = new java.util.HashMap<>();
+    public static java.util.Map < EncodeHintType, Object > getQRCodeHints() {
+        java.util.Map < EncodeHintType, Object > hints = new java.util.HashMap < > ();
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         hints.put(EncodeHintType.MARGIN, 1);

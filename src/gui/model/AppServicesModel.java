@@ -12,7 +12,6 @@ public class AppServicesModel {
         appServicesManager = new AppServicesManager();
     }
 
-
     public void sendEmail(String toEmail, String messageSubject, String yourTextMessage, String filePath, String fileName) throws MessagingException {
         appServicesManager.sendEmail(toEmail, messageSubject, yourTextMessage, filePath, fileName);
     }

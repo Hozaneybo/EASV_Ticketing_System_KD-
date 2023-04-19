@@ -4,12 +4,12 @@ public class SpecialTicket {
 
     private int id;
     private String qr_code;
-    private boolean used;
+    private boolean valid;
 
-    public SpecialTicket(int id, String qr_code, boolean used) {
+    public SpecialTicket(int id, String qr_code, boolean valid) {
         this.id = id;
         this.qr_code = qr_code;
-        this.used = false;
+        this.valid = true;
     }
 
     public int getId() {
@@ -28,11 +28,11 @@ public class SpecialTicket {
         this.qr_code = qr_code;
     }
 
-    public boolean isStatus() {
-        return used;
+    public boolean getStatus() {
+        return valid;
     }
 
     public void setStatus(boolean used) {
-        this.used = used;
+        this.valid = used;
     }
 }

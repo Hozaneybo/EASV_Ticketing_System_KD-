@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
@@ -31,7 +30,6 @@ public class LogInController implements Initializable {
 
     @FXML
     private TextField usernameField;
-
 
     private static int coordinatorId;
 
@@ -48,15 +46,12 @@ public class LogInController implements Initializable {
         return LogInController.coordinatorId;
     }
 
-
-
-       @FXML
-       private void handleLogIn(ActionEvent actionEvent) {
+    @FXML
+    private void handleLogIn(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-
-           try {
+        try {
             Admin admin = facadeModel.getLogInModel().adminLogIn(username, password);
             EventCoordinator coordinator = null;
             try {
@@ -91,9 +86,7 @@ public class LogInController implements Initializable {
                 stage.setResizable(false);
                 stage.show();
 
-
-            }
-            else {
+            } else {
                 // Login failed, show an error message
                 facadeModel.getAlert("Login error", "Invalid Data",
                         "Please enter the correct information", Alert.AlertType.ERROR);

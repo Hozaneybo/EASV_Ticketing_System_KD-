@@ -1,12 +1,9 @@
 package dal;
 
-
 import be.*;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.database.DBConnector;
 import java.sql.*;
-
-
 
 public class Ticket_DB {
 
@@ -51,41 +48,4 @@ public class Ticket_DB {
         }
     }
 
-          /*public ArrayList<Ticket> getAllTickets() throws SQLException {
-        //Create and return songs
-        ArrayList<Ticket> tickets = new ArrayList<>();
-
-        //Get connection to database
-        try (Connection connection = dbConnector.getConnected()) {
-            //Create an SQL command
-            String sql = "SELECT * FROM BarEvent e, Customer c, EventCoordinator co, tickets t " +
-                    "WHERE e.id = t.event_id AND c.id = t.customer_id AND co.id = t.coordinator_id;";
-
-            //Create some statements
-            Statement statement = connection.createStatement();
-
-            //Do what you suppose to do
-            if (statement.execute(sql)) {
-                ResultSet resultSet = statement.getResultSet();
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("ticket_id");
-                    int event_id = resultSet.getInt("even_id");
-                    int customer_id = resultSet.getInt("customer_id");
-                    int coordinatoe_id = resultSet.getInt("coordinator_id");
-                    String qr_code = resultSet.getString("qr_code");
-
-                    Ticket ticket1 = new Ticket(id, event_id, customer_id, coordinatoe_id, qr_code);
-                    tickets.add(ticket1);
-                }
-            }
-        }
-        return tickets;
-    }*/
-
-
 }
-
-
-
-
-

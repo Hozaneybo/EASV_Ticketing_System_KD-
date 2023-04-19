@@ -7,11 +7,11 @@ public class SpecialTicketModel {
 
     private SpecialTicketManager specialTicketManager;
 
-    public SpecialTicketModel(){
+    public SpecialTicketModel() {
         specialTicketManager = new SpecialTicketManager();
     }
 
-    public SpecialTicket createSpecialTicket(String qrCode){
+    public SpecialTicket createSpecialTicket(String qrCode) {
         return specialTicketManager.createSpecialTicket(qrCode);
     }
 }

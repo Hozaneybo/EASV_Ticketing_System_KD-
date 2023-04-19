@@ -25,13 +25,12 @@ public class EmailWindowController implements Initializable {
 
     private File selectedFile;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         try {
             appServicesModel = new AppServicesModel();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -43,16 +42,12 @@ public class EmailWindowController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose File");
         selectedFile = fileChooser.showOpenDialog(null);
-       /* if (selectedFile != null) {
-            filePathLabel.setText(selectedFile.getAbsolutePath());
-        }*/
-
     }
 
     @FXML
     void sendEmail(ActionEvent event) {
 
-        Task<Void> task = new Task<Void>() {
+        Task < Void > task = new Task < Void > () {
             @Override
             protected Void call() throws Exception {
 
@@ -64,7 +59,7 @@ public class EmailWindowController implements Initializable {
 
                 try {
                     appServicesModel.sendEmail(receiverEmail, emailSubject, messageToBeSent, filePath, fileName);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -77,6 +72,5 @@ public class EmailWindowController implements Initializable {
         thread.start();
 
     }
-
 
 }

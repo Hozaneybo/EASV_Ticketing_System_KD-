@@ -5,8 +5,6 @@ public class BarEvent {
     private int id, coordinator_id;
     private String eventName, eventAddress, notes, startTime, endTime;
     private TicketType type;
-    private List < Ticket > tickets;
-    // private List<SpecialTicket> specialTickets;
     public BarEvent(int id, String eventName, String eventAddress, String notes, String startTime, String endTime, TicketType type, int coordinator_id) {
         this.id = id;
         this.eventName = eventName;
@@ -16,8 +14,6 @@ public class BarEvent {
         this.endTime = endTime;
         this.type = type;
         this.coordinator_id = coordinator_id;
-        this.tickets = new ArrayList < Ticket > ();
-        // this.specialTickets = new ArrayList<SpecialTicket>();
     }
     public BarEvent(int id, String eventName, String eventAddress, String notes, String startTime, String endTime, TicketType type) {
         this.id = id;

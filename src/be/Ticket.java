@@ -1,6 +1,5 @@
 package be;
 
-
 public class Ticket {
 
     private int id;
@@ -9,9 +8,7 @@ public class Ticket {
     private int coordinator_id;
     private String qrCode;
 
-
-
-    public Ticket(int id, int event_id, int  customer_id, int coordinator_id, String qrCode) {
+    public Ticket(int id, int event_id, int customer_id, int coordinator_id, String qrCode) {
         this.id = id;
         this.event_id = event_id;
         this.customer_id = customer_id;
@@ -19,8 +16,7 @@ public class Ticket {
         this.qrCode = qrCode;
     }
 
-    public Ticket() {
-    }
+    public Ticket() {}
 
     public int getId() {
         return id;
@@ -63,4 +59,3 @@ public class Ticket {
     }
 
 }
-

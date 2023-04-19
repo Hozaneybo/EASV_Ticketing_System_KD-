@@ -14,10 +14,9 @@ public class EventCoordinatorManager {
         eventCoordinatorDb = new EventCoordinator_DB();
     }
 
-    public List<BarEvent> getAllBarEvents() throws SQLException {
+    public List < BarEvent > getAllBarEvents() throws SQLException {
         return eventCoordinatorDb.getAllBarEvents();
     }
-
 
     public BarEvent createNewBarEvent(String eventName, String eventAddress, String notes, String startTime, String endTime, TicketType type, int coordinator) throws Exception {
         return eventCoordinatorDb.createBarEvent(eventName, eventAddress, notes, startTime, endTime, type, coordinator);
@@ -32,7 +31,7 @@ public class EventCoordinatorManager {
     }
 
     public int getCoordinatorId(int event_id) throws SQLException {
-       return eventCoordinatorDb.getCoordinatorId(event_id);
+        return eventCoordinatorDb.getCoordinatorId(event_id);
     }
 
 }

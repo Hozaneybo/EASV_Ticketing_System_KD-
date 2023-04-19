@@ -20,21 +20,17 @@ public class DBConnector {
         dataSource.setTrustServerCertificate(true);
         dataSource.setPortNumber(1433);
 
-
     }
 
     public Connection getConnected() throws SQLServerException {
         return dataSource.getConnection();
     }
 
-
     //Only to see if we have connection or not
     public static void main(String[] args) throws SQLServerException {
         DBConnector dbConnector = new DBConnector();
-        try(Connection connection =dbConnector.getConnected())
-        {
-            if(!connection.isClosed())
-            {
+        try (Connection connection = dbConnector.getConnected()) {
+            if (!connection.isClosed()) {
                 System.out.println("Is it opened..?\n" + !connection.isClosed());
             }
         } catch (SQLException e) {

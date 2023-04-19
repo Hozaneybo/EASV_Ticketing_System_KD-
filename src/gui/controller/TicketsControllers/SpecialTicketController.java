@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 public class SpecialTicketController implements Initializable {
 
-
     @FXML
     private ImageView qr_code;
 

@@ -7,12 +7,12 @@ public class SpecialTicketManager {
 
     private SpecialTicket_DB specialTicketDb;
 
-    public SpecialTicketManager(){
+    public SpecialTicketManager() {
 
         specialTicketDb = new SpecialTicket_DB();
     }
 
-    public SpecialTicket createSpecialTicket(String qrCode){
+    public SpecialTicket createSpecialTicket(String qrCode) {
         return specialTicketDb.createSpecialTicket(qrCode);
     }
 }

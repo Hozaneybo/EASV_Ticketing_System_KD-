@@ -16,18 +16,16 @@ public class Customer_DB {
         dbConnector = new DBConnector();
     }
 
-    public List<BarEvent> getAllBarEvents() throws SQLException {
-        List<BarEvent> allBarEvents = new ArrayList<>();
+    public List < BarEvent > getAllBarEvents() throws SQLException {
+        List < BarEvent > allBarEvents = new ArrayList < > ();
 
         try (Connection conn = dbConnector.getConnected()) {
             String sql = "SELECT * FROM BarEvent;";
             Statement statement = conn.createStatement();
             //Run the SQL statement
-            if(statement.execute(sql))
-            {
+            if (statement.execute(sql)) {
                 ResultSet resultSet = statement.getResultSet();
-                while (resultSet.next())
-                {
+                while (resultSet.next()) {
                     int id = resultSet.getInt("ID");
                     String eventName = resultSet.getString("Event_Name");
                     String eventAddress = resultSet.getString("Event_Address");
@@ -63,7 +61,6 @@ public class Customer_DB {
             ResultSet result = stmt.getGeneratedKeys();
             int id = 0;
 
-
             if (result.next()) {
                 id = result.getInt(1);
             }
@@ -71,26 +68,22 @@ public class Customer_DB {
             // Create a BarEvent object and send up the layers
             Customer customer1 = new Customer(id, name, email);
             return customer1;
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             throw new Exception("Could not create a Customer", ex);
         }
     }
 
-    public List<Customer> getAllCustomer() throws SQLException {
-        List<Customer> allCustomers = new ArrayList<>();
+    public List < Customer > getAllCustomer() throws SQLException {
+        List < Customer > allCustomers = new ArrayList < > ();
 
         try (Connection conn = dbConnector.getConnected()) {
             String sql = "SELECT * FROM Customer;";
             Statement statement = conn.createStatement();
             //Run the SQL statement
-            if(statement.execute(sql))
-            {
+            if (statement.execute(sql)) {
                 ResultSet result = statement.getResultSet();
-                while (result.next())
-                {
+                while (result.next()) {
                     int id = result.getInt("id");
                     String customerName = result.getString("Name");
                     String email = result.getString("email");

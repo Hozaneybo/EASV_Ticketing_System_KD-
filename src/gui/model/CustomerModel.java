@@ -8,11 +8,10 @@ import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
 
-
 public class CustomerModel {
 
-    private ObservableList<BarEvent> allEvents;
-    private ObservableList<Customer> allCustoners;
+    private ObservableList < BarEvent > allEvents;
+    private ObservableList < Customer > allCustoners;
     private CustomerManager customerManager;
 
     public CustomerModel() throws SQLException {
@@ -24,14 +23,16 @@ public class CustomerModel {
         allCustoners.addAll(customerManager.getAllCustomer());
     }
 
-    public ObservableList<BarEvent> getObservableEvents(){
+    public ObservableList < BarEvent > getObservableEvents() {
         return allEvents;
     }
 
-    public ObservableList<Customer> getObservableCustomers(){return allCustoners;}
+    public ObservableList < Customer > getObservableCustomers() {
+        return allCustoners;
+    }
 
     public void createCustomer(String name, String email) throws Exception {
-         customerManager.createCustomer(name, email);
+        customerManager.createCustomer(name, email);
 
     }
 
@@ -48,7 +49,5 @@ public class CustomerModel {
         allCustoners.setAll(customerManager.getAllCustomer());
 
     }
-
-
 
 }
