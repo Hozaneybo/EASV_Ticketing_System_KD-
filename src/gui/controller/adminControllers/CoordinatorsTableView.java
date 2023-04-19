@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CoordinatorsTableView implements Initializable {
@@ -64,26 +66,40 @@ public class CoordinatorsTableView implements Initializable {
         }
         if (facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
             selectedEventCoordinator = coordinatorTable.getSelectionModel().getSelectedItem();
-        EditCoordinatorViewController controller = loader.getController();
-        controller.getCoordinatorIdLabel().setText(String.valueOf(selectedEventCoordinator.getId()));
-        controller.getCoordinatorNameE().setText(selectedEventCoordinator.getFullName());
-        controller.getCoordinatorUsernameE().setText(selectedEventCoordinator.getUsername());
-        controller.getCoordinatorPasswordE().setPromptText("New Password");
+        try {
+            EditCoordinatorViewController controller = loader.getController();
+            controller.getCoordinatorIdLabel().setText(String.valueOf(selectedEventCoordinator.getId()));
+            controller.getCoordinatorNameE().setText(selectedEventCoordinator.getFullName());
+            controller.getCoordinatorUsernameE().setText(selectedEventCoordinator.getUsername());
+            Stage stage = new Stage();
+            stage.setTitle("Update EventCoordinator");
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
 
-        Stage stage = new Stage();
-        stage.setTitle("Update EventCoordinator");
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-
-        // Show the new stage
-        stage.setResizable(false);
-        stage.show();
+            // Show the new stage
+            stage.setResizable(false);
+            stage.show();
+            controller.getCoordinatorPasswordE().setPromptText("New Password");
+        } catch (Exception e) {
+            facadeModel.getAlert("Error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     public void deleteCoordinator(ActionEvent actionEvent) {
-        if (facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
+        if (facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0) {
             selectedEventCoordinator = coordinatorTable.getSelectionModel().getSelectedItem();
-
-        facadeModel.getAdminModel().deleteEventCoordinator(selectedEventCoordinator);
+            try {
+            Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmDialog.setTitle("Confirm Deletion");
+            confirmDialog.setHeaderText("Are you sure you want to delete coordinator " + selectedEventCoordinator.getFullName() + "?");
+            confirmDialog.setContentText("Click OK to delete or Cancel to exit without deleting.");
+            Optional<ButtonType> result = confirmDialog.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                facadeModel.getAdminModel().deleteEventCoordinator(selectedEventCoordinator);
+            }
+            } catch (Exception e) {
+                facadeModel.getAlert("Error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
+            }
+        }
     }
 }

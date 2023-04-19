@@ -42,7 +42,7 @@
                </font></Label>
             <TextField fx:id="startHourFieldE" alignment="CENTER" layoutX="153.0" layoutY="88.0" prefHeight="32.0" prefWidth="120.0" promptText="HOURS" />
             <TextField fx:id="startMinFieldE" alignment="CENTER" layoutX="284.0" layoutY="88.0" prefHeight="32.0" prefWidth="120.0" promptText="MIN" />
-            <Label layoutX="304.0" layoutY="94.0" text=":" />
+            <Label layoutX="276.0" layoutY="95.0" text=":" />
             <DatePicker fx:id="endDateFieldE" editable="false" layoutX="153.0" layoutY="127.0" prefHeight="32.0" prefWidth="250.0" promptText="Optional" />
             <CheckBox fx:id="foodOption" layoutX="22.0" layoutY="440.0" mnemonicParsing="false" text="free food" textFill="#f3db28">
                <font>
@@ -63,7 +63,7 @@
             <TextField fx:id="eventNameFieldE" layoutX="153.0" layoutY="8.0" prefHeight="32.0" prefWidth="400.0" promptText="event name ...." />
             <TextField fx:id="endHourFieldE" alignment="CENTER" layoutX="153.0" layoutY="170.0" prefHeight="32.0" prefWidth="120.0" promptText="HOURS" />
             <TextField fx:id="endMinFieldE" alignment="CENTER" layoutX="284.0" layoutY="170.0" prefHeight="32.0" prefWidth="120.0" promptText="MIN" />
-            <Label layoutX="304.0" layoutY="176.0" text=":" />
+            <Label layoutX="276.0" layoutY="177.0" text=":" />
             <Button layoutX="445.0" layoutY="436.0" mnemonicParsing="false" onAction="#submitEditing" styleClass="my-button-style-yellow" stylesheets="@../design.css" text="Edit event">
                <font>
                   <Font name="System Bold" size="15.0" />

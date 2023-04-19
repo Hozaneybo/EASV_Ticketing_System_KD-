@@ -9,8 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -110,22 +112,30 @@ public class EditEventController implements Initializable {
 
     @FXML
     void submitEditing(ActionEvent event) {
-        //TODO submitEditing BarEvent
+        // check if required fields are empty
+        if (eventNameFieldE.getText().isEmpty() || streetField.getText().isEmpty() || startDateFieldE.getValue() == null
+                || startHourFieldE.getText().isEmpty() || startMinFieldE.getText().isEmpty() ||  cboxTicketTypeE.getValue() == null) {
+            facadeModel.getAlert("Error", "Please fill all required fields", "", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // the rest of the code
         int eventId = Integer.parseInt(eventIdLabel.getText());
         String eventName = eventNameFieldE.getText().toUpperCase();
         String eventAddress = streetField.getText();
         String notes = noteAreaE.getText();
         String startTime = null;
         if (startDateFieldE.getValue() != null) {
-            startTime = startDateFieldE.getValue().format(DateTimeFormatter.ofPattern("dd-MMM-yyy")).toString() + " " + startHourFieldE.getText() + ":" + startMinFieldE.getText();
+            startTime = startDateFieldE.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyy")).toString() + " " + startHourFieldE.getText() + ":" + startMinFieldE.getText();
         }
         String endTime = null;
         if (endDateFieldE.getValue() != null) {
-            endTime = endDateFieldE.getValue().format(DateTimeFormatter.ofPattern("dd-MMM-yyy")).toString() + " " + endHourFieldE.getText() + ":" + endMinFieldE.getText();
+            endTime = endDateFieldE.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyy")).toString() + " " + endHourFieldE.getText() + ":" + endMinFieldE.getText();
         }
 
-        TicketType type = TicketType.valueOf(cboxTicketTypeE.getValue());
 
+
+        TicketType type = TicketType.valueOf(cboxTicketTypeE.getValue());
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LogIn.fxml"));
             Parent root = loader.load();
@@ -135,12 +145,14 @@ public class EditEventController implements Initializable {
             BarEvent toBeUpdated = new BarEvent(eventId, eventName, eventAddress, notes, startTime, endTime, type, coordinator_id);
 
             facadeModel.getEventCoordinatorModel().updateBarEvent(toBeUpdated);
-
+            facadeModel.getAlert("Info...", "Event has been successfully edited", "", Alert.AlertType.INFORMATION);
+            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
         }
-
     }
+
 
     private void fieldsProperties() {
         endDateFieldE.valueProperty().addListener((observable, oldValue, newValue) -> {

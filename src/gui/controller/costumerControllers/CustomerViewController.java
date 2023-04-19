@@ -29,8 +29,7 @@ public class CustomerViewController implements Initializable {
 
     }
 
-    @FXML
-    private void showAllEvents() {
+    public void showAllEvents() {
         eventBox.getChildren().clear();
         try {
             facadeModel.getCustomerModel().refreshEventListView();

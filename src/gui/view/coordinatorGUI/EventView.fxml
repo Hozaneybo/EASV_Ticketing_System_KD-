@@ -36,11 +36,6 @@
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <Label layoutX="354.0" layoutY="140.0" text=", which takes place in">
-               <font>
-                  <Font name="Berlin Sans FB" size="17.0" />
-               </font>
-            </Label>
             <Label fx:id="startTimeLbl" layoutX="100.0" layoutY="172.0" text=" date and time">
                <font>
                   <Font name="Berlin Sans FB" size="17.0" />
@@ -51,7 +46,7 @@
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="eventAddressLbl" layoutX="101.0" layoutY="108.0" prefHeight="20.0" prefWidth="212.0" text="Address">
+            <Label fx:id="eventAddressLbl" layoutX="101.0" layoutY="108.0" prefHeight="20.0" prefWidth="350.0" text="Address">
                <font>
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>
@@ -61,7 +56,7 @@
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="eventNotes" layoutX="101.0" layoutY="140.0" prefHeight="20.0" prefWidth="212.0" text="Type your notes">
+            <Label fx:id="eventNotes" layoutX="101.0" layoutY="140.0" prefHeight="20.0" prefWidth="400.0" text="Type your notes">
                <font>
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>

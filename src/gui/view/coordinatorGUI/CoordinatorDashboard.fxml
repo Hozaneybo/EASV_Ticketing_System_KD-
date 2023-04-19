@@ -16,7 +16,7 @@
    <children>
       <ScrollPane layoutX="245.0" prefHeight="500.0" prefWidth="595.0" style="-fx-background-color: #ff0000;" stylesheets="@../design.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <VBox fx:id="eventBox" maxHeight="-Infinity" minHeight="498" prefWidth="594.0" style="-fx-background-color: DF2929;" />
+            <VBox fx:id="eventBox" maxHeight="-Infinity" minHeight="498" prefWidth="593.0" style="-fx-background-color: DF2929;" />
          </content>
       </ScrollPane>
       <ImageView fitHeight="135.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">

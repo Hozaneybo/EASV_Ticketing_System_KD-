@@ -36,6 +36,14 @@ public class CreateEventController implements Initializable {
     }
     @FXML
     void addEvent(ActionEvent event) {
+        // Check if any required fields are empty
+
+        if (cityField.getText().isEmpty() || eventNameField.getText().isEmpty() || postCodeField.getText().isEmpty() ||
+                startHourField.getText().isEmpty() || cboxTicketType.getValue() == null|| startMinField.getText().isEmpty() || streetField.getText().isEmpty() ||
+                startDateField.getValue() == null) {
+            facadeModel.getAlert("Error", "Please fill in all required fields", "", Alert.AlertType.ERROR);
+            return;
+        }
         String eventName = eventNameField.getText().toUpperCase();
         String eventAddress = streetField.getText() + ", " + postCodeField.getText() + " " + cityField.getText();
         String notes = noteArea.getText();
@@ -48,16 +56,31 @@ public class CreateEventController implements Initializable {
             endTime = endDateField.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyy")) + " " + endHourField.getText() + ":" + endMinField.getText();
         }
         TicketType type = TicketType.valueOf(cboxTicketType.getValue());
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LogIn.fxml"));
             Parent root = loader.load();
             LogInController controller = loader.getController();
             int coordinator_id = controller.getCoordinatorId();
             facadeModel.getEventCoordinatorModel().createNewBarEvent(eventName, eventAddress, notes, startTime, endTime, type, coordinator_id);
+            facadeModel.getAlert("Info..!", "Event has been successfully created", null, Alert.AlertType.INFORMATION);
         } catch (Exception e) {
-            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
+            facadeModel.getAlert("Error", "Something went wrong", e.getMessage(), Alert.AlertType.ERROR);
         }
+        eventNameField.clear();
+        streetField.clear();
+        noteArea.clear();
+        postCodeField.clear();
+        cityField.clear();
+        startDateField.setValue(null);
+        startHourField.clear();
+        startMinField.clear();
+        endDateField.setValue(null);
+        endHourField.clear();
+        endMinField.clear();
+        cboxTicketType.setValue(null);
     }
+
     private void fieldsProperties() {
         endDateField.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (startDateField.getValue() != null && newValue != null && newValue.isBefore(startDateField.getValue())) {

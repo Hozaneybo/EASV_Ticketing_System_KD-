@@ -114,7 +114,7 @@ public class Admin_DB {
         String hashedPassword = BCrypt.hashpw(coordinator.getPassword(), salt);
 
         // Creates an SQL command
-        String sql = "UPDATE EventCoordinator SET fullName=?, password=?, salt=? WHERE id=?;";
+        String sql = "UPDATE EventCoordinator SET fullName=?, username=?, password=?, salt=? WHERE id=?;";
 
         try (Connection connection = dbConnector.getConnected()) {
             // Creates a statement
@@ -122,9 +122,10 @@ public class Admin_DB {
 
             // Bind parameters
             stmt.setString(1, coordinator.getFullName());
-            stmt.setString(2, hashedPassword);
-            stmt.setString(3, salt);
-            stmt.setInt(4, coordinator.getId());
+            stmt.setString(2, coordinator.getUsername());
+            stmt.setString(3, hashedPassword);
+            stmt.setString(4, salt);
+            stmt.setInt(5, coordinator.getId());
 
             // Run the specified SQL statement
             stmt.executeUpdate();

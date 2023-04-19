@@ -1,5 +1,6 @@
 package gui.controller.coordinatorControllers;
 
+import gui.controller.costumerControllers.CustomerViewController;
 import gui.model.FacadeModel;
 import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
@@ -10,12 +11,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ECDashboardController implements Initializable {
@@ -32,13 +35,12 @@ public class ECDashboardController implements Initializable {
         facadeModelLoader = FacadeModelLoader.getInstance();
         facadeModel = facadeModelLoader.getFacadeModel();
     }
-    @FXML
-    private void showAllEvents() {
+    public void showAllEvents() {
         eventBox.getChildren().clear();
         try {
             facadeModel.getEventCoordinatorModel().refreshEventListView();
         } catch (Exception e) {
-            facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
+            facadeModel.getAlert("Error", "Something went wrong ... !", e.getMessage(), Alert.AlertType.ERROR);
         }
         eventsNumber = facadeModel.getEventCoordinatorModel().getObservableEvents().size();
 
@@ -56,7 +58,7 @@ public class ECDashboardController implements Initializable {
                     controller.getEventIdLabel().setText(String.valueOf(facadeModel.getEventCoordinatorModel().getObservableEvents().get(i).getId()));
                     eventBox.getChildren().add(node);
                 } catch (IOException ex) {
-                    facadeModel.getAlert("Something went wrong", "Error", ex.getMessage(), Alert.AlertType.ERROR);
+                    facadeModel.getAlert("Error", "Something went wrong ... !", ex.getMessage(), Alert.AlertType.ERROR);
                 }
             }
         }
@@ -72,28 +74,40 @@ public class ECDashboardController implements Initializable {
         try {
             node = loader.load();
         } catch (Exception e) {
-            facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
+            facadeModel.getAlert("Error", "Something went wrong ... !", e.getMessage(), Alert.AlertType.ERROR);
         }
         eventBox.getChildren().add(node);
     }
 
-    public void logOut(ActionEvent actionEvent) {
-        Node source = (Node) actionEvent.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+    @FXML
+    private void logOut(ActionEvent event) {
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Confirm Logout");
+        confirmDialog.setHeaderText("Are you sure you want to log out?");
+        confirmDialog.setContentText("Click OK to confirm or Cancel to stay logged in.");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/customerGUI/CustomerView.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
+        Optional<ButtonType> result = confirmDialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/customerGUI/CustomerView.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                facadeModel.getAlert("Error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
+            }
+            CustomerViewController controller = loader.getController();
+            controller.showAllEvents();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
     }
+
+
 
     public void email(ActionEvent actionEvent) {
         eventBox.getChildren().clear();
@@ -104,7 +118,7 @@ public class ECDashboardController implements Initializable {
             eventBox.getChildren().add(node);
 
         } catch (Exception e) {
-            facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
+            facadeModel.getAlert("Error", "Something went wrong ... !", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

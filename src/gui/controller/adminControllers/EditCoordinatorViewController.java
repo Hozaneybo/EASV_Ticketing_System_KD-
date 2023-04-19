@@ -54,6 +54,7 @@ public class EditCoordinatorViewController implements Initializable {
         EventCoordinator toBeUpdated = new EventCoordinator(parseInt(coordinatorIdLabel.getText()), coordinatorNameE.getText(), coordinatorUsernameE.getText(), coordinatorPasswordE.getText());
         try {
             facadeModel.getAdminModel().updateEventCoordinator(toBeUpdated);
+            facadeModel.getAdminModel().refreshEventListView();
         } catch (Exception e) {
             facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
         }

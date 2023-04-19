@@ -21,6 +21,7 @@ public class AdminModel {
         allEvents = FXCollections.observableArrayList();
         allEvents.addAll(adminManager.getAllBarEvents());
         allEventCoordinator.addAll(adminManager.getAllEventCoordinators());
+        refreshEventListView();
     }
     public ObservableList < EventCoordinator > getObservableEventCoordinator() {
         return allEventCoordinator;
@@ -29,6 +30,7 @@ public class AdminModel {
     public void createNewEventCoordinator(String fullName, String username, String password) throws Exception {
         EventCoordinator eventCoordinator = adminManager.createNewEventCoordinator(fullName, username, password);
         allEventCoordinator.add(eventCoordinator);
+        refreshEventListView();
     }
 
     public ObservableList < BarEvent > getObservableEvents() {
@@ -37,17 +39,27 @@ public class AdminModel {
 
     public void updateEventCoordinator(EventCoordinator coordinator) throws Exception {
         adminManager.updateEventCoordinator(coordinator);
-        allEventCoordinator.addAll(coordinator);
+        refreshEventListView();
     }
 
-    public void deleteEventCoordinator(EventCoordinator coordinator) {
+    public void deleteEventCoordinator(EventCoordinator coordinator) throws SQLException {
         adminManager.deleteEventCoordinator(coordinator);
         allEventCoordinator.remove(coordinator);
+        refreshEventListView();
     }
 
-    public void deleteEvent(BarEvent event) {
+    public void deleteEvent(BarEvent event) throws SQLException {
         adminManager.deleteEvent(event);
         allEvents.remove(event);
+        refreshEventListView();
+    }
+
+    public void refreshEventListView() throws SQLException {
+        //Update the listview
+        allEvents.clear();
+        allEventCoordinator.clear();
+        allEvents.setAll(adminManager.getAllBarEvents());
+        allEventCoordinator.setAll(adminManager.getAllEventCoordinators());
     }
 
 }

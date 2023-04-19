@@ -66,6 +66,7 @@ public class LogInController implements Initializable {
                 Parent root = loader.load();
                 AdminDashboardController controller = loader.getController();
                 controller.getUserName().setText(admin.getName());
+                controller.showAllEvents();
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(scene);
@@ -79,6 +80,7 @@ public class LogInController implements Initializable {
                 Parent root = loader.load();
                 ECDashboardController controller = loader.getController();
                 controller.getUserName().setText(coordinator.getFullName());
+                controller.showAllEvents();
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(scene);

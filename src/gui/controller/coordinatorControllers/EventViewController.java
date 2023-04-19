@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EventViewController implements Initializable {
@@ -69,12 +71,21 @@ public class EventViewController implements Initializable {
 
         int eventId = Integer.parseInt(eventIdLabel.getText());
         BarEvent toBeDeleted = new BarEvent(eventId);
-        try {
-            facadeModel.getEventCoordinatorModel().deleteBarEvent(toBeDeleted);
-        } catch (Exception e) {
-            facadeModel.getAlert("Database Error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
-        }
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Deletion");
+        alert.setHeaderText("Are you sure you want to delete this event?");
+        alert.setContentText("This operation cannot be undone.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            try {
+                facadeModel.getEventCoordinatorModel().deleteBarEvent(toBeDeleted);
+                facadeModel.getEventCoordinatorModel().refreshEventListView();
+            } catch (Exception e) {
+                facadeModel.getAlert("Database Error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
+            }
+        }
     }
 
     public void updateEvent(ActionEvent actionEvent) {
@@ -96,11 +107,13 @@ public class EventViewController implements Initializable {
         controller.getStartDateFieldE().setValue(startDate);
         controller.getStartHourFieldE().setText(startTimeLbl.getText().substring(11, 13));
         controller.getStartMinFieldE().setText(startTimeLbl.getText().substring(14));
+        if(endTimeLbl.getText() != null && !endTimeLbl.getText().equals("")){
+
         String endDateString = endTimeLbl.getText().substring(0, 10);
         LocalDate endDate = LocalDate.parse(endDateString, formatter);
         controller.getEndDateFieldE().setValue(endDate);
         controller.getEndHourFieldE().setText(endTimeLbl.getText().substring(11, 13));
-        controller.getEndMinFieldE().setText(endTimeLbl.getText().substring(14));
+        controller.getEndMinFieldE().setText(endTimeLbl.getText().substring(14));}
         String[] options = {
                 "STANDARD",
                 "CUSTOMIZED",
