@@ -57,7 +57,7 @@ public class LogInController implements Initializable {
             try {
                 coordinator = facadeModel.getLogInModel().coordinatorLogIn(username, password);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
             }
 
             if (admin != null) {

@@ -1,6 +1,5 @@
 package gui.controller.adminControllers;
 
-
 import gui.model.AdminModel;
 import gui.model.FacadeModel;
 import gui.model.FacadeModelLoader;
@@ -27,8 +26,7 @@ public class NewEventCoordinatorController implements Initializable {
         facadeModel = facadeModelLoader.getFacadeModel();
     }
 
-
-    public void CreateNewCoordinator(ActionEvent event)  {
+    public void CreateNewCoordinator(ActionEvent event) {
         String fullName = FullNameTXT.getText();
         String userName = UserNameTXT.getText();
         String password = PasswordTXT.getText();
@@ -39,11 +37,10 @@ public class NewEventCoordinatorController implements Initializable {
             FullNameTXT.clear();
             UserNameTXT.clear();
             PasswordTXT.clear();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You have successfully created an event coordinator ..!");
-            alert.show();
+            facadeModel.getAlert("", "Create a new coordinator", "You have successfully created an event coordinator ..!", Alert.AlertType.INFORMATION);
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
         }
 
     }
