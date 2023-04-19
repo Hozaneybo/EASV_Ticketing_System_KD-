@@ -3,6 +3,7 @@ import be.TicketType;
 import gui.controller.LogInController;
 import gui.model.EventCoordinatorModel;
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,15 +27,13 @@ public class CreateEventController implements Initializable {
     private DatePicker endDateField, startDateField;
     @FXML
     private TextArea noteArea;
+    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            eventCoordinatorModel = new EventCoordinatorModel();
-            facadeModel = new FacadeModel();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
         fieldsProperties();
         cboxTicketType.setItems(facadeModel.getEventCoordinatorModel().getTypes());
     }

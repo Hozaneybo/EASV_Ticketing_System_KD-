@@ -1,6 +1,7 @@
 package gui.controller.costumerControllers;
 
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,18 +18,14 @@ public class CustomerViewController implements Initializable {
     @FXML
     private VBox eventBox;
 
+
+    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
-
     int eventsNumber;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       try{
-          facadeModel = new FacadeModel();
-
-       }catch (Exception e){
-           e.printStackTrace();
-       }
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
 
     }
 

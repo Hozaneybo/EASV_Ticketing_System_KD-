@@ -2,6 +2,8 @@ package gui.controller.coordinatorControllers;
 
 
 import gui.model.EventCoordinatorModel;
+import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -25,28 +28,23 @@ public class ECDashboardController implements Initializable {
     private Label userName;
 
 
-    private EventCoordinatorModel eventCoordinatorModel;
+    private FacadeModelLoader facadeModelLoader;
+    private FacadeModel facadeModel;
     private int eventsNumber;
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            eventCoordinatorModel = new EventCoordinatorModel();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
     }
     @FXML
     private void showAllEvents() {
         eventBox.getChildren().clear();
         try {
-            eventCoordinatorModel.refreshEventListView();
+            facadeModel.getEventCoordinatorModel().refreshEventListView();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
         }
-        eventsNumber = eventCoordinatorModel.getObservableEvents().size();
+        eventsNumber = facadeModel.getEventCoordinatorModel().getObservableEvents().size();
 
         if ( eventsNumber != 0) {
             for (int i = 0; i < eventsNumber; i++) {
@@ -54,12 +52,12 @@ public class ECDashboardController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/EventView.fxml"));
                     Node node = loader.load();
                     EventViewController controller = loader.getController();
-                    controller.getEventNameLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getEventName());
-                    controller.getEventAddressLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getEventAddress());
-                    controller.getEventNotes().setText(eventCoordinatorModel.getObservableEvents().get(i).getNotes());
-                    controller.getStartTimeLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getStartTime());
-                    controller.getEndTimeLbl().setText(eventCoordinatorModel.getObservableEvents().get(i).getEndTime());
-                    controller.getEventIdLabel().setText(String.valueOf(eventCoordinatorModel.getObservableEvents().get(i).getId()));
+                    controller.getEventNameLbl().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(i).getEventName());
+                    controller.getEventAddressLbl().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(i).getEventAddress());
+                    controller.getEventNotes().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(i).getNotes());
+                    controller.getStartTimeLbl().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(i).getStartTime());
+                    controller.getEndTimeLbl().setText(facadeModel.getEventCoordinatorModel().getObservableEvents().get(i).getEndTime());
+                    controller.getEventIdLabel().setText(String.valueOf(facadeModel.getEventCoordinatorModel().getObservableEvents().get(i).getId()));
                     eventBox.getChildren().add(node);
                 } catch (IOException ex) {
 

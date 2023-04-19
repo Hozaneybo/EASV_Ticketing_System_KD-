@@ -3,6 +3,7 @@ package gui.controller.adminControllers;
 import gui.controller.coordinatorControllers.EventViewController;
 import gui.model.AdminModel;
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +27,7 @@ public class AdminDashboardController implements Initializable {
 
     @FXML
     private Label userName;
-    private AdminModel adminModel;
+    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
 
 
@@ -36,14 +37,9 @@ public class AdminDashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            adminModel = new AdminModel();
-        } catch (SQLException e) {
-            facadeModel.getAlert("Database connection error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
 
-           // throw new RuntimeException(e);
-
-        }
 
     }
 
@@ -83,7 +79,7 @@ public class AdminDashboardController implements Initializable {
     private  void showAllEvents() {
         eventBox.getChildren().clear();
 
-        int eventsNumber = adminModel.getObservableEvents().size();
+        int eventsNumber = facadeModel.getAdminModel().getObservableEvents().size();
 
         if ( eventsNumber != 0) {
             for (int i = 0; i < eventsNumber; i++) {
@@ -91,12 +87,12 @@ public class AdminDashboardController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/EventView.fxml"));
                     Node node = loader.load();
                     EventViewController controller = loader.getController();
-                    controller.getEventNameLbl().setText(adminModel.getObservableEvents().get(i).getEventName());
-                    controller.getEventAddressLbl().setText(adminModel.getObservableEvents().get(i).getEventAddress());
-                    controller.getEventNotes().setText(adminModel.getObservableEvents().get(i).getNotes());
-                    controller.getStartTimeLbl().setText(adminModel.getObservableEvents().get(i).getStartTime());
-                    controller.getEndTimeLbl().setText(adminModel.getObservableEvents().get(i).getEndTime());
-                    controller.getEventIdLabel().setText(String.valueOf(adminModel.getObservableEvents().get(i).getId()));
+                    controller.getEventNameLbl().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getEventName());
+                    controller.getEventAddressLbl().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getEventAddress());
+                    controller.getEventNotes().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getNotes());
+                    controller.getStartTimeLbl().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getStartTime());
+                    controller.getEndTimeLbl().setText(facadeModel.getAdminModel().getObservableEvents().get(i).getEndTime());
+                    controller.getEventIdLabel().setText(String.valueOf(facadeModel.getAdminModel().getObservableEvents().get(i).getId()));
                     controller.getUpdateBtn().setVisible(false);
                     eventBox.getChildren().add(node);
                 } catch (Exception ex) {

@@ -24,6 +24,6 @@
       <Label fx:id="eventEnd" layoutX="79.0" layoutY="128.0" prefHeight="34.0" prefWidth="264.0" text="evnet end" textFill="#f3db28" />
       <Label fx:id="notes" layoutX="79.0" layoutY="162.0" prefHeight="34.0" prefWidth="264.0" text="Notes" textFill="#f3db28" />
       <Label fx:id="customerName" layoutX="79.0" layoutY="196.0" prefHeight="34.0" prefWidth="210.0" text="Customer name " textFill="#f3db28" />
-      <Label fx:id="customerName1" layoutX="312.0" layoutY="196.0" prefHeight="34.0" prefWidth="210.0" text="customer's email" textFill="#f3db28" />
+      <Label fx:id="customerEmailLabel" layoutX="312.0" layoutY="196.0" prefHeight="34.0" prefWidth="210.0" text="customer's email" textFill="#f3db28" />
    </children>
 </AnchorPane>

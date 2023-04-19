@@ -1,8 +1,8 @@
 package gui.controller.adminControllers;
 
 import be.EventCoordinator;
-import gui.controller.coordinatorControllers.EditEventController;
-import gui.model.AdminModel;
+import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CoordinatorsTableView implements Initializable {
@@ -36,19 +35,17 @@ public class CoordinatorsTableView implements Initializable {
 
     private EventCoordinator selectedEventCoordinator;
 
-    AdminModel adminModel;
+    private FacadeModelLoader facadeModelLoader;
+    private FacadeModel facadeModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            adminModel = new AdminModel();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
 
-        if(adminModel.getObservableEventCoordinator().size() != 0)
+        if(facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
         {
-            coordinatorTable.setItems(adminModel.getObservableEventCoordinator());
+            coordinatorTable.setItems(facadeModel.getAdminModel().getObservableEventCoordinator());
             idColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, Integer>("id"));
             nameColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("fullName"));
             usernameColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("username"));
@@ -68,7 +65,7 @@ public class CoordinatorsTableView implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if(adminModel.getObservableEventCoordinator().size() != 0)
+        if(facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
             selectedEventCoordinator = coordinatorTable.getSelectionModel().getSelectedItem();
         EditCoordinatorViewController controller = loader.getController();
         controller.getCoordinatorIdLabel().setText(String.valueOf(selectedEventCoordinator.getId()));
@@ -87,9 +84,9 @@ public class CoordinatorsTableView implements Initializable {
     }
 
     public void deleteCoordinator(ActionEvent actionEvent) {
-        if(adminModel.getObservableEventCoordinator().size() != 0)
+        if(facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
             selectedEventCoordinator = coordinatorTable.getSelectionModel().getSelectedItem();
 
-        adminModel.deleteEventCoordinator(selectedEventCoordinator);
+        facadeModel.getAdminModel().deleteEventCoordinator(selectedEventCoordinator);
     }
 }

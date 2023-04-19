@@ -6,6 +6,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.controller.adminControllers.AdminDashboardController;
 import gui.controller.coordinatorControllers.ECDashboardController;
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,44 +31,29 @@ public class LogInController implements Initializable {
 
     @FXML
     private TextField usernameField;
-    public FacadeModel facadeModel;
+
 
     private static int coordinatorId;
 
+    private FacadeModelLoader facadeModelLoader;
+    private FacadeModel facadeModel;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
+
+    }
     public int getCoordinatorId() {
         return LogInController.coordinatorId;
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-        try {
-            facadeModel = new FacadeModel();
-        } catch (SQLException e) {
-            facadeModel.getAlert("Database connection error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
-            e.printStackTrace();
-        }
-
-    }
        @FXML
        private void handleLogIn(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-
-
-        /*   // Get the EventCoordinator object from the database based on the username
-            EventCoordinator eventCoordinator = facadeModel.getAdminModel().getCoordinatorByName(username);
-            // Check if the password matches
-           if (eventCoordinator.checkPassword(password)) {
-               // Password matches
-               // ...
-           } else {
-               // Password does not match
-               // ...
-           }
-*/
-
 
 
            try {

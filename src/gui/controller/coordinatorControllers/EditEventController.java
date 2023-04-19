@@ -4,6 +4,7 @@ import be.BarEvent;
 import be.TicketType;
 import gui.controller.LogInController;
 import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,12 +66,13 @@ public class EditEventController implements Initializable {
     @FXML
     private Label eventIdLabel;
 
+    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getFacadeModelInNewThread();
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
         fieldsProperties();
 
     }
@@ -169,20 +171,6 @@ public class EditEventController implements Initializable {
 
     }
 
-
-    private void getFacadeModelInNewThread()
-    {
-        Task<Void> task = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                facadeModel = new FacadeModel();
-                return null;
-            }
-        };
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
-    }
 
     private void fieldsProperties() {
         endDateFieldE.valueProperty().addListener((observable, oldValue, newValue) -> {

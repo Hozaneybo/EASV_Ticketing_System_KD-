@@ -2,6 +2,8 @@ package gui.controller.adminControllers;
 
 
 import gui.model.AdminModel;
+import gui.model.FacadeModel;
+import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,14 +18,13 @@ public class NewEventCoordinatorController implements Initializable {
 
     @FXML
     private TextField FullNameTXT, UserNameTXT, PasswordTXT;
-    private AdminModel model;
+    private FacadeModelLoader facadeModelLoader;
+    private FacadeModel facadeModel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            model = new AdminModel();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        facadeModelLoader = FacadeModelLoader.getInstance();
+        facadeModel = facadeModelLoader.getFacadeModel();
     }
 
 
@@ -33,7 +34,7 @@ public class NewEventCoordinatorController implements Initializable {
         String password = PasswordTXT.getText();
 
         try {
-            model.createNewEventCoordinator(fullName, userName, password);
+            facadeModel.getAdminModel().createNewEventCoordinator(fullName, userName, password);
 
             FullNameTXT.clear();
             UserNameTXT.clear();
