@@ -24,7 +24,7 @@
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="C:\Users\dilbe\Desktop\New folder\event_accepted_tentatively_96px.png" />
+                        <Image url="@../images/all_events.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -36,7 +36,7 @@
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="C:\Users\dilbe\Desktop\New folder\logout_rounded_left_96px.png" />
+                        <Image url="@../images/logout.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -56,7 +56,7 @@
         </ScrollPane>
       <ImageView fitHeight="135.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="C:\Users\dilbe\Desktop\New folder\ea_logo.png" />
+            <Image url="@../images/ea_logo.png" />
          </image>
       </ImageView>
     </children>
