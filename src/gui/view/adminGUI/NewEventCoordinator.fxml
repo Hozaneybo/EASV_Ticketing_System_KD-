@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -30,15 +32,22 @@
                </font>
             </Text>
             <TextField fx:id="PasswordTXT" layoutX="176.0" layoutY="287.0" prefWidth="200.0" />
-            <Button fx:id="Create" layoutX="183.0" layoutY="370.0" mnemonicParsing="false" onAction="#CreateNewCoordinator" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: DF2929;" text="Add" textFill="#f3db28">
+            <Button fx:id="Create" layoutX="216.0" layoutY="369.0" mnemonicParsing="false" onAction="#CreateNewCoordinator" prefHeight="35.0" prefWidth="120.0" stylesheets="@../design.css" text="Add" textFill="#f3db28">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="my-button-style" />
+               </styleClass>
             </Button>
             <Separator layoutX="176.0" layoutY="156.0" prefWidth="200.0" />
             <Separator layoutX="175.0" layoutY="235.0" prefWidth="200.0" />
             <Separator layoutX="177.0" layoutY="315.0" prefWidth="200.0" />
-            <Separator layoutX="204.0" layoutY="404.0" prefHeight="3.0" prefWidth="77.0" />
+            <Separator layoutX="237.0" layoutY="403.0" prefHeight="3.0" prefWidth="77.0" />
          </children>
       </Pane>
    </children>

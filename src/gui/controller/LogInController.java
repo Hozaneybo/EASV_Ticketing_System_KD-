@@ -3,6 +3,8 @@ package gui.controller;
 import be.Admin;
 import be.EventCoordinator;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import gui.controller.adminControllers.AdminDashboardController;
+import gui.controller.coordinatorControllers.ECDashboardController;
 import gui.model.FacadeModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,9 +83,12 @@ public class LogInController implements Initializable {
                 // Login successful, navigate to the next screen
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/adminGUI/AdminDashboard.fxml"));
                 Parent root = loader.load();
+                AdminDashboardController controller = loader.getController();
+                controller.getUserName().setText(admin.getName());
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(scene);
+                stage.setResizable(false);
                 stage.show();
 
             } else if (coordinator != null) {
@@ -91,10 +96,13 @@ public class LogInController implements Initializable {
                 // Login successful, navigate to the next screen
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/CoordinatorDashboard.fxml"));
                 Parent root = loader.load();
+                ECDashboardController controller = loader.getController();
+                controller.getUserName().setText(coordinator.getFullName());
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(scene);
                 coordinatorId = coordinator.getId();
+                stage.setResizable(false);
                 stage.show();
 
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -63,10 +64,13 @@
             <TextField fx:id="endHourFieldE" alignment="CENTER" layoutX="153.0" layoutY="170.0" prefHeight="32.0" prefWidth="120.0" promptText="HOURS" />
             <TextField fx:id="endMinFieldE" alignment="CENTER" layoutX="284.0" layoutY="170.0" prefHeight="32.0" prefWidth="120.0" promptText="MIN" />
             <Label layoutX="304.0" layoutY="176.0" text=":" />
-            <Button layoutX="445.0" layoutY="436.0" mnemonicParsing="false" onAction="#submitEditing" style="-fx-background-color: #f3db28;" text="Edit event">
+            <Button layoutX="445.0" layoutY="436.0" mnemonicParsing="false" onAction="#submitEditing" styleClass="my-button-style-yellow" stylesheets="@../design.css" text="Edit event">
                <font>
                   <Font name="System Bold" size="15.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Label layoutX="23.0" layoutY="306.0" prefHeight="20.0" prefWidth="120.0" text="Notes             :" textFill="#f3db28">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -76,7 +80,10 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <ComboBox fx:id="cboxTicketTypeE" layoutX="151.0" layoutY="383.0" prefHeight="20.0" prefWidth="171.0" />
+            <ComboBox fx:id="cboxTicketTypeE" layoutX="151.0" layoutY="383.0" prefHeight="20.0" prefWidth="171.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
             <Label fx:id="eventIdLabel" layoutX="532.0" layoutY="59.0" text="id" textFill="#a41818" />
             <TextArea fx:id="streetField" layoutX="153.0" layoutY="210.0" prefHeight="64.0" prefWidth="400.0" />
          </children>

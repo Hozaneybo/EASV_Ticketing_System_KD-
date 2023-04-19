@@ -46,8 +46,43 @@
 }
 
 .my-button-style:hover {
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebc934, #050000);
+    -fx-background-color: #b65353;
 
+}
+.my-button-style:pressed {
+    -fx-background-color: #9d2525;
+
+}
+
+.my-button-style-yellow:hover {
+    -fx-background-color: #e8d074;
+
+}
+.my-button-style-yellow:pressed {
+    -fx-background-color: #b0a007;
+
+}
+.my-button-style-yellow {
+    -fx-background-color: #f3db28;
+
+}
+
+.table-row-cell:odd{
+
+    -fx-background-color: #ea8787;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:even {
+
+    -fx-background-color: #f36969;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:selected {
+    -fx-text-fill: white;
+    -fx-background-color: #4d4d4d;
 }
 
 

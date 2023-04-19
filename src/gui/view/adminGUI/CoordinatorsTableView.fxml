@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,27 +12,37 @@
 
 <AnchorPane prefHeight="490.0" prefWidth="487.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.adminControllers.CoordinatorsTableView">
    <children>
-      <TableView fx:id="coordinatorTable" layoutX="105.0" layoutY="110.0" prefHeight="440.0" prefWidth="487.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="coordinatorTable" layoutX="105.0" layoutY="110.0" prefHeight="440.0" prefWidth="487.0" stylesheets="@../design.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
           <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Coordinator's Name" />
             <TableColumn fx:id="usernameColumn" prefWidth="235.7999725341797" text="Coordinator's Username" />
         </columns>
+         <styleClass>
+            <String fx:value="table-row-cell" />
+            <String fx:value="table-view" />
+         </styleClass>
       </TableView>
       <HBox alignment="CENTER_LEFT" layoutY="419.0" prefHeight="71.0" prefWidth="487.0" style="-fx-background-color: DF2929;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="419.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#updateCoordinator" prefHeight="30.0" prefWidth="129.0" style="-fx-background-color: #f3db28;" text="Update Coordinator">
+            <Button mnemonicParsing="false" onAction="#updateCoordinator" prefHeight="30.0" prefWidth="129.0" styleClass="my-button-style-yellow" stylesheets="@../design.css" text="Update Coordinator">
                <HBox.margin>
                   <Insets left="50.0" right="20.0" />
                </HBox.margin>
                <font>
                   <Font name="System Bold Italic" size="13.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#deleteCoordinator" prefHeight="30.0" prefWidth="129.0" style="-fx-background-color: #f3db28;" text="Delete Coordinator">
+            <Button mnemonicParsing="false" onAction="#deleteCoordinator" prefHeight="30.0" prefWidth="129.0" styleClass="my-button-style-yellow" stylesheets="@../design.css" text="Delete Coordinator">
                <font>
                   <Font name="System Bold Italic" size="13.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </children>
       </HBox>
    </children>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Light.Distant?>
@@ -65,10 +66,13 @@
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>
             </Label>
-            <Button layoutX="399.0" layoutY="201.0" mnemonicParsing="false" onAction="#deleteEvent" prefHeight="32.0" prefWidth="105.0" style="-fx-background-radius: 25;" styleClass="body_background02" stylesheets="@../design.css" text="Delete">
+            <Button layoutX="399.0" layoutY="201.0" mnemonicParsing="false" onAction="#deleteEvent" prefHeight="32.0" prefWidth="105.0" style="-fx-background-radius: 25;" styleClass="my-button-style-yellow" stylesheets="@../design.css" text="Delete">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Label layoutX="15.0" layoutY="206.0" text="Event ends:">
                <font>
@@ -80,10 +84,13 @@
                   <Font name="Berlin Sans FB" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="updateBtn" layoutX="287.0" layoutY="201.0" mnemonicParsing="false" onAction="#updateEvent" prefHeight="32.0" prefWidth="105.0" style="-fx-background-radius: 25;" styleClass="body_background02" stylesheets="@../design.css" text="Update">
+            <Button fx:id="updateBtn" layoutX="287.0" layoutY="201.0" mnemonicParsing="false" onAction="#updateEvent" prefHeight="32.0" prefWidth="105.0" style="-fx-background-radius: 25;" styleClass="my-button-style-yellow" stylesheets="@../design.css" text="Update">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Label fx:id="eventIdLabel" layoutX="471.0" layoutY="15.0" text="Label" />
             <Label layoutX="15.0" layoutY="172.0" text="Event start:">

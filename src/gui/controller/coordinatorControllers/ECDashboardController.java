@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,6 +21,9 @@ import java.util.ResourceBundle;
 public class ECDashboardController implements Initializable {
     @FXML
     private VBox eventBox;
+    @FXML
+    private Label userName;
+
 
     private EventCoordinatorModel eventCoordinatorModel;
     private int eventsNumber;
@@ -95,6 +99,7 @@ public class ECDashboardController implements Initializable {
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -109,5 +114,9 @@ public class ECDashboardController implements Initializable {
     }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public Label getUserName() {
+        return userName;
     }
 }

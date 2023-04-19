@@ -1,3 +1,4 @@
+/*
 package gui.controller.adminControllers;
 
 import be.Admin;
@@ -61,3 +62,4 @@ public class AdminViewController implements Initializable {
         }
     }
 }
+*/

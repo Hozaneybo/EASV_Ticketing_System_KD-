@@ -114,6 +114,7 @@ public class EventViewController implements Initializable {
         eventCoordinatorStage.setScene(scene);
 
         // Show the new stage
+        eventCoordinatorStage.setResizable(false);
         eventCoordinatorStage.show();
 
     }

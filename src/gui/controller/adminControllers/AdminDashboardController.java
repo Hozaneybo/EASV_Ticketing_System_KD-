@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -22,6 +23,9 @@ public class AdminDashboardController implements Initializable {
 
     @FXML
     private VBox eventBox;
+
+    @FXML
+    private Label userName;
     private AdminModel adminModel;
     private FacadeModel facadeModel;
 
@@ -120,4 +124,7 @@ public class AdminDashboardController implements Initializable {
         stage.show();
     }
 
+    public Label getUserName() {
+        return userName;
+    }
 }

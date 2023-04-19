@@ -30,8 +30,6 @@ public class CoordinatorsTableView implements Initializable {
     @FXML
     private TableColumn<EventCoordinator, String> nameColumn;
 
-    @FXML
-    private TableColumn<EventCoordinator, String> passwordColumn;
 
     @FXML
     private TableColumn<EventCoordinator, String> usernameColumn;
@@ -54,7 +52,6 @@ public class CoordinatorsTableView implements Initializable {
             idColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, Integer>("id"));
             nameColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("fullName"));
             usernameColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("username"));
-            passwordColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("password"));
 
         }
 
@@ -77,7 +74,7 @@ public class CoordinatorsTableView implements Initializable {
         controller.getCoordinatorIdLabel().setText(String.valueOf(selectedEventCoordinator.getId()));
         controller.getCoordinatorNameE().setText(selectedEventCoordinator.getFullName());
         controller.getCoordinatorUsernameE().setText(selectedEventCoordinator.getUsername());
-        controller.getCoordinatorPasswordE().setText(selectedEventCoordinator.getPassword());
+        controller.getCoordinatorPasswordE().setPromptText("New Password");
 
         Stage stage = new Stage();
         stage.setTitle("Update EventCoordinator");
@@ -85,6 +82,7 @@ public class CoordinatorsTableView implements Initializable {
         stage.setScene(scene);
 
         // Show the new stage
+        stage.setResizable(false);
         stage.show();
     }
 

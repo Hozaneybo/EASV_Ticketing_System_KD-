@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -14,7 +16,7 @@
    <children>
       <ScrollPane layoutX="245.0" prefHeight="500.0" prefWidth="595.0" style="-fx-background-color: #ff0000;" stylesheets="@../design.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <VBox fx:id="eventBox" prefHeight="498.0" prefWidth="594.0" style="-fx-background-color: DF2929;" />
+            <VBox fx:id="eventBox" maxHeight="-Infinity" minHeight="498" prefWidth="594.0" style="-fx-background-color: DF2929;" />
          </content>
       </ScrollPane>
       <ImageView fitHeight="135.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
@@ -36,7 +38,7 @@
             </VBox>
             <VBox prefHeight="246.0" prefWidth="246.0">
                <children>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#showAllEvents" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: B12626;" text="All Events" textFill="#f3db28">
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#showAllEvents" prefHeight="35.0" prefWidth="250.0" stylesheets="@../design.css" text="All Events" textFill="#f3db28">
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -50,8 +52,15 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <styleClass>
+                        <String fx:value="my-button-style" />
+                        <String fx:value="transparent" />
+                     </styleClass>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#createNewEvent" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: B12626;" text="New Event" textFill="#f3db28">
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#createNewEvent" prefHeight="35.0" prefWidth="250.0" stylesheets="@../design.css" text="New Event" textFill="#f3db28">
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -65,8 +74,15 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <styleClass>
+                        <String fx:value="my-button-style" />
+                        <String fx:value="transparent" />
+                     </styleClass>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#email" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: B12626;" text="Email" textFill="#f3db28">
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#email" prefHeight="35.0" prefWidth="250.0" stylesheets="@../design.css" text="Email" textFill="#f3db28">
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -80,8 +96,15 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <styleClass>
+                        <String fx:value="my-button-style" />
+                        <String fx:value="transparent" />
+                     </styleClass>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#logOut" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: B12626;" text="Logout" textFill="#f3db28">
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#logOut" prefHeight="35.0" prefWidth="250.0" stylesheets="@../design.css" text="Logout" textFill="#f3db28">
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -95,6 +118,13 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <styleClass>
+                        <String fx:value="my-button-style" />
+                        <String fx:value="transparent" />
+                     </styleClass>
                   </Button>
                </children>
             </VBox>
