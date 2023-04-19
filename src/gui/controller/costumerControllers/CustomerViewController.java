@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class CustomerViewController implements Initializable {
         try {
             facadeModel.getCustomerModel().refreshEventListView();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
         }
         eventsNumber = facadeModel.getCustomerModel().getObservableEvents().size();
 
@@ -59,7 +60,7 @@ public class CustomerViewController implements Initializable {
 
                     eventBox.getChildren().add(node);
                 } catch (IOException ex) {
-
+                    facadeModel.getAlert("Something went wrong", "Error", ex.getMessage(), Alert.AlertType.ERROR);
                 }
             }
         }
@@ -73,8 +74,7 @@ public class CustomerViewController implements Initializable {
         try {
             node = loader.load();
         } catch (IOException e) {
-
-            e.printStackTrace();
+            facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
         }
         eventBox.getChildren().add(node);
 

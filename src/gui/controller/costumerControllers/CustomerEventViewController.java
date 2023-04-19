@@ -3,7 +3,6 @@ package gui.controller.costumerControllers;
 import gui.controller.TicketsControllers.BuyTicketController;
 import gui.model.FacadeModel;
 import gui.model.FacadeModelLoader;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,10 +38,6 @@ public class CustomerEventViewController implements Initializable {
         this.eventIndex = eventIndex;
         // set the index as the user data of the button
         buyTicketButton.setUserData(eventIndex);
-    }
-
-    public int getEventIndex() {
-        return eventIndex;
     }
 
     public void buyTickets(ActionEvent actionEvent) {
@@ -90,14 +85,6 @@ public class CustomerEventViewController implements Initializable {
 
     public Button getBuyTicketButton() {
         return buyTicketButton;
-    }
-
-    public void setBuyTicketButton(Button buyTicketButton) {
-        this.buyTicketButton = buyTicketButton;
-    }
-
-    public void deleteEvent(ActionEvent actionEvent) {
-
     }
 
 }
