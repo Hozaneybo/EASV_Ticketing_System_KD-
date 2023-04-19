@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
@@ -62,7 +61,7 @@ public class LogInController implements Initializable {
             try {
                 coordinator = facadeModel.getLogInModel().coordinatorLogIn(username, password);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
             }
 
             if (admin != null) {

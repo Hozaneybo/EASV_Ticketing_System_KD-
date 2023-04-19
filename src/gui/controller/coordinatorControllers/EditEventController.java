@@ -23,45 +23,25 @@ import static java.lang.Integer.parseInt;
 public class EditEventController implements Initializable {
 
     @FXML
-    private CheckBox beerOption;
+    private CheckBox beerOption, foodOption, womenOption;
 
     @FXML
-    private ComboBox<String> cboxTicketTypeE;
-
+    private ComboBox < String > cboxTicketTypeE;
 
     @FXML
     private DatePicker endDateFieldE;
 
     @FXML
-    private TextField endHourFieldE;
-
-    @FXML
-    private TextField endMinFieldE;
-
-    @FXML
-    private TextField eventNameFieldE;
-
-    @FXML
-    private CheckBox foodOption;
+    private TextField endHourFieldE, endMinFieldE, eventNameFieldE, startHourFieldE, startMinFieldE;
 
     @FXML
     private TextArea noteAreaE;
-
 
     @FXML
     private DatePicker startDateFieldE;
 
     @FXML
-    private TextField startHourFieldE;
-
-    @FXML
-    private TextField startMinFieldE;
-
-    @FXML
     private TextArea streetField;
-
-    @FXML
-    private CheckBox womenOption;
 
     @FXML
     private Label eventIdLabel;
@@ -80,10 +60,9 @@ public class EditEventController implements Initializable {
         return beerOption;
     }
 
-    public ComboBox<String> getCboxTicketTypeE() {
+    public ComboBox < String > getCboxTicketTypeE() {
         return cboxTicketTypeE;
     }
-
 
     public Label getEventIdLabel() {
         return eventIdLabel;
@@ -112,7 +91,6 @@ public class EditEventController implements Initializable {
     public TextArea getNoteAreaE() {
         return noteAreaE;
     }
-
 
     public DatePicker getStartDateFieldE() {
         return startDateFieldE;
@@ -162,15 +140,11 @@ public class EditEventController implements Initializable {
 
             facadeModel.getEventCoordinatorModel().updateBarEvent(toBeUpdated);
 
-
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Something went wrong", "Error", e.getMessage(), Alert.AlertType.ERROR);
         }
 
     }
-
 
     private void fieldsProperties() {
         endDateFieldE.valueProperty().addListener((observable, oldValue, newValue) -> {

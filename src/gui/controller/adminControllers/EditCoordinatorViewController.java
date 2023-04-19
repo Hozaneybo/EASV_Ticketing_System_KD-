@@ -1,11 +1,9 @@
 package gui.controller.adminControllers;
 
-
 import be.EventCoordinator;
 import gui.model.FacadeModel;
 
 import gui.model.FacadeModelLoader;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,7 +46,7 @@ public class EditCoordinatorViewController implements Initializable {
     @FXML
     void cancelEditing(ActionEvent event) {
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
     @FXML
@@ -60,7 +58,7 @@ public class EditCoordinatorViewController implements Initializable {
             facadeModel.getAlert("Data connection error", "something went wrong", e.getMessage(), Alert.AlertType.ERROR);
         }
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 }

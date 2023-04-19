@@ -1,7 +1,6 @@
 package gui.controller.adminControllers;
 
 import gui.controller.coordinatorControllers.EventViewController;
-import gui.model.AdminModel;
 import gui.model.FacadeModel;
 import gui.model.FacadeModelLoader;
 import javafx.event.ActionEvent;
@@ -17,7 +16,6 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AdminDashboardController implements Initializable {
@@ -30,19 +28,12 @@ public class AdminDashboardController implements Initializable {
     private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
 
-
-
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         facadeModelLoader = FacadeModelLoader.getInstance();
         facadeModel = facadeModelLoader.getFacadeModel();
 
-
     }
-
 
     @FXML
     void createCoordinator(ActionEvent event) {
@@ -53,7 +44,7 @@ public class AdminDashboardController implements Initializable {
         try {
             node = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Database Error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
         }
         eventBox.getChildren().add(node);
     }
@@ -67,21 +58,19 @@ public class AdminDashboardController implements Initializable {
         try {
             node = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Database Error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
         }
         eventBox.getChildren().add(node);
 
     }
 
-
-
     @FXML
-    private  void showAllEvents() {
+    private void showAllEvents() {
         eventBox.getChildren().clear();
 
         int eventsNumber = facadeModel.getAdminModel().getObservableEvents().size();
 
-        if ( eventsNumber != 0) {
+        if (eventsNumber != 0) {
             for (int i = 0; i < eventsNumber; i++) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/coordinatorGUI/EventView.fxml"));
@@ -97,6 +86,7 @@ public class AdminDashboardController implements Initializable {
                     eventBox.getChildren().add(node);
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    facadeModel.getAlert("Database Error", "Something went wrong!", ex.getMessage(), Alert.AlertType.ERROR);
                 }
             }
         }
@@ -113,7 +103,7 @@ public class AdminDashboardController implements Initializable {
         try {
             root = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Database Error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);

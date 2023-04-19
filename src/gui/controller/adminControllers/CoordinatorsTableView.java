@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,17 +22,16 @@ import java.util.ResourceBundle;
 public class CoordinatorsTableView implements Initializable {
 
     @FXML
-    private TableView<EventCoordinator> coordinatorTable;
+    private TableView < EventCoordinator > coordinatorTable;
 
     @FXML
-    private TableColumn<EventCoordinator, Integer> idColumn;
+    private TableColumn < EventCoordinator, Integer > idColumn;
 
     @FXML
-    private TableColumn<EventCoordinator, String> nameColumn;
-
+    private TableColumn < EventCoordinator, String > nameColumn;
 
     @FXML
-    private TableColumn<EventCoordinator, String> usernameColumn;
+    private TableColumn < EventCoordinator, String > usernameColumn;
 
     private EventCoordinator selectedEventCoordinator;
 
@@ -43,18 +43,15 @@ public class CoordinatorsTableView implements Initializable {
         facadeModelLoader = FacadeModelLoader.getInstance();
         facadeModel = facadeModelLoader.getFacadeModel();
 
-        if(facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
-        {
+        if (facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0) {
             coordinatorTable.setItems(facadeModel.getAdminModel().getObservableEventCoordinator());
-            idColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, Integer>("id"));
-            nameColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("fullName"));
-            usernameColumn.setCellValueFactory(new PropertyValueFactory<EventCoordinator, String>("username"));
+            idColumn.setCellValueFactory(new PropertyValueFactory < EventCoordinator, Integer > ("id"));
+            nameColumn.setCellValueFactory(new PropertyValueFactory < EventCoordinator, String > ("fullName"));
+            usernameColumn.setCellValueFactory(new PropertyValueFactory < EventCoordinator, String > ("username"));
 
         }
 
     }
-
-
 
     public void updateCoordinator(ActionEvent actionEvent) {
 
@@ -63,9 +60,9 @@ public class CoordinatorsTableView implements Initializable {
         try {
             root = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            facadeModel.getAlert("Database Error", "Something went wrong!", e.getMessage(), Alert.AlertType.ERROR);
         }
-        if(facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
+        if (facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
             selectedEventCoordinator = coordinatorTable.getSelectionModel().getSelectedItem();
         EditCoordinatorViewController controller = loader.getController();
         controller.getCoordinatorIdLabel().setText(String.valueOf(selectedEventCoordinator.getId()));
@@ -84,7 +81,7 @@ public class CoordinatorsTableView implements Initializable {
     }
 
     public void deleteCoordinator(ActionEvent actionEvent) {
-        if(facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
+        if (facadeModel.getAdminModel().getObservableEventCoordinator().size() != 0)
             selectedEventCoordinator = coordinatorTable.getSelectionModel().getSelectedItem();
 
         facadeModel.getAdminModel().deleteEventCoordinator(selectedEventCoordinator);

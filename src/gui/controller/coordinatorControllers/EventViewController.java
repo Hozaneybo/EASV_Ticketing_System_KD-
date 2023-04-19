@@ -1,10 +1,7 @@
 package gui.controller.coordinatorControllers;
 
 import be.BarEvent;
-import be.TicketType;
-import gui.model.EventCoordinatorModel;
 import gui.model.FacadeModel;
-import gui.model.FacadeModelLoader;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,10 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -33,13 +28,11 @@ public class EventViewController implements Initializable {
     @FXML
     private Label endTimeLbl, eventAddressLbl, eventNameLbl, eventNotes, startTimeLbl, eventIdLabel;
 
-    private FacadeModelLoader facadeModelLoader;
     private FacadeModel facadeModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        facadeModelLoader = FacadeModelLoader.getInstance();
-        facadeModel = facadeModelLoader.getFacadeModel();
+        getFacadeModelInNewThread();
 
     }
     public Label getEndTimeLbl() {
@@ -106,7 +99,11 @@ public class EventViewController implements Initializable {
         controller.getEndDateFieldE().setValue(endDate);
         controller.getEndHourFieldE().setText(endTimeLbl.getText().substring(11, 13));
         controller.getEndMinFieldE().setText(endTimeLbl.getText().substring(14));
-        String[] options = {"STANDARD", "CUSTOMIZED", "SPECIAL"};
+        String[] options = {
+                "STANDARD",
+                "CUSTOMIZED",
+                "SPECIAL"
+        };
         controller.getCboxTicketTypeE().getItems().addAll(options);
         controller.getEventIdLabel().setText(eventIdLabel.getText());
 
@@ -119,5 +116,19 @@ public class EventViewController implements Initializable {
         eventCoordinatorStage.setResizable(false);
         eventCoordinatorStage.show();
 
+    }
+
+    private void getFacadeModelInNewThread() {
+        Task < Void > task = new Task < Void > () {
+            @Override
+            protected Void call() throws Exception {
+                facadeModel = new FacadeModel();
+
+                return null;
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 }
